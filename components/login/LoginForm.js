@@ -1,12 +1,18 @@
-import { useTheme, Spacer, Input, Button } from '@nextui-org/react'
+import { useContext, useState } from 'react'
+
+import { Spacer, Input, Button, Loading } from '@nextui-org/react'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+
 import { validations } from '../../utils'
-import { talksUpApi } from '../../api'
 import { ErrorCard } from '../errorCard'
+import { AuthContext } from '../../context'
 
 export const LoginForm = () => {
+  const { loginUser } = useContext(AuthContext)
+  const router = useRouter()
   const [validCredentialsError, setValidCredentialsError] = useState(false)
+  const [loadingLogin, setLoadingLogin] = useState(false)
 
   const {
     register,
@@ -14,20 +20,22 @@ export const LoginForm = () => {
     watch,
     formState: { errors },
   } = useForm()
+
   const onLoginUser = async ({ email, password }) => {
     setValidCredentialsError(false)
-    try {
-      const { data } = await talksUpApi.post('/users/login', {
-        email,
-        password,
-      })
-      const { token } = data.data
-    } catch (error) {
+    setLoadingLogin(true)
+    const isValidLogin = await loginUser(email, password)
+    setLoadingLogin(false)
+
+    if (!isValidLogin) {
       setValidCredentialsError(true)
       setTimeout(() => {
         setValidCredentialsError(false)
       }, 3000)
+      return
     }
+
+    router.replace('/dashboard')
   }
 
   return (
@@ -75,8 +83,18 @@ export const LoginForm = () => {
           color={!!errors.password && 'error'}
         />
         <Spacer y={2} />
-        <Button type='submit' color='secondary' shadow width='70%'>
-          LogIn
+        <Button
+          type='submit'
+          disabled={loadingLogin}
+          color='secondary'
+          shadow
+          width='70%'
+        >
+          {loadingLogin ? (
+            <Loading type='points' color='currentColor' size='sm' />
+          ) : (
+            'LogIn'
+          )}
         </Button>
       </form>
     </>

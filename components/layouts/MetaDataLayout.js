@@ -1,7 +1,12 @@
 import Head from 'next/head'
-import React from 'react'
+import { useTheme as useNextTheme } from 'next-themes'
+import { Switch, useTheme } from '@nextui-org/react'
+
+import { SunIcon, MoonIcon } from '../icons'
 
 export const MetaDataLayout = ({ children, title }) => {
+  const { setTheme } = useNextTheme()
+  const { isDark, type } = useTheme()
   return (
     <>
       <Head>
@@ -11,7 +16,17 @@ export const MetaDataLayout = ({ children, title }) => {
         <meta name='keywords' content={`podcasts, recommendations, app`} />
       </Head>
 
-      <main>{children}</main>
+      <main style={{minHeight: '100vh', minWidth: '100%'}}>
+        {children}
+
+        <Switch
+          css={{ position: 'absolute', bottom: '10px', right: '10px' }}
+          checked={isDark}
+          onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')}
+          iconOn={<MoonIcon filled color='success' />}
+          iconOff={<SunIcon filled color='success' />}
+        />
+      </main>
     </>
   )
 }

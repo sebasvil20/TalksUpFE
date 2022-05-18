@@ -1,6 +1,8 @@
+import { useState } from 'react'
+
 import { useTheme, Spacer, Input, Button, Grid } from '@nextui-org/react'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+
 import { talksUpApi } from '../../api'
 
 export const RegisterForm = () => {

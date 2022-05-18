@@ -1,13 +1,9 @@
 import axios from 'axios'
 
 const talksUpApi = axios.create({
-  //baseURL: 'https://talksupapi-s7q7i.ondigitalocean.app',
-  baseURL: 'http://localhost:8080',
-  headers: [
-    {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Content-Type',
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  headers: {
+      'api-key': process.env.NEXT_PUBLIC_API_KEY,
     },
-  ],
 })
 export default talksUpApi
