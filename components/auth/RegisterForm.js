@@ -9,7 +9,7 @@ import { AnimatePresence } from 'framer-motion'
 import { RegisterThirdForm } from './RegisterThirdForm'
 
 export const RegisterForm = () => {
-  const [stepper, setStepper] = useState(3)
+  const [stepper, setStepper] = useState(1)
 
   return (
     <Container
