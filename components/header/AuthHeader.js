@@ -16,6 +16,9 @@ export const AuthHeader = ({ title, subtitle, link, linkTitle }) => {
   return (
     <Container
       css={{
+        '@mdMax' :{
+          textAlign: 'center!important'
+        },
         backgroundColor: theme?.colors.background?.value,
         display: 'flex',
         flexDirection: 'column',

@@ -15,7 +15,7 @@ export const RegisterForm = ({ categories }) => {
 
   useEffect(() => {
     if (stepper == 4) {
-      setIsLoading(true)
+      setIsLoading(true) 
       router.replace('/dashboard')
       return
     }

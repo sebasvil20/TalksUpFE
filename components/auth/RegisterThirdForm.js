@@ -42,7 +42,7 @@ export const RegisterThirdForm = ({ setStepper, categories }) => {
 
   return (
     <motion.form
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.9 }}
       initial={{
         opacity: 0,
         x: 200,
