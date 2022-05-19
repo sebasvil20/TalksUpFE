@@ -2,12 +2,11 @@ import { useState, useRef, useContext } from 'react'
 
 import { Spacer, Input, Button, Grid, Loading } from '@nextui-org/react'
 import { useForm } from 'react-hook-form'
+import { motion } from 'framer-motion'
 
 import { validations } from '../../utils'
 import { AuthContext } from '../../context'
 import { ErrorCard } from '../errorCard'
-
-import { motion } from 'framer-motion'
 
 export const RegisterFirstForm = ({ setStepper }) => {
   const { registerUser, loginUser } = useContext(AuthContext)

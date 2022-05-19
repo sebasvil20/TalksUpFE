@@ -1,19 +1,12 @@
-import {
-  useTheme,
-  Grid,
-  Image,
-  Text,
-  Container,
-  Spacer,
-} from '@nextui-org/react'
-import { AuthHeader } from '../header'
+import { useTheme, Grid, Text, Container } from '@nextui-org/react'
 
+import { AuthHeader } from '../header'
 import { LoginForm } from './LoginForm'
 
 export const LoginContainer = () => {
   const { type, theme } = useTheme()
   return (
-    <Container css={{ margin: '0', width: '100%!important' }}>
+    <Container css={{ margin: '0', width: '100%!important', paddingLeft: '0' }}>
       <Grid.Container
         justify='center'
         css={{ margin: '0', width: '100vw!important', height: '100vh' }}
@@ -30,7 +23,12 @@ export const LoginContainer = () => {
             alignItems: 'center',
           }}
         >
-          <AuthHeader title='Login' subtitle='Don&apos;t have an account?' link='/register' linkTitle='Sign up for free'/>
+          <AuthHeader
+            title='Login'
+            subtitle="Don't have an account?"
+            link='/register'
+            linkTitle='Sign up for free'
+          />
           <LoginForm />
         </Grid>
         <Grid

@@ -1,9 +1,8 @@
-import React from 'react'
 import { RegisterForm } from './RegisterForm'
 import { useTheme, Container } from '@nextui-org/react'
 import { AuthHeader } from '../header/AuthHeader'
 
-export const RegisterContainer = () => {
+export const RegisterContainer = ({ categories }) => {
   const { theme } = useTheme()
   return (
     <Container
@@ -45,7 +44,7 @@ export const RegisterContainer = () => {
           link='/'
           linkTitle='Login now'
         />
-        <RegisterForm />
+        <RegisterForm categories={categories} />
       </Container>
     </Container>
   )

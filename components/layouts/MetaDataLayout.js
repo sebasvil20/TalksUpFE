@@ -16,7 +16,7 @@ export const MetaDataLayout = ({ children, title }) => {
         <meta name='keywords' content={`podcasts, recommendations, app`} />
       </Head>
 
-      <main style={{minHeight: '100vh', minWidth: '100%'}}>
+      <main style={{minHeight: '100vh', minWidth: '100%', paddingLeft: '0'}}>
         {children}
 
         <Switch

@@ -95,7 +95,7 @@ export const AuthProvider = ({ children }) => {
       categories: user.Categories,
     })
     try {
-      const { data } = await talksUpApi.put('/users/associate', body, {
+      const { data } = await talksUpApi.post('/users/associate', body, {
         headers: { Authorization: `Bearer ${Cookies.get('token')}` },
       })
       dispatch({

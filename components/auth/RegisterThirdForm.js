@@ -1,39 +1,31 @@
 import { useState, useContext } from 'react'
 
-import {
-  Spacer,
-  Button,
-  Grid,
-  Loading,
-  Card,
-  Text,
-  Textarea,
-} from '@nextui-org/react'
+import { Spacer, Button, Grid, Loading, Card, Text } from '@nextui-org/react'
 import { useForm } from 'react-hook-form'
+import { TagPicker } from 'rsuite'
+import { motion } from 'framer-motion'
+import 'rsuite/dist/rsuite.min.css'
 
 import { AuthContext } from '../../context'
 import { ErrorCard } from '../errorCard'
 
-import { motion } from 'framer-motion'
-
-export const RegisterThirdForm = ({ setStepper }) => {
+export const RegisterThirdForm = ({ setStepper, categories }) => {
   const { associateLikesWithUser, userName, userId } = useContext(AuthContext)
   const [showUpdateError, setShowUpdateError] = useState(false)
   const [savingRegister, setSavingRegister] = useState(false)
+  const [selectedCategories, setSelectedCategories] = useState()
 
   const {
-    register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm()
 
-  const onUpdateUser = async ({ categories }) => {
+  const onAssociateCategories = async () => {
     setSavingRegister(true)
     setShowUpdateError(false)
     const isValidUpdate = await associateLikesWithUser({
       UserID: userId,
-      Categories: categories,
+      Categories: selectedCategories,
     })
     setSavingRegister(false)
 
@@ -44,7 +36,8 @@ export const RegisterThirdForm = ({ setStepper }) => {
       }, 3000)
       return
     }
-    setStepper(3)
+
+    setStepper(4)
   }
 
   return (
@@ -56,7 +49,7 @@ export const RegisterThirdForm = ({ setStepper }) => {
       }}
       animate={{ x: 0, opacity: 1, position: 'unset' }}
       exit={{ x: -200, opacity: 0, position: 'absolute' }}
-      onSubmit={handleSubmit(onUpdateUser)}
+      onSubmit={handleSubmit(onAssociateCategories)}
       style={{
         width: '100%',
         display: 'flex',
@@ -83,8 +76,14 @@ export const RegisterThirdForm = ({ setStepper }) => {
       </Card>
       <Spacer y={2} />
       <Grid.Container gap={2} justify='center'>
-        <Grid xs={12}>
-          <Textarea width='100%' placeholder='Add max 3 categories' />
+        <Grid xs={12} css={{ display: 'flex', justifyContent: 'center' }}>
+          <TagPicker
+            size='lg'
+            placeholder='Select categories'
+            data={categories}
+            onChange={(e) => setSelectedCategories(e)}
+            style={{ width: 500, display: 'block', marginBottom: 10 }}
+          />
         </Grid>
       </Grid.Container>
       <Spacer y={2} />
