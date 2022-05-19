@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 
 import { MetaDataLayout } from '../components/layouts'
-import { LoginContainer } from '../components/login'
+import { LoginContainer } from '../components/auth'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)

@@ -6,20 +6,12 @@ import {
   Container,
   Spacer,
 } from '@nextui-org/react'
-import Link from 'next/link'
+import { AuthHeader } from '../header'
 
 import { LoginForm } from './LoginForm'
 
 export const LoginContainer = () => {
   const { type, theme } = useTheme()
-  const buttonStyle = {
-    color: theme?.colors.link?.value,
-    padding: '0 10px',
-    margin: '0',
-    border: 'none',
-    outline: 'none',
-    background: 'none',
-  }
   return (
     <Container css={{ margin: '0', width: '100%!important' }}>
       <Grid.Container
@@ -38,20 +30,7 @@ export const LoginContainer = () => {
             alignItems: 'center',
           }}
         >
-          <Image
-            src={type == 'dark' ? '/logo_light.png' : '/logo_dark.png'}
-            alt='Talks up logo'
-            width={100}
-          />
-
-          <Text h1>Login</Text>
-          <Text h5>
-            Don&apos;t have an account?
-            <Link href='/register'>
-              <a style={buttonStyle}>Sign up for free</a>
-            </Link>
-          </Text>
-          <Spacer y={1.6} />
+          <AuthHeader title='Login' subtitle='Don&apos;t have an account?' link='/register' linkTitle='Sign up for free'/>
           <LoginForm />
         </Grid>
         <Grid

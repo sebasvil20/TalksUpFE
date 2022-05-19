@@ -20,7 +20,7 @@ export const MetaDataLayout = ({ children, title }) => {
         {children}
 
         <Switch
-          css={{ position: 'absolute', bottom: '10px', right: '10px' }}
+          css={{ position: 'absolute', bottom: '10px', right: '10px', '@sm': {bottom: '20px', right: '5px'}}}
           checked={isDark}
           onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')}
           iconOn={<MoonIcon filled color='success' />}
