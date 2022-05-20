@@ -50,7 +50,7 @@ export const AuthHeader = ({ title, subtitle, link, linkTitle }) => {
           </p>
         </Link>
       </Text>
-        <Spacer y={1.6} />
+        <Spacer y={1} />
     </Container>
   )
 }

@@ -81,13 +81,13 @@ export const RegisterFirstForm = ({ setStepper }) => {
       }}
       noValidate
     >
-    <AnimatePresence>
-      {showRegisterError && (
+      <AnimatePresence>
+        {showRegisterError && (
           <ErrorCard
             title='Error creando usuario'
             message='El correo podria estar tomado'
           />
-      )}
+        )}
       </AnimatePresence>
       <Grid.Container gap={2} justify='center'>
         <Grid xs={12} sm={6}>
@@ -177,6 +177,7 @@ export const RegisterFirstForm = ({ setStepper }) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          zIndex: 1,
         }}
       >
         I have read and agreed to the
@@ -189,6 +190,9 @@ export const RegisterFirstForm = ({ setStepper }) => {
         color='secondary'
         shadow
         width='70%'
+        css={{
+          zIndex: 1,
+        }}
       >
         {loadingRegister ? (
           <Loading type='points' color='currentColor' size='sm' />

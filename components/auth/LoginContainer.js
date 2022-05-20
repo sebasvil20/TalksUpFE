@@ -2,9 +2,10 @@ import { useTheme, Grid, Text, Container } from '@nextui-org/react'
 
 import { AuthHeader } from '../header'
 import { LoginForm } from './LoginForm'
+import { ThemeSwitcher, LangSwitcher } from '../themeConfig'
 
 export const LoginContainer = () => {
-  const { type, theme } = useTheme()
+  const { theme } = useTheme()
   return (
     <Container css={{ margin: '0', width: '100%!important', paddingLeft: '0' }}>
       <Grid.Container
@@ -29,6 +30,12 @@ export const LoginContainer = () => {
             link='/register'
             linkTitle='Sign up for free'
           />
+          <Container
+            css={{ display: 'flex', maxHeight: '30px!important', width: 'max-content', margin: '0px 0 25px'}}
+          >
+            <ThemeSwitcher customStyle={{ margin: '0px 10px' }} />
+            <LangSwitcher />
+          </Container>
           <LoginForm />
         </Grid>
         <Grid

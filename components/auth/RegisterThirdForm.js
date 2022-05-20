@@ -2,9 +2,7 @@ import { useState, useContext } from 'react'
 
 import { Spacer, Button, Grid, Loading, Card, Text } from '@nextui-org/react'
 import { useForm } from 'react-hook-form'
-import { TagPicker } from 'rsuite'
 import { motion } from 'framer-motion'
-import 'rsuite/dist/rsuite.min.css'
 
 import { AuthContext } from '../../context'
 import { ErrorCard } from '../errorCard'
@@ -77,36 +75,36 @@ export const RegisterThirdForm = ({ setStepper, categories }) => {
       <Spacer y={2} />
       <Grid.Container gap={2} justify='center'>
         <Grid xs={12} css={{ display: 'flex', justifyContent: 'center' }}>
-          <TagPicker
-            size='lg'
-            placeholder='Select categories'
-            data={categories}
-            onChange={(e) => setSelectedCategories(e)}
-            style={{ width: 500, display: 'block', marginBottom: 10 }}
-          />
+          {
+            //TODO: TagPicker
+          }
         </Grid>
       </Grid.Container>
       <Spacer y={2} />
-
-      <Grid.Container>
-        <Grid xs={6}>
+      <Grid.Container gap={2} justify='center'>
+        <Grid md={6} xs={12} justify='center'>
           <Button
             onPress={() => setStepper(4)}
             color='secondary'
             shadow
-            width='70%'
             ghost
+            css={{
+              zIndex: 1,
+            }}
           >
             Omit
           </Button>
         </Grid>
-        <Grid xs={6}>
+        <Grid md={6} xs={12} justify='center'>
           <Button
             type='submit'
             disabled={savingRegister}
             color='secondary'
             shadow
-            width='70%'
+            css={{
+              zIndex: 1,
+              width: '30%',
+            }}
           >
             {savingRegister ? (
               <Loading type='points' color='currentColor' size='sm' />

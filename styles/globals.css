@@ -14,3 +14,12 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.rs-picker-toggle-wrapper {
+  max-height: 100px !important;
+  overflow: scroll;
+}
+
+.rs-picker-menu {
+  max-height: 200px !important;
+}

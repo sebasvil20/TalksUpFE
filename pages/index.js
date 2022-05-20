@@ -12,7 +12,7 @@ export default function Home() {
   const router = useRouter()
   useEffect(() => {
     if (Cookies.get('token')) {
-      router.replace('/dashboard')
+      router.push('/dashboard')
       return
     }
     setIsLoading(false)

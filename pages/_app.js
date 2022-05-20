@@ -8,7 +8,7 @@ import { AuthProvider } from '../context'
 function MyApp({ Component, pageProps }) {
   return (
     <NextThemesProvider
-      defaultTheme='system'
+      defaultTheme={darkTheme}
       attribute='class'
       value={{
         light: lightTheme.className,

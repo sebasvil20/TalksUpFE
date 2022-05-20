@@ -24,7 +24,6 @@ export const RegisterSecondForm = ({ setStepper }) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm()
 
@@ -139,6 +138,8 @@ export const RegisterSecondForm = ({ setStepper }) => {
             width='100%'
             label='Birth date'
             type='date'
+            min="1950-01-01"
+            max="2010-01-01"
             {...register('birthDate', {
               required: 'Este campo es requerido',
             })}
@@ -154,6 +155,9 @@ export const RegisterSecondForm = ({ setStepper }) => {
         color='secondary'
         shadow
         width='70%'
+        css={{
+          zIndex: 1,
+        }}
       >
         {savingRegister ? (
           <Loading type='points' color='currentColor' size='sm' />
