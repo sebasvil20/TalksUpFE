@@ -1,14 +1,23 @@
 import { useState, useRef, useContext } from 'react'
 
-import { Spacer, Input, Button, Grid, Loading } from '@nextui-org/react'
+import {
+  Spacer,
+  Input,
+  Button,
+  Grid,
+  Loading,
+  Checkbox,
+} from '@nextui-org/react'
 import { useForm } from 'react-hook-form'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import { validations } from '../../utils'
 import { AuthContext } from '../../context'
 import { ErrorCard } from '../errorCard'
+import { TermsModal } from '../terms'
 
 export const RegisterFirstForm = ({ setStepper }) => {
+  const [areTermsChecked, setTermsChecked] = useState(true)
   const { registerUser, loginUser } = useContext(AuthContext)
   const [showRegisterError, setShowRegisterError] = useState(false)
   const [loadingRegister, setLoadingRegister] = useState(false)
@@ -46,7 +55,7 @@ export const RegisterFirstForm = ({ setStepper }) => {
       setShowRegisterError(true)
       setTimeout(() => {
         setShowRegisterError(false)
-      }, 3000)
+      }, 4000)
       return
     }
 
@@ -72,13 +81,14 @@ export const RegisterFirstForm = ({ setStepper }) => {
       }}
       noValidate
     >
+    <AnimatePresence>
       {showRegisterError && (
-        <ErrorCard
-          message='Email o contraseña invalidos'
-          title='Error iniciando sesión'
-          show={showRegisterError}
-        />
+          <ErrorCard
+            title='Error creando usuario'
+            message='El correo podria estar tomado'
+          />
       )}
+      </AnimatePresence>
       <Grid.Container gap={2} justify='center'>
         <Grid xs={12} sm={6}>
           <Input
@@ -102,6 +112,10 @@ export const RegisterFirstForm = ({ setStepper }) => {
             {...register('publicName', {
               required: 'Este campo es requerido',
               validate: validations.isString,
+              minLength: {
+                value: 5,
+                message: 'Min. 5 caracteres',
+              },
             })}
             helperText={errors.publicName?.message}
             color={!!errors.publicName && 'error'}
@@ -151,10 +165,27 @@ export const RegisterFirstForm = ({ setStepper }) => {
           </select>
         </Grid>
       </Grid.Container>
-      <Spacer y={2} />
+      <Spacer y={1.8} />
+      <Checkbox
+        color='secondary'
+        size='sm'
+        defaultSelected={true}
+        onChange={(e) => {
+          setTermsChecked(!areTermsChecked)
+        }}
+        css={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        I have read and agreed to the
+      </Checkbox>
+      <TermsModal />
+      <Spacer y={1} />
       <Button
         type='submit'
-        disabled={loadingRegister}
+        disabled={loadingRegister || !areTermsChecked}
         color='secondary'
         shadow
         width='70%'

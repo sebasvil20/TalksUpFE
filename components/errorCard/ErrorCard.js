@@ -1,20 +1,42 @@
 import { Text, Card } from '@nextui-org/react'
+import { motion } from 'framer-motion'
 
-export const ErrorCard = ({ title, message, show }) => {
+export const ErrorCard = ({ title, message }) => {
   return (
-    <Card
-      color='error'
-      css={{
-        color: 'white',
-        maxWidth: 'fit-content',
-        position: 'absolute',
-        bottom: '20px',
-        left: '20px',
+    <motion.div
+      style={{
+        position: 'fixed',
         zIndex: '10',
       }}
+      transition={{ duration: 0.5 }}
+      initial={{
+        opacity: 0,
+        left: -100,
+        top: 'calc(100% - 90px)',
+        position: 'fixed',
+      }}
+      animate={{
+        x: 120,
+        opacity: 1,
+        top: 'calc(100% - 90px)',
+      }}
+      exit={{ x: -100, opacity: 0 }}
     >
-      <Text css={{ fontWeight: '800' }}>{title}</Text>
-      <Text>{message}</Text>
-    </Card>
+      <Card
+        color='error'
+        css={{
+          color: 'white',
+          maxWidth: 'fit-content',
+          margin: 'auto',
+        }}
+      >
+        <Text
+          css={{ display: 'block', width: 'max-content', fontWeight: '800' }}
+        >
+          {title}
+        </Text>
+        <Text css={{ display: 'block', width: 'max-content' }}>{message}</Text>
+      </Card>
+    </motion.div>
   )
 }

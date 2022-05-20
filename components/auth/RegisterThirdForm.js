@@ -87,19 +87,35 @@ export const RegisterThirdForm = ({ setStepper, categories }) => {
         </Grid>
       </Grid.Container>
       <Spacer y={2} />
-      <Button
-        type='submit'
-        disabled={savingRegister}
-        color='secondary'
-        shadow
-        width='70%'
-      >
-        {savingRegister ? (
-          <Loading type='points' color='currentColor' size='sm' />
-        ) : (
-          'Save'
-        )}
-      </Button>
+
+      <Grid.Container>
+        <Grid xs={6}>
+          <Button
+            onPress={() => setStepper(4)}
+            color='secondary'
+            shadow
+            width='70%'
+            ghost
+          >
+            Omit
+          </Button>
+        </Grid>
+        <Grid xs={6}>
+          <Button
+            type='submit'
+            disabled={savingRegister}
+            color='secondary'
+            shadow
+            width='70%'
+          >
+            {savingRegister ? (
+              <Loading type='points' color='currentColor' size='sm' />
+            ) : (
+              'Save'
+            )}
+          </Button>
+        </Grid>
+      </Grid.Container>
     </motion.form>
   )
 }

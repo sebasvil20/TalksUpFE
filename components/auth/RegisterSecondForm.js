@@ -10,12 +10,11 @@ import {
   Text,
 } from '@nextui-org/react'
 import { useForm } from 'react-hook-form'
+import { motion } from 'framer-motion'
 
 import { validations } from '../../utils'
 import { AuthContext } from '../../context'
 import { ErrorCard } from '../errorCard'
-
-import { motion } from 'framer-motion'
 
 export const RegisterSecondForm = ({ setStepper }) => {
   const { updateUser, userName, userId } = useContext(AuthContext)
@@ -100,6 +99,10 @@ export const RegisterSecondForm = ({ setStepper }) => {
             {...register('firstName', {
               required: 'Este campo es requerido',
               validate: validations.isString,
+              minLength: {
+                value: 2,
+                message: 'Min. 2 caracteres'
+              }
             })}
             helperText={errors.firstName?.message}
             color={!!errors.firstName && 'error'}
@@ -113,6 +116,10 @@ export const RegisterSecondForm = ({ setStepper }) => {
             {...register('lastName', {
               required: 'Este campo es requerido',
               validate: validations.isString,
+              minLength: {
+                value: 2,
+                message: 'Min. 2 caracteres'
+              }
             })}
             helperText={errors.lastName?.message}
             color={!!errors.lastName && 'error'}
