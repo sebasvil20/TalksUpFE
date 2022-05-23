@@ -10,7 +10,7 @@ import { RegisterThirdForm } from './RegisterThirdForm'
 
 export const RegisterForm = ({ categories }) => {
   const router = useRouter()
-  const [stepper, setStepper] = useState(1)
+  const [stepper, setStepper] = useState(3)
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {

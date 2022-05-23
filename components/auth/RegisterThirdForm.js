@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 
 import { AuthContext } from '../../context'
 import { ErrorCard } from '../errorCard'
+import { TagPicker } from '../tagPicker'
 
 export const RegisterThirdForm = ({ setStepper, categories }) => {
   const { associateLikesWithUser, userName, userId } = useContext(AuthContext)
@@ -69,7 +70,7 @@ export const RegisterThirdForm = ({ setStepper, categories }) => {
           Cool {userName},
         </Text>
         <Text css={{ color: '$white' }} span>
-          Now let&apos;s define some categories of your interest
+          Now let&apos;s define some categories of your interest. <br /> No worries you can still change it in the future
         </Text>
       </Card>
       <Spacer y={2} />
@@ -78,6 +79,7 @@ export const RegisterThirdForm = ({ setStepper, categories }) => {
           {
             //TODO: TagPicker
           }
+          <TagPicker />
         </Grid>
       </Grid.Container>
       <Spacer y={2} />

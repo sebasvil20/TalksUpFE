@@ -6,7 +6,8 @@ export const darkTheme = createTheme({
     colors: {
       titles: '#D9DBE9',
       background: '#14142B',
+      backgroundSecundary : '#4E4B66',
       link: '#1CC8EE',
-    }, // override dark theme colors
+    },
   },
 })
