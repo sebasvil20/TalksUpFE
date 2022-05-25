@@ -10,13 +10,13 @@ import { RegisterThirdForm } from './RegisterThirdForm'
 
 export const RegisterForm = ({ categories }) => {
   const router = useRouter()
-  const [stepper, setStepper] = useState(3)
+  const [stepper, setStepper] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     if (stepper == 4) {
       setIsLoading(true)
-      router.replace('/dashboard')
+      router.push('/dashboard')
       return
     }
   }, [stepper])

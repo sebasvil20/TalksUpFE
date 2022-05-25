@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
       const { data } = await talksUpApi.get('/auth/validate', {
         headers: { Authorization: `Bearer ${token}` },
       })
-      dispatch({ type: '[Auth] - Login', payload: token })
+      dispatch({ type: '[Auth] - Login', payload: data.data.user })
     } catch (error) {
       Cookies.remove('token')
     }
@@ -39,9 +39,9 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
       })
-      const { token } = data.data
+      const { token, user } = data.data
       Cookies.set('token', token)
-      dispatch({ type: '[Auth] - Login', payload: token })
+      dispatch({ type: '[Auth] - Login', payload: user })
       return true
     } catch (error) {
       return false

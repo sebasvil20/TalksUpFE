@@ -1,23 +1,14 @@
-import React from 'react'
-import {
-  useTheme,
-  Spacer,
-  Input,
-  Button,
-  Image,
-  Text,
-  Link,
-  Grid,
-  Container,
-} from '@nextui-org/react'
+import { useTheme, Spacer, Text, Link, Container } from '@nextui-org/react'
+
+import { LogoHeader } from './'
 
 export const AuthHeader = ({ title, subtitle, link, linkTitle }) => {
-  const { type, theme } = useTheme()
+  const { theme } = useTheme()
   return (
     <Container
       css={{
-        '@mdMax' :{
-          textAlign: 'center!important'
+        '@mdMax': {
+          textAlign: 'center!important',
         },
         backgroundColor: theme?.colors.background?.value,
         display: 'flex',
@@ -26,11 +17,7 @@ export const AuthHeader = ({ title, subtitle, link, linkTitle }) => {
         alignItems: 'center',
       }}
     >
-      <Image
-        src={type == 'dark' ? '/logo_light.png' : '/logo_dark.png'}
-        alt='Talks up logo'
-        width={100}
-      />
+      <LogoHeader />
 
       <Text h1>{title}</Text>
       <Text h5>
@@ -50,7 +37,7 @@ export const AuthHeader = ({ title, subtitle, link, linkTitle }) => {
           </p>
         </Link>
       </Text>
-        <Spacer y={1} />
+      <Spacer y={1} />
     </Container>
   )
 }

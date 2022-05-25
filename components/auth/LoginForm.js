@@ -35,7 +35,7 @@ export const LoginForm = () => {
       return
     }
 
-    router.replace('/dashboard')
+    router.push('/dashboard')
   }
 
   return (

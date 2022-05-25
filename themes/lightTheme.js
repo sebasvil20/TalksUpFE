@@ -5,8 +5,10 @@ export const lightTheme = createTheme({
   theme: {
     colors: {
       titles: '#14142B',
+      contrastTitle: '#FCFCFC',
       background: '#FCFCFC',
-      backgroundSecundary : '#D9DBE9',
+      backgroundSecundary: '#D9DBE9',
+      contrastBackground: '#14142B',
       link: '#6334EB',
     },
   },

@@ -4,6 +4,7 @@ export const authReducer = (state, action) => {
       return {
         ...state,
         isLoggedIn: true,
+        user: action.payload,
       }
     case '[Auth] - Register':
       return {

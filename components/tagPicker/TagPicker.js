@@ -1,44 +1,17 @@
 import { useState, useEffect } from 'react'
-
-import {
-  Checkbox,
-  Textarea,
-  Container,
-  Text,
-  useTheme,
-} from '@nextui-org/react'
+import { Checkbox, Container, useTheme } from '@nextui-org/react'
 
 import { ArrowIcon } from '../icons'
 
-export const TagPicker = () => {
+export const TagPicker = ({ categories, setSelectedCategories }) => {
   const { theme } = useTheme()
   const [showOptionsList, setShowOptionsList] = useState(false)
   const [selectedTags, setSelectedTags] = useState([])
   const [selectedLabels, setSelectedLabels] = useState()
-  const [options, setOptions] = useState([
-    {
-      value: 'testing',
-      label: 'Categoria 1',
-    },
-    {
-      value: 'volvo',
-      label: 'Volvo 1',
-    },
-    {
-      value: 'ferrari',
-      label: 'Ferrari carro',
-    },
-    {
-      value: 'ferrari32',
-      label: 'Ferrari carro',
-    },
-    {
-      value: 'ferrari 33',
-      label: 'Ferrari carro',
-    },
-  ])
+  const [options, setOptions] = useState(categories)
 
   useEffect(() => {
+    setSelectedCategories(selectedTags)
     let labelTags = []
     selectedTags.map((tag) => {
       labelTags.push(options.find((o) => o?.value == tag).label)
@@ -77,7 +50,6 @@ export const TagPicker = () => {
           }}
           onFocus={() => setShowOptionsList(true)}
         />
-        {console.log(theme?.colors?.backgroundSecundary?.value)}
 
         <div
           style={{
@@ -85,7 +57,8 @@ export const TagPicker = () => {
             alignItems: 'center',
             justifyContent: 'center',
             height: '50px',
-            width: '50px', cursor: 'pointer'
+            width: '50px',
+            cursor: 'pointer',
           }}
           type='none'
           onClick={() => setShowOptionsList(!showOptionsList)}
@@ -118,7 +91,7 @@ export const TagPicker = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     marginTop: '8px!important',
-                    marginBottom: '8 px!important'
+                    marginBottom: '8 px!important',
                   }}
                   key={option.value}
                   value={option.value}

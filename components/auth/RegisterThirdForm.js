@@ -70,7 +70,8 @@ export const RegisterThirdForm = ({ setStepper, categories }) => {
           Cool {userName},
         </Text>
         <Text css={{ color: '$white' }} span>
-          Now let&apos;s define some categories of your interest. <br /> No worries you can still change it in the future
+          Now let&apos;s define some categories of your interest. <br /> No
+          worries you can still change it in the future
         </Text>
       </Card>
       <Spacer y={2} />
@@ -79,7 +80,10 @@ export const RegisterThirdForm = ({ setStepper, categories }) => {
           {
             //TODO: TagPicker
           }
-          <TagPicker />
+          <TagPicker
+            categories={categories}
+            setSelectedCategories={setSelectedCategories}
+          />
         </Grid>
       </Grid.Container>
       <Spacer y={2} />
