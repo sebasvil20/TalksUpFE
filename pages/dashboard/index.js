@@ -1,15 +1,14 @@
-import { Container, Text } from '@nextui-org/react'
+import { Text } from '@nextui-org/react'
 
 import { MetaDataLayout } from '../../components/layouts'
-import { SidebarContainer } from '../../components/sideBar'
+import { SideBarLayout } from '../../components/layouts/SideBarLayout'
 
 export default function Dashboard() {
   return (
     <MetaDataLayout title='TalksUp - Dashboard'>
-      <Container style={{ display: 'flex', margin: '0', padding: '0' }}>
-        <SidebarContainer />
+      <SideBarLayout>
         <Text h1>Bienvenido</Text>
-      </Container>
+      </SideBarLayout>
     </MetaDataLayout>
   )
 }
