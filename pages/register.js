@@ -13,7 +13,7 @@ const register = ({ categories }) => {
 export const getStaticProps = async (ctx) => {
   const { data } = await talksUpApi.get('/categories')
   const categories = data.data.map((category) => ({
-    value: category.category_id,
+    id: category.category_id,
     label: category.name,
   }))
   return {

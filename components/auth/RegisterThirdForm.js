@@ -1,17 +1,20 @@
+import * as React from 'react'
 import { useState, useContext } from 'react'
 
 import { Spacer, Button, Grid, Loading, Card, Text } from '@nextui-org/react'
+import TextField from '@mui/material/TextField'
+import Autocomplete from '@mui/material/Autocomplete'
 import { useForm } from 'react-hook-form'
 import { motion } from 'framer-motion'
 
 import { AuthContext } from '../../context'
 import { ErrorCard } from '../errorCard'
-import { TagPicker } from '../tagPicker'
+
 export const RegisterThirdForm = ({ setStepper, categories }) => {
   const { associateLikesWithUser, userName, userId } = useContext(AuthContext)
   const [showUpdateError, setShowUpdateError] = useState(false)
   const [savingRegister, setSavingRegister] = useState(false)
-  const [selectedCategories, setSelectedCategories] = useState()
+  const [selectedCategories, setSelectedCategories] = useState([])
 
   const {
     handleSubmit,
@@ -38,6 +41,7 @@ export const RegisterThirdForm = ({ setStepper, categories }) => {
     setStepper(4)
   }
 
+  console.log(selectedCategories)
   return (
     <motion.form
       transition={{ duration: 0.9 }}
@@ -76,12 +80,26 @@ export const RegisterThirdForm = ({ setStepper, categories }) => {
       <Spacer y={2} />
       <Grid.Container gap={2} justify='center'>
         <Grid xs={12} css={{ display: 'flex', justifyContent: 'center' }}>
-          {
-            //TODO: TagPicker
-          }
-          <TagPicker
-            categories={categories}
-            setSelectedCategories={setSelectedCategories}
+          <Autocomplete
+            multiple
+            id='tags-outlined'
+            fullWidth
+            options={categories}
+            onChange={(e, v) => {
+              v.forEach((value) => {
+                setSelectedCategories([...selectedCategories, value.id])
+              })
+            }}
+            getOptionLabel={(option) => option.label}
+            filterSelectedOptions
+            disableCloseOnSelect
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label='Selecciona 1 o mas categorías'
+                placeholder='Favorites'
+              />
+            )}
           />
         </Grid>
       </Grid.Container>
