@@ -100,8 +100,8 @@ export const RegisterSecondForm = ({ setStepper }) => {
               validate: validations.isString,
               minLength: {
                 value: 2,
-                message: 'Min. 2 caracteres'
-              }
+                message: 'Min. 2 caracteres',
+              },
             })}
             helperText={errors.firstName?.message}
             color={!!errors.firstName && 'error'}
@@ -117,8 +117,8 @@ export const RegisterSecondForm = ({ setStepper }) => {
               validate: validations.isString,
               minLength: {
                 value: 2,
-                message: 'Min. 2 caracteres'
-              }
+                message: 'Min. 2 caracteres',
+              },
             })}
             helperText={errors.lastName?.message}
             color={!!errors.lastName && 'error'}
@@ -138,8 +138,8 @@ export const RegisterSecondForm = ({ setStepper }) => {
             width='100%'
             label='Birth date'
             type='date'
-            min="1950-01-01"
-            max="2010-01-01"
+            min='1950-01-01'
+            max='2010-01-01'
             {...register('birthDate', {
               required: 'Este campo es requerido',
             })}

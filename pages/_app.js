@@ -1,6 +1,7 @@
 import { NextUIProvider } from '@nextui-org/react'
-import { AuthProvider } from '../context'
 import CssBaseline from '@mui/material/CssBaseline'
+
+import { AuthProvider } from '../context'
 
 function MyApp({ Component, pageProps }) {
   return (
