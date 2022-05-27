@@ -7,19 +7,16 @@ export const SidebarContainer = () => {
   const { theme } = useTheme()
   return (
     <Container
-      style={{
-        width: '300px',
+      css={{
         boxShadow: '2px 0px 13px 0px rgba(0,0,0,0.6)',
         display: 'flex',
+        maxWidth: '300px',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        position: 'sticky',
-        top: '0',
-        left: '0',
         height: '100vh',
-        maxHeight: '100vh',
         minHeight: '100vh',
-        margin: '0px 20px 0px 0px',
+        maxHeight: '100vh',
+        margin: '0!important',
         padding: '15px',
       }}
     >

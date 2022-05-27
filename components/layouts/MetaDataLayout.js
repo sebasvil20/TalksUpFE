@@ -8,11 +8,10 @@ export const MetaDataLayout = ({ children, title }) => {
         <meta name='author' content='Sebasvil20' />
         <meta name='description' content={`TalksUp - Find your next podcast`} />
         <meta name='keywords' content={`podcasts, recommendations, app`} />
+        <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Head>
 
-      <main style={{ minHeight: '100vh', minWidth: '100%', paddingLeft: '0' }}>
-        {children}
-      </main>
+      <main style={{ padding: '0', margin: '0' }}>{children}</main>
     </>
   )
 }

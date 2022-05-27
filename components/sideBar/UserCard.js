@@ -11,7 +11,7 @@ export const UserCard = () => {
   return (
     <Container style={{ width: '100%', textAlign: 'center' }}>
       <Grid>
-        <Link href='/user'>
+        <Link href='/dashboard/user'>
           <User
             bordered
             src={

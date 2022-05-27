@@ -7,7 +7,6 @@ import { motion } from 'framer-motion'
 import { AuthContext } from '../../context'
 import { ErrorCard } from '../errorCard'
 import { TagPicker } from '../tagPicker'
-
 export const RegisterThirdForm = ({ setStepper, categories }) => {
   const { associateLikesWithUser, userName, userId } = useContext(AuthContext)
   const [showUpdateError, setShowUpdateError] = useState(false)

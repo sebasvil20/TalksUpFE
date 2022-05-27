@@ -1,7 +1,6 @@
 import { NextUIProvider } from '@nextui-org/react'
 import { darkTheme, lightTheme } from '../themes'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
-
 import '../styles/globals.css'
 import { AuthProvider } from '../context'
 
