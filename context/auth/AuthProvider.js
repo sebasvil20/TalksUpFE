@@ -48,6 +48,12 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  const logoutUser = () => {
+    Cookies.remove('token')
+    dispatch({ type: '[Auth] - Logout' })
+    return true
+  }
+
   const registerUser = async (user) => {
     var body = JSON.stringify({
       public_name: user.PublicName,
@@ -113,6 +119,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         ...state,
         loginUser,
+        logoutUser,
         registerUser,
         updateUser,
         associateLikesWithUser,

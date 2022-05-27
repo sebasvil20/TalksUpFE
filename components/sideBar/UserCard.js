@@ -1,12 +1,22 @@
 import { useContext } from 'react'
+import { useRouter } from 'next/router'
 
 import { User, Grid, Container, Link } from '@nextui-org/react'
+import { Button } from '@mui/material'
+
+import LogoutIcon from '@mui/icons-material/Logout'
 
 import { AuthContext } from '../../context'
 import { ThemeSwitcher } from '../themeConfig'
 
 export const UserCard = () => {
-  const { user } = useContext(AuthContext)
+  const { user, logoutUser } = useContext(AuthContext)
+  const router = useRouter()
+
+  const logoutAndRedirect = () => {
+    logoutUser()
+    router.push('/')
+  }
 
   return (
     <Container style={{ width: '100%', textAlign: 'center' }}>
@@ -23,7 +33,24 @@ export const UserCard = () => {
             color='secondary'
           />
         </Link>
-        <ThemeSwitcher customStyle={{ margin: '0px 10px' }} />
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Button button onClick={() => logoutAndRedirect()}>
+            <LogoutIcon />
+          </Button>
+          <ThemeSwitcher
+            customStyle={{
+              margin: '0px 10px',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          />
+        </div>
       </Grid>
     </Container>
   )

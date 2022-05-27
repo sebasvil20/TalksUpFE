@@ -1,11 +1,11 @@
-import { Text } from '@nextui-org/react'
-
 import { MetaDataLayout } from '../../components/layouts'
+import { NavBar, SideMenu } from '../../components/sideBar'
 
 export default function Dashboard() {
   return (
     <MetaDataLayout title='TalksUp - Dashboard'>
-        <Text h1>Bienvenido</Text>
+      <NavBar />
+      <SideMenu />
     </MetaDataLayout>
   )
 }

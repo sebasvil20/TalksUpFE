@@ -1,47 +1,32 @@
-import React from 'react'
-import { useState } from 'react'
-
-import Link from 'next/link'
+import { useState, useContext } from 'react'
 import { useRouter } from 'next/router'
 
-import { useTheme } from '@nextui-org/react'
+import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
+import ExploreIcon from '@mui/icons-material/Explore'
 
-export const NavLink = ({ children, href }) => {
+import { UIContext } from '../../context'
+
+export const NavLink = ({ children, href, icon }) => {
   const [isServer, setIsServer] = useState(true)
-  const { type, theme } = useTheme()
-  const child = React.Children.only(children)
+  const { toggleSideMenu } = useContext(UIContext)
+  const isCurrent = () => {
+    return router.pathname === href
+  }
+
+  const redirectTo = () => {
+    toggleSideMenu()
+    router.push(href)
+  }
   const router = useRouter()
   return (
-    <div
+    <ListItem
+      button
       style={{
-        height: '60px',
-        fontSize: '18px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontWeight: 'regular',
-        borderRadius: '15px',
-        background: `${
-          router.pathname === href
-            ? theme.colors.contrastBackground
-              ? theme.colors?.contrastBackground?.value
-              : type == 'light' && '#14142B'
-            : ''
-        }`,
-        color: `${
-          router.pathname === href
-            ? theme.colors.contrastTitle
-              ? theme.colors?.contrastTitle?.value
-              : type == 'light' && '#fff'
-            : theme.colors?.titles?.value
-        }`,
+        backgroundColor: isCurrent() ? '#efefef' : '',
       }}
     >
-      <Link href={href}>
-        {React.cloneElement(child, {
-          'aria-current': router.pathname === href ? 'page' : null,
-        })}
-      </Link>
-    </div>
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText onClick={() => redirectTo()}> {children} </ListItemText>
+    </ListItem>
   )
 }
