@@ -4,6 +4,8 @@ export const MetaDataLayout = ({ children, title }) => {
   return (
     <>
       <Head>
+        <link rel='shortcut icon' href='/favicon.ico' />
+        <link rel='manifest' href='/manifest.json' />
         <title>{title || 'TalksUp'}</title>
         <meta name='author' content='Sebasvil20' />
         <meta name='description' content={`TalksUp - Find your next podcast`} />
