@@ -1,12 +1,32 @@
 import { Card, Col, Row, Button, Text, Link } from '@nextui-org/react'
 
-export const PodcastCard = ({author, authorID, podcastTitle, coverURL, totalEpisodes, tags}) => {
+export const PodcastCard = ({
+  author,
+  authorID,
+  podcastTitle,
+  coverURL,
+  totalEpisodes,
+  tags,
+}) => {
   return (
-    <Card cover css={{ w: '100%', p: 0 , mb: '10px'}}>
-      <Card.Header css={{ position: 'absolute', zIndex: 1, top: 5 }}>
+    <Card cover css={{ w: '100%', p: 0, mb: '10px' }}>
+      <Card.Header
+        blur
+        css={{
+          position: 'absolute',
+          zIndex: 1,
+          top: 0,
+          bgBlur: '#0f1114',
+          borderBottom: '$borderWeights$light solid $gray700',
+          zIndex: 1,
+        }}
+      >
         <Col>
-          <Text size={12} weight='bold' transform='uppercase' color='#9E9E9E'>
-            By <Link href={`dashboard/artists/${authorID}`}>{author}</Link>
+          <Text size={12} weight='bold' transform='uppercase' color='#D6D6D6'>
+            By{' '}
+            <Link css={{color: '#D6D6D6'}} href={`dashboard/artists/${authorID}`}>
+              {author}
+            </Link>
           </Text>
           <Text h3 color='white'>
             {podcastTitle}
@@ -36,14 +56,14 @@ export const PodcastCard = ({author, authorID, podcastTitle, coverURL, totalEpis
             <Row>
               <Col span={3}>
                 <Card.Image
-                  src='/images/breathing-app-icon.jpeg'
+                  src={coverURL}
                   css={{ background: 'black' }}
                   height={40}
                   width={40}
                   alt='Breathing app icon'
                 />
               </Col>
-              <Col>
+              <Col css={{ paddingLeft: '10px' }}>
                 <Text color='#d1d1d1' size={12}>
                   {totalEpisodes} espisodes
                 </Text>
