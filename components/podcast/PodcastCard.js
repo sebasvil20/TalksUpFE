@@ -41,7 +41,7 @@ export const PodcastCard = ({
           src={coverURL}
           height={400}
           width='100%'
-          alt='Relaxing app background'
+          alt={`${podcastTitle} cover image`}
         />
       </Card.Body>
       <Card.Footer
@@ -63,7 +63,7 @@ export const PodcastCard = ({
                   css={{ background: 'black' }}
                   height={40}
                   width={40}
-                  alt='Breathing app icon'
+                  alt={`${podcastTitle} icon`}
                 />
               </Col>
               <Col css={{ paddingLeft: '10px' }}>
@@ -71,7 +71,15 @@ export const PodcastCard = ({
                   {totalEpisodes} espisodes
                 </Text>
                 <Text color='#d1d1d1' size={12}>
-                  History, War, Strategy, Society
+                  {tags.map((tag) => (
+                    <Link
+                    css={{ color: '#D6D6D6' }}
+                      key={tag.category_id}
+                      href={`/dashboard/categories/${tag.category_id}`}
+                    >
+                      {tag.name}&nbsp;
+                    </Link>
+                  ))}
                 </Text>
               </Col>
             </Row>
