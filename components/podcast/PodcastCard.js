@@ -24,7 +24,10 @@ export const PodcastCard = ({
         <Col>
           <Text size={12} weight='bold' transform='uppercase' color='#D6D6D6'>
             By{' '}
-            <Link css={{color: '#D6D6D6'}} href={`dashboard/artists/${authorID}`}>
+            <Link
+              css={{ color: '#D6D6D6' }}
+              href={`dashboard/artists/${authorID}`}
+            >
               {author}
             </Link>
           </Text>
