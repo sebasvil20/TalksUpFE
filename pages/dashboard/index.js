@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { Grid, Loading, Text } from '@nextui-org/react'
 import Cookies from 'js-cookie'
 
 import { talksUpApi } from '../../api'
@@ -16,8 +17,8 @@ export default function Dashboard() {
       const { data } = await talksUpApi.get('/podcasts?lang=ESP', {
         headers: { Authorization: `Bearer ${Cookies.get('token')}` },
       })
-      setPodcastList(data.data)
-      console.log(podcastList)
+      setPodcastList(data.data.slice(0, 3))
+      setIsLoading(false)
     }
 
     fetchPodcasts()
@@ -26,21 +27,42 @@ export default function Dashboard() {
   }, [])
   return (
     <MetaDataLayout title='TalksUp - Dashboard'>
-      <NavBar />
-
-      <div style={{ marginTop: '56px', padding: '20px' }}>
-        {podcastList.map((podcast) => (
-          <PodcastCard
-            key={podcast.podcast_id}
-            author={podcast.author.name}
-            authorID={podcast.author.author_id}
-            podcastTitle={podcast.name}
-            coverURL={podcast.cover_pic_url}
-            totalEpisodes={podcast.total_episodes}
-            tags={podcast.categories}
-          />
-        ))}
-      </div>
+      {isLoading ? (
+        <div style={{height: '100vh'}}>
+        <Loading color='secondary' css={{width: '200px', position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, 0)'}} />
+        </div>
+      ) : (
+        <>
+          <NavBar />
+          <div style={{ marginTop: '56px', padding: '20px' }}>
+            <Text
+              css={{ paddingLeft: '24px', marginTop: '10px', color: '#6E7191' }}
+            >
+              What&rsquo;s Hot 🔥
+            </Text>
+            <Text
+              css={{ paddingLeft: '24px', marginTop: '2px', color: '#14142B' }}
+              h1
+            >
+              Explore
+            </Text>
+            <Grid.Container gap={2} justify='center'>
+              {podcastList.map((podcast) => (
+                <Grid key={podcast.podcast_id} sm={4} xs={12}>
+                  <PodcastCard
+                    author={podcast.author.name}
+                    authorID={podcast.author.author_id}
+                    podcastTitle={podcast.name}
+                    coverURL={podcast.cover_pic_url}
+                    totalEpisodes={podcast.total_episodes}
+                    tags={podcast.categories}
+                  />
+                </Grid>
+              ))}
+            </Grid.Container>
+          </div>
+        </>
+      )}
     </MetaDataLayout>
   )
 }
