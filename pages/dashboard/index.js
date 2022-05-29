@@ -28,15 +28,24 @@ export default function Dashboard() {
   return (
     <MetaDataLayout title='TalksUp - Dashboard'>
       {isLoading ? (
-        <div style={{height: '100vh'}}>
-        <Loading color='secondary' css={{width: '200px', position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, 0)'}} />
+        <div style={{ height: '100vh' }}>
+          <Loading
+            color='secondary'
+            css={{
+              width: '200px',
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, 0)',
+            }}
+          />
         </div>
       ) : (
         <>
           <NavBar />
           <div style={{ marginTop: '56px', padding: '20px' }}>
             <Text
-              css={{ paddingLeft: '24px', marginTop: '10px', color: '#6E7191' }}
+              css={{ paddingLeft: '26px', marginTop: '10px', color: '#6E7191' }}
             >
               What&rsquo;s Hot 🔥
             </Text>
@@ -45,6 +54,11 @@ export default function Dashboard() {
               h1
             >
               Explore
+            </Text>
+            <Text
+              css={{ paddingLeft: '26px', marginTop: '0', color: '#6334EB' }}
+            >
+              Last updated
             </Text>
             <Grid.Container gap={2} justify='center'>
               {podcastList.map((podcast) => (
