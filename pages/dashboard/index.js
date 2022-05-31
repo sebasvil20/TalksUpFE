@@ -64,12 +64,7 @@ export default function Dashboard() {
               {podcastList.map((podcast) => (
                 <Grid key={podcast.podcast_id} sm={4} xs={12}>
                   <PodcastCard
-                    author={podcast.author.name}
-                    authorID={podcast.author.author_id}
-                    podcastTitle={podcast.name}
-                    coverURL={podcast.cover_pic_url}
-                    totalEpisodes={podcast.total_episodes}
-                    tags={podcast.categories}
+                    podcast={podcast}
                   />
                 </Grid>
               ))}
