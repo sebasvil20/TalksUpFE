@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 
 import { Grid, Text } from '@nextui-org/react'
 import Cookies from 'js-cookie'
@@ -9,23 +9,49 @@ import { PodcastCard } from '../../components/podcast'
 import { NavBar } from '../../components/sideBar'
 import { Loader } from '../../components/loader'
 
+import { AuthContext } from '../../context'
+
+import React from 'react'
+
+export const MenuLink = ({ text, isActive, onClickFunc }) => {
+  const linkStyle = {
+    color: isActive ? '#6334EB' : '#A0A3BD',
+    cursor: 'pointer',
+    '@sm': {
+      marginRight: '40px',
+    },
+  }
+
+  return (
+    <Text onClick={onClickFunc} css={linkStyle}>
+      {text}
+    </Text>
+  )
+}
+
 export default function Dashboard() {
+  const { user } = useContext(AuthContext)
+  const [hasLikes] = useState(user?.likes?.length > 0)
   const [isLoading, setIsLoading] = useState(true)
+  const [fetchForUser, setFetchForUser] = useState(hasLikes)
   const [podcastList, setPodcastList] = useState([])
 
+  const fetchPodcasts = async (forUser) => {
+    const url = forUser
+      ? '/podcasts/recommendation'
+      : `/podcasts?lang=${user.lang}`
+    const { data } = await talksUpApi.get(url, {
+      headers: { Authorization: `Bearer ${Cookies.get('token')}` },
+    })
+    setPodcastList(data.data.slice(0, 3))
+    setIsLoading(false)
+  }
+
   useEffect(() => {
-    const fetchPodcasts = async () => {
-      const { data } = await talksUpApi.get('/podcasts?lang=ESP', {
-        headers: { Authorization: `Bearer ${Cookies.get('token')}` },
-      })
-      setPodcastList(data.data.slice(0, 3))
-      setIsLoading(false)
-    }
-
-    fetchPodcasts()
-
+    fetchPodcasts(fetchForUser)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [fetchForUser])
+
   return (
     <MetaDataLayout title='TalksUp - Dashboard'>
       {isLoading ? (
@@ -46,9 +72,27 @@ export default function Dashboard() {
               Explore
             </Text>
             <Text
-              css={{ paddingLeft: '26px', marginTop: '0', color: '#6334EB' }}
+              css={{
+                paddingLeft: '26px',
+                paddingRight: '26px',
+                marginTop: '0',
+                display: 'flex',
+                justifyContent: 'start',
+                '@smMax': { justifyContent: 'space-between' },
+              }}
             >
-              Last updated
+              {hasLikes && (
+                <MenuLink
+                  text='For you 🎧'
+                  isActive={fetchForUser}
+                  onClickFunc={() => setFetchForUser(true)}
+                />
+              )}
+              <MenuLink
+                text='Last updated 🕙'
+                isActive={!fetchForUser}
+                onClickFunc={() => setFetchForUser(false)}
+              />
             </Text>
             <Grid.Container gap={2} justify='center'>
               {podcastList.map((podcast) => (
