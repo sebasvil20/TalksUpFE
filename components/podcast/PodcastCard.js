@@ -52,7 +52,11 @@ export const PodcastCard = ({ podcast }) => {
         </Card.Header>
         <Card.Body>
           <Card.Image
-            src={cover_pic_url}
+            src={
+              cover_pic_url
+                ? cover_pic_url
+                : 'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/f4435d00-e1e5-11ec-9f43-acde48001122.png'
+            }
             height={400}
             width='100%'
             alt={`${name} cover image`}
@@ -73,7 +77,11 @@ export const PodcastCard = ({ podcast }) => {
               <Row>
                 <Col span={3}>
                   <Card.Image
-                    src={cover_pic_url}
+                    src={
+                      cover_pic_url
+                        ? cover_pic_url
+                        : 'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/f4435d00-e1e5-11ec-9f43-acde48001122.png'
+                    }
                     css={{ background: 'black' }}
                     height={40}
                     width={40}
@@ -81,19 +89,22 @@ export const PodcastCard = ({ podcast }) => {
                   />
                 </Col>
                 <Col css={{ paddingLeft: '10px' }}>
+                  {total_episodes && (
+                    <Text color='#d1d1d1' size={12}>
+                      {total_episodes} espisodes
+                    </Text>
+                  )}
                   <Text color='#d1d1d1' size={12}>
-                    {total_episodes} espisodes
-                  </Text>
-                  <Text color='#d1d1d1' size={12}>
-                    {categories.map((tag) => (
-                      <Link
-                        css={{ color: '#D6D6D6' }}
-                        key={tag.category_id}
-                        href={`/dashboard/categories/${tag.category_id}`}
-                      >
-                        {tag.name}&nbsp;
-                      </Link>
-                    ))}
+                    {categories &&
+                      categories.map((tag) => (
+                        <Link
+                          css={{ color: '#D6D6D6' }}
+                          key={tag.category_id}
+                          href={`/dashboard/categories/${tag.category_id}`}
+                        >
+                          {tag.name}&nbsp;
+                        </Link>
+                      ))}
                   </Text>
                 </Col>
               </Row>

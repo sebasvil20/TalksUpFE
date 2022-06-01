@@ -1,29 +1,31 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { Loading } from '@nextui-org/react'
 import Cookies from 'js-cookie'
 
 import { MetaDataLayout } from '../../../components/layouts'
-import { NavBar } from '../../../components/sideBar'
 import { DetailedPodcast } from '../../../components/podcast'
 import { talksUpApi } from '../../../api'
+import { NavBar } from '../../../components/sideBar'
+import { Loader } from '../../../components/loader'
 
 const DetailPodcast = () => {
   const [podcastInfo, setPodcastInfo] = useState()
   const [isLoading, setIsLoading] = useState(true)
-  const { query } = useRouter()
+  const router = useRouter()
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await talksUpApi.get(`/podcasts/${query.id}`, {
-        headers: { Authorization: `Bearer ${Cookies.get('token')}` },
-      })
-      setPodcastInfo(data.data)
-      setIsLoading(false)
-    }
+    if (router.isReady) {
+      const fetchData = async () => {
+        const { data } = await talksUpApi.get(`/podcasts/${router.query.id}`, {
+          headers: { Authorization: `Bearer ${Cookies.get('token')}` },
+        })
+        setPodcastInfo(data.data)
+        setIsLoading(false)
+      }
 
-    fetchData()
-  }, [query])
+      fetchData()
+    }
+  }, [router.isReady, router.query.id])
 
   return (
     <MetaDataLayout
@@ -31,7 +33,7 @@ const DetailPodcast = () => {
     >
       <NavBar />
       <div style={{ display: 'flex', marginTop: '80px' }}>
-        {isLoading ? <Loading /> : <DetailedPodcast podcast={podcastInfo} />}
+        {isLoading ? <Loader /> : <DetailedPodcast podcast={podcastInfo} />}
       </div>
     </MetaDataLayout>
   )

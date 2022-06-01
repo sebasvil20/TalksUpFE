@@ -1,7 +1,19 @@
-import { Container, Spacer, Text, Grid, Link } from '@nextui-org/react'
+import { useRouter } from 'next/router'
+
+import {
+  Container,
+  Spacer,
+  Text,
+  Grid,
+  Link,
+  Image,
+  Button,
+  Avatar,
+} from '@nextui-org/react'
 import Rating from '@mui/material/Rating'
 
 export const DetailedPodcast = ({ podcast }) => {
+  const router = useRouter()
   const {
     podcast_id,
     author,
@@ -21,20 +33,72 @@ export const DetailedPodcast = ({ podcast }) => {
 
   return (
     <Container>
-      <Text b size={26}>
-        {name}
+      <Button
+        onClick={() => router.push('/dashboard')}
+        css={{ margin: 'auto', background: 'transparent', color: '#6E7191' }}
+      >
+        ← Go to dashboard
+      </Button>
+      <Text css={{ '@smMax': { textAlign: 'center' }, padding: '12px' }}>
+        <Text b size={26}>
+          {name}
+          {lang_id && (lang_id == 'ESP' ? ' 🇪🇸' : ' 🇺🇸')}
+        </Text>
       </Text>
       <Spacer />
-      <Text size={18}>
-        <Text b size={18}>
-          Descripción
-        </Text>
-        <Text>{description}</Text>
-      </Text>
+      <Grid.Container gap={2}>
+        <Grid xs={12} sm={2}>
+          <Image
+            src={
+              cover_pic_url
+                ? cover_pic_url
+                : 'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/f4435d00-e1e5-11ec-9f43-acde48001122.png'
+            }
+            alt='Cover podcast image'
+          />
+        </Grid>
+        <Grid xs={12} sm={10} direction='column' justify='center'>
+          <Text b size={18}>
+            Descripción
+          </Text>
+          <Text>{description}</Text>
+          <Text>
+            By <Link href={`/artists/${author.author_id}`}>{author.name}</Link>
+          </Text>
+          {platforms && (
+            <>
+              <Spacer y={0.5} />
+              <Text b>Escuchalo ahora en:</Text>
+              <Spacer y={0.2} />
+              <Text>
+                {platforms.map((platform) => (
+                  <Link
+                    key={platform.platform_id}
+                    href={platform.redirect_url}
+                    target='_blank'
+                    rel='nofollow noopener noreferrer'
+                    css={{ padding: '2px' }}
+                  >
+                    <Avatar
+                      src={platform.logo_url}
+                      title={platform.name}
+                      alt={`Logo ${platform.name}`}
+                      color='primary'
+                      bordered
+                      squared
+                      css={{ cursor: 'pointer' }}
+                    />
+                  </Link>
+                ))}
+              </Text>
+            </>
+          )}
+        </Grid>
+      </Grid.Container>
 
       <Grid.Container gap={2} justify='center'>
         {rating && (
-          <Grid md sm={6} xs={12} direction='column'>
+          <Grid xs={6} sm={3} direction='column'>
             <Text css={{ marginTop: '10px' }} b size={18}>
               Rating
             </Text>
@@ -44,7 +108,7 @@ export const DetailedPodcast = ({ podcast }) => {
           </Grid>
         )}
         {trailer_url && (
-          <Grid md sm={6} xs={12} direction='column'>
+          <Grid xs={6} sm={3} direction='column'>
             <Text css={{ marginTop: '10px' }} b size={18}>
               Trailer
             </Text>
@@ -59,30 +123,38 @@ export const DetailedPodcast = ({ podcast }) => {
             </Text>
           </Grid>
         )}
-        <Grid md sm={6} xs={12} direction='column'>
-          <Text css={{ marginTop: '10px' }} b size={18}>
-            Release date
-          </Text>
-          <Text>{release_date}</Text>
-        </Grid>
-        <Grid md sm={6} xs={12} direction='column'>
-          <Text css={{ marginTop: '10px' }} b size={18}>
-            Last updated date
-          </Text>
-          <Text>{update_date}</Text>
-        </Grid>
-        <Grid md sm={6} xs={12} direction='column'>
-          <Text css={{ marginTop: '10px' }} b size={18}>
-            Total episodes
-          </Text>
-          <Text>{total_episodes}</Text>
-        </Grid>
-        <Grid md sm={6} xs={12} direction='column'>
-          <Text css={{ marginTop: '10px' }} b size={18}>
-            Total length
-          </Text>
-          <Text>{total_length}</Text>
-        </Grid>
+        {release_date && (
+          <Grid xs={6} sm={3} direction='column'>
+            <Text css={{ marginTop: '10px' }} b size={18}>
+              Release date
+            </Text>
+            <Text>{release_date}</Text>
+          </Grid>
+        )}
+        {update_date && (
+          <Grid xs={6} sm={3} direction='column'>
+            <Text css={{ marginTop: '10px' }} b size={18}>
+              Last updated date
+            </Text>
+            <Text>{update_date}</Text>
+          </Grid>
+        )}
+        {total_episodes && (
+          <Grid xs={6} sm={3} direction='column'>
+            <Text css={{ marginTop: '10px' }} b size={18}>
+              Total episodes
+            </Text>
+            <Text>{total_episodes}</Text>
+          </Grid>
+        )}
+        {total_length && (
+          <Grid xs={6} sm={3} direction='column'>
+            <Text css={{ marginTop: '10px' }} b size={18}>
+              Total length
+            </Text>
+            <Text>{total_length}</Text>
+          </Grid>
+        )}
       </Grid.Container>
     </Container>
   )

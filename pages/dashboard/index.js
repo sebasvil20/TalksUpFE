@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 
-import { Grid, Loading, Text } from '@nextui-org/react'
+import { Grid, Text } from '@nextui-org/react'
 import Cookies from 'js-cookie'
 
 import { talksUpApi } from '../../api'
 import { MetaDataLayout } from '../../components/layouts'
 import { PodcastCard } from '../../components/podcast'
 import { NavBar } from '../../components/sideBar'
+import { Loader } from '../../components/loader'
 
 export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(true)
@@ -28,18 +29,7 @@ export default function Dashboard() {
   return (
     <MetaDataLayout title='TalksUp - Dashboard'>
       {isLoading ? (
-        <div style={{ height: '100vh' }}>
-          <Loading
-            color='secondary'
-            css={{
-              width: '200px',
-              position: 'absolute',
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%, 0)',
-            }}
-          />
-        </div>
+        <Loader />
       ) : (
         <>
           <NavBar />
@@ -63,9 +53,7 @@ export default function Dashboard() {
             <Grid.Container gap={2} justify='center'>
               {podcastList.map((podcast) => (
                 <Grid key={podcast.podcast_id} sm={4} xs={12}>
-                  <PodcastCard
-                    podcast={podcast}
-                  />
+                  <PodcastCard podcast={podcast} />
                 </Grid>
               ))}
             </Grid.Container>
