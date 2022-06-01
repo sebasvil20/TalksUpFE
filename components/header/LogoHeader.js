@@ -1,6 +1,6 @@
 import { Image, useTheme } from '@nextui-org/react'
 
-export const LogoHeader = ({witdh}) => {
+export const LogoHeader = ({ witdh }) => {
   const { type } = useTheme()
   return (
     <Image

@@ -1,22 +1,11 @@
-import {
-  Card,
-  Col,
-  Row,
-  Button,
-  Text,
-  Link,
-  Modal,
-  Grid,
-} from '@nextui-org/react'
-import { useState } from 'react'
-import Rating from '@mui/material/Rating'
+import { useRouter } from 'next/router'
+
+import { Card, Col, Row, Button, Text, Link } from '@nextui-org/react'
+
 export const PodcastCard = ({ podcast }) => {
-  const [visible, setVisible] = useState(false)
-  const handler = () => setVisible(true)
-  const closeHandler = () => {
-    setVisible(false)
-  }
+  const router = useRouter()
   const {
+    podcast_id,
     author,
     name,
     cover_pic_url,
@@ -116,7 +105,9 @@ export const PodcastCard = ({ podcast }) => {
                   auto
                   rounded
                   css={{ color: '#94f9f0', bg: '#94f9f026' }}
-                  onClick={handler}
+                  onClick={() => {
+                    router.push(`/dashboard/podcast/${podcast_id}`)
+                  }}
                 >
                   <Text
                     css={{ color: 'inherit' }}
@@ -132,88 +123,6 @@ export const PodcastCard = ({ podcast }) => {
           </Row>
         </Card.Footer>
       </Card>
-      <Modal
-        closeButton
-        blur
-        width='60%'
-        aria-labelledby='modal-title'
-        open={visible}
-        onClose={closeHandler}
-      >
-        <Modal.Header>
-          <Text id='modal-title' size={18}>
-            <Text b size={18}>
-              {name}
-            </Text>
-          </Text>
-        </Modal.Header>
-        <Modal.Body>
-          <Text size={18}>
-            <Text b size={18}>
-              Descripción
-            </Text>
-            <Text>{description}</Text>
-          </Text>
-
-          <Grid.Container gap={2} justify='center'>
-            {rating && (
-              <Grid xs={2} direction='column'>
-                <Text css={{ marginTop: '10px' }} b size={18}>
-                  Rating
-                </Text>
-                <Text>
-                  <Rating name='read-only' value={rating} readOnly />
-                </Text>
-              </Grid>
-            )}
-            {trailer_url && (
-              <Grid xs={2} direction='column'>
-                <Text css={{ marginTop: '10px' }} b size={18}>
-                  Trailer
-                </Text>
-                <Text>
-                  <Link
-                    href={trailer_url}
-                    target='_blank'
-                    rel='nofollow noopener noreferrer'
-                  >
-                    Click to see trailer
-                  </Link>
-                </Text>
-              </Grid>
-            )}
-            <Grid xs={2} direction='column'>
-              <Text css={{ marginTop: '10px' }} b size={18}>
-                Release date
-              </Text>
-              <Text>{release_date}</Text>
-            </Grid>
-            <Grid xs={2} direction='column'>
-              <Text css={{ marginTop: '10px' }} b size={18}>
-                Last updated date
-              </Text>
-              <Text>{update_date}</Text>
-            </Grid>
-            <Grid xs={2} direction='column'>
-              <Text css={{ marginTop: '10px' }} b size={18}>
-                Total episodes
-              </Text>
-              <Text>{total_episodes}</Text>
-            </Grid>
-            <Grid xs={2} direction='column'>
-              <Text css={{ marginTop: '10px' }} b size={18}>
-                Total length
-              </Text>
-              <Text>{total_length}</Text>
-            </Grid>
-          </Grid.Container>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button auto flat color='error' onClick={closeHandler}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </>
   )
 }

@@ -1,8 +1,9 @@
-import React from 'react'
-import { Image, Text, Grid } from '@nextui-org/react'
 import { useContext } from 'react'
 
+import { Image, Text, Grid } from '@nextui-org/react'
+
 import { AuthContext } from '../../context'
+
 export const UserResume = () => {
   const { user } = useContext(AuthContext)
   return (

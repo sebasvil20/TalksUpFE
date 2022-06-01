@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useState, useContext } from 'react'
 
 import { Spacer, Button, Grid, Loading, Card, Text } from '@nextui-org/react'
