@@ -27,7 +27,11 @@ export const AuthProvider = ({ children }) => {
       const { data } = await talksUpApi.get('/auth/validate', {
         headers: { Authorization: `Bearer ${token}` },
       })
-      dispatch({ type: '[Auth] - Login', payload: data.data.user })
+      const { user } = data.data
+      Cookies.set('user_id', user.user_id)
+      Cookies.set('lang', user.lang)
+      Cookies.set('hasLikes', user.likes?.length > 0)
+      dispatch({ type: '[Auth] - Login', payload: user })
     } catch (error) {
       Cookies.remove('token')
     }
@@ -41,6 +45,9 @@ export const AuthProvider = ({ children }) => {
       })
       const { token, user } = data.data
       Cookies.set('token', token)
+      Cookies.set('user_id', user.user_id)
+      Cookies.set('lang', user.lang)
+      Cookies.set('hasLikes', user.likes?.length > 0)
       dispatch({ type: '[Auth] - Login', payload: user })
       return true
     } catch (error) {
@@ -50,6 +57,9 @@ export const AuthProvider = ({ children }) => {
 
   const logoutUser = () => {
     Cookies.remove('token')
+    Cookies.remove('user_id')
+    Cookies.remove('lang')
+    Cookies.remove('hasLikes')
     dispatch({ type: '[Auth] - Logout' })
     return true
   }

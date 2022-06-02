@@ -1,7 +1,6 @@
 import { useEffect, useState, useContext } from 'react'
 
 import { Grid, Text } from '@nextui-org/react'
-import Cookies from 'js-cookie'
 
 import { talksUpApi } from '../../api'
 import { MetaDataLayout } from '../../components/layouts'
@@ -10,8 +9,6 @@ import { NavBar } from '../../components/sideBar'
 import { Loader } from '../../components/loader'
 
 import { AuthContext } from '../../context'
-
-import React from 'react'
 
 export const MenuLink = ({ text, isActive, onClickFunc }) => {
   const linkStyle = {
@@ -29,28 +26,21 @@ export const MenuLink = ({ text, isActive, onClickFunc }) => {
   )
 }
 
-export default function Dashboard() {
+const Dashboard = ({ allPodcasts, recommended }) => {
   const { user } = useContext(AuthContext)
-  const [hasLikes] = useState(user?.likes?.length > 0)
+  const [hasLikes] = useState(recommended.length > 0)
   const [isLoading, setIsLoading] = useState(true)
   const [fetchForUser, setFetchForUser] = useState(hasLikes)
   const [podcastList, setPodcastList] = useState([])
 
-  const fetchPodcasts = async (forUser) => {
-    const url = forUser
-      ? '/podcasts/recommendation'
-      : `/podcasts?lang=${user.lang}`
-    const { data } = await talksUpApi.get(url, {
-      headers: { Authorization: `Bearer ${Cookies.get('token')}` },
-    })
-    setPodcastList(data.data.slice(0, 3))
-    setIsLoading(false)
-  }
-
   useEffect(() => {
-    fetchPodcasts(fetchForUser)
+    setPodcastList(allPodcasts.slice(0, 3))
+    if (hasLikes) {
+      setPodcastList(recommended.slice(0, 3))
+    }
+    setIsLoading(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchForUser])
+  }, [])
 
   return (
     <MetaDataLayout title='TalksUp - Dashboard'>
@@ -83,15 +73,21 @@ export default function Dashboard() {
             >
               {hasLikes && (
                 <MenuLink
-                  text='For you 🎧'
+                  text={`For you, ${user?.public_name} 🎧`}
                   isActive={fetchForUser}
-                  onClickFunc={() => setFetchForUser(true)}
+                  onClickFunc={() => {
+                    setPodcastList(recommended)
+                    setFetchForUser(true)
+                  }}
                 />
               )}
               <MenuLink
                 text='Last updated 🕙'
                 isActive={!fetchForUser}
-                onClickFunc={() => setFetchForUser(false)}
+                onClickFunc={() => {
+                  setPodcastList(allPodcasts)
+                  setFetchForUser(false)
+                }}
               />
             </Text>
             <Grid.Container gap={2} justify='center'>
@@ -107,3 +103,25 @@ export default function Dashboard() {
     </MetaDataLayout>
   )
 }
+
+export const getServerSideProps = async ({ req }) => {
+  const { token = '', lang = '', hasLikes = false } = req.cookies
+  let recommended = []
+  const all = await talksUpApi.get(`/podcasts?lang=${lang}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+
+  if (hasLikes) {
+    recommended = await talksUpApi.get('/podcasts/recommendation', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+  }
+  return {
+    props: {
+      allPodcasts: all.data.data,
+      recommended: recommended?.data?.data,
+    },
+  }
+}
+
+export default Dashboard
