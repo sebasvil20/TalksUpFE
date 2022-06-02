@@ -6,15 +6,17 @@ import { Button } from '@mui/material'
 
 import LogoutIcon from '@mui/icons-material/Logout'
 
-import { AuthContext } from '../../context'
+import { AuthContext, UIContext } from '../../context'
 import { ThemeSwitcher } from '../themeConfig'
 
 export const UserCard = () => {
   const { user, logoutUser } = useContext(AuthContext)
+  const { toggleSideMenu } = useContext(UIContext)
   const router = useRouter()
 
   const logoutAndRedirect = () => {
     logoutUser()
+    toggleSideMenu()
     router.push('/')
   }
 
