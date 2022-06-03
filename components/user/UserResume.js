@@ -60,7 +60,7 @@ export const UserResume = () => {
               xs={12}
               css={{ position: 'relative' }}
               onMouseOver={() => setShowIconEditImage(true)}
-              onMouseLeave={() => setShowIconEditImage(false)}
+              onMouseOut={() => setShowIconEditImage(false)}
             >
               <AnimatePresence>
                 {showUploadError && (
