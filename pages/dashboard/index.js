@@ -4,27 +4,11 @@ import { Grid, Text } from '@nextui-org/react'
 
 import { talksUpApi } from '../../api'
 import { MetaDataLayout } from '../../components/layouts'
-import { PodcastCard } from '../../components/podcast'
+import { PodcastCard, MenuLink } from '../../components/podcast'
 import { NavBar } from '../../components/sideBar'
 import { Loader } from '../../components/loader'
 
 import { AuthContext } from '../../context'
-
-export const MenuLink = ({ text, isActive, onClickFunc }) => {
-  const linkStyle = {
-    color: isActive ? '#6334EB' : '#A0A3BD',
-    cursor: 'pointer',
-    '@sm': {
-      marginRight: '40px',
-    },
-  }
-
-  return (
-    <Text onClick={onClickFunc} css={linkStyle}>
-      {text}
-    </Text>
-  )
-}
 
 const Dashboard = ({ allPodcasts, recommended }) => {
   const { user } = useContext(AuthContext)
@@ -105,6 +89,7 @@ const Dashboard = ({ allPodcasts, recommended }) => {
 }
 
 export const getServerSideProps = async ({ req }) => {
+  console.log(req)
   const { token = '', lang = '', hasLikes = false } = req.cookies
   let recommended = []
   const all = await talksUpApi.get(`/podcasts?lang=${lang}`, {
