@@ -73,8 +73,13 @@ export const UserResume = () => {
               {editImage ? (
                 <Container justify='center'>
                   <FileUploader files={files} setFiles={setFiles} />
-                  <Grid.Container css={{marginTop: '30px'}}>
-                    <Grid sm={12} xs={6} css={{padding: '5px'}} justify='center'>
+                  <Grid.Container css={{ marginTop: '30px' }}>
+                    <Grid
+                      sm={12}
+                      xs={6}
+                      css={{ padding: '5px' }}
+                      justify='center'
+                    >
                       <Button
                         css={{ maxWitdh: '100px' }}
                         onClick={() => setEditImage(false)}
@@ -82,13 +87,18 @@ export const UserResume = () => {
                         Cancelar
                       </Button>
                     </Grid>
-                    <Grid sm={12} xs={6} css={{padding: '5px'}} justify='center'>
+                    <Grid
+                      sm={12}
+                      xs={6}
+                      css={{ padding: '5px' }}
+                      justify='center'
+                    >
                       <Button onClick={() => onUploadImg()}>Guardar</Button>
                     </Grid>
                   </Grid.Container>
                 </Container>
               ) : (
-                <>
+                <div className='fpfImg'>
                   {showIconEditImage && (
                     <div
                       style={{
@@ -113,13 +123,17 @@ export const UserResume = () => {
                   )}
                   <Image
                     alt='user pfp img'
+                    onError={(e) =>
+                      (e.target.src =
+                        'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/88be4dd4-dc7b-11ec-b799-acde48001122.png')
+                    }
                     src={
                       user?.profile_pic_url
                         ? user.profile_pic_url
                         : 'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/88be4dd4-dc7b-11ec-b799-acde48001122.png'
                     }
                   />
-                </>
+                </div>
               )}
             </Grid>
             <Grid sm={10} xs={12} direction='column' justify='center'>

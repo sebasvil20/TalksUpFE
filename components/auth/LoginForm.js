@@ -35,7 +35,6 @@ export const LoginForm = () => {
     }
 
     router.push('/dashboard')
-    setLoadingLogin(false)
   }
 
   return (

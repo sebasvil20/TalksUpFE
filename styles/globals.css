@@ -14,3 +14,14 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.fpfImg {
+  
+}
+
+@media (max-width: 600px) {
+  .fpfImg {
+    min-height: 300px;
+    max-height: 550px;
+  }
+}
