@@ -1,19 +1,19 @@
-import { useContext, useState } from 'react'
-import Chip from '@mui/material/Chip'
+import { useContext, useEffect, useState } from 'react'
 
 import { Image, Text, Grid, Container, Button } from '@nextui-org/react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ErrorCard } from '../errorCard'
+import { AnimatePresence } from 'framer-motion'
+import Chip from '@mui/material/Chip'
 
 import Cookies from 'js-cookie'
 
 import { AuthContext } from '../../context'
 import { FileUploader } from '../fileUploader/FileUploader'
+import { ErrorCard } from '../errorCard'
 import { Loader } from '../loader'
 
 export const UserResume = () => {
   const { user, uploadFile, updateUser } = useContext(AuthContext)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [showUploadError, setShowUploadError] = useState(false)
   const [showIconEditImage, setShowIconEditImage] = useState(false)
   const [editImage, setEditImage] = useState(false)
@@ -47,6 +47,12 @@ export const UserResume = () => {
     setEditImage(false)
     setIsLoading(false)
   }
+
+  useEffect(() => {
+    if (user) {
+      setIsLoading(false)
+    }
+  }, [user])
 
   return (
     <>

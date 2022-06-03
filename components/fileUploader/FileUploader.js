@@ -13,6 +13,8 @@ export const FileUploader = ({ files, setFiles }) => {
       maxFiles={1}
       accept='.png,.jpeg,.jpg,.webp'
       label='Arrastra tu imagen aqui'
+      behaviour='replace'
+      footer={false}
     >
       {files.map((file) => (
         <FileItem {...file} onDelete={removeFile} key={file.id} info />

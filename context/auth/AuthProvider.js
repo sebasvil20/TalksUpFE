@@ -91,7 +91,9 @@ export const AuthProvider = ({ children }) => {
       last_name: user.LastName,
       birth_date: user.BirthDate,
       profile_pic_url:
-        user.ProfilePicURL && user.ProfilePicURL != '' ? user.ProfilePicURL : null,
+        user.ProfilePicURL && user.ProfilePicURL != ''
+          ? user.ProfilePicURL
+          : null,
       phone_number:
         user.PhoneNumber && user.PhoneNumber != '' ? user.PhoneNumber : null,
     })
@@ -109,7 +111,7 @@ export const AuthProvider = ({ children }) => {
   const uploadFile = async (file) => {
     console.log(file)
     let formData = new FormData()
-    formData.append("file", file.file)
+    formData.append('file', file.file)
     try {
       const { data } = await talksUpApi.put('/upload', formData)
       return data.data.url
