@@ -1,14 +1,15 @@
 import { MetaDataLayout } from '../../../components/layouts'
 import { UserResume } from '../../../components/user'
 import { NavBar } from '../../../components/sideBar'
+import { Container } from '@nextui-org/react'
 
 const index = () => {
   return (
     <MetaDataLayout title='TalksUp - User Management'>
       <NavBar />
-      <div style={{ display: 'flex', marginTop: '56px' }}>
+      <Container css={{ '@sm': {maxWidth: '80%'}, maxWidth: '100%', margin: '70px auto' }}>
         <UserResume />
-      </div>
+      </Container>
     </MetaDataLayout>
   )
 }

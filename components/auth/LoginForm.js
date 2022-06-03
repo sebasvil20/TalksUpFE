@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react'
+import { useRouter } from 'next/router'
 
 import { Spacer, Input, Button, Loading } from '@nextui-org/react'
 import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/router'
 
 import { validations } from '../../utils'
 import { ErrorCard } from '../errorCard'
@@ -17,25 +17,25 @@ export const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm()
 
   const onLoginUser = async ({ email, password }) => {
-    setValidCredentialsError(false)
     setLoadingLogin(true)
+    setValidCredentialsError(false)
     const isValidLogin = await loginUser(email, password)
-    setLoadingLogin(false)
 
     if (!isValidLogin) {
       setValidCredentialsError(true)
       setTimeout(() => {
         setValidCredentialsError(false)
       }, 3000)
+      setLoadingLogin(false)
       return
     }
 
     router.push('/dashboard')
+    setLoadingLogin(false)
   }
 
   return (

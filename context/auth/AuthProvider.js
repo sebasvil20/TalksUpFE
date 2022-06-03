@@ -90,6 +90,8 @@ export const AuthProvider = ({ children }) => {
       first_name: user.FirstName,
       last_name: user.LastName,
       birth_date: user.BirthDate,
+      profile_pic_url:
+        user.ProfilePicURL && user.ProfilePicURL != '' ? user.ProfilePicURL : null,
       phone_number:
         user.PhoneNumber && user.PhoneNumber != '' ? user.PhoneNumber : null,
     })
@@ -99,6 +101,18 @@ export const AuthProvider = ({ children }) => {
       })
       dispatch({ type: '[Auth] - Update user', payload: data.data })
       return true
+    } catch (error) {
+      return false
+    }
+  }
+
+  const uploadFile = async (file) => {
+    console.log(file)
+    let formData = new FormData()
+    formData.append("file", file.file)
+    try {
+      const { data } = await talksUpApi.put('/upload', formData)
+      return data.data.url
     } catch (error) {
       return false
     }
@@ -133,6 +147,7 @@ export const AuthProvider = ({ children }) => {
         logoutUser,
         registerUser,
         updateUser,
+        uploadFile,
         associateLikesWithUser,
       }}
     >
