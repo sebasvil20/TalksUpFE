@@ -28,8 +28,7 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       })
       const { user } = data.data
-      Cookies.set('user_id', user.user_id)
-      Cookies.set('lang', user.lang)
+      Cookies.remove('hasLikes')
       Cookies.set('hasLikes', user.likes?.length > 0)
       dispatch({ type: '[Auth] - Login', payload: user })
     } catch (error) {
@@ -114,6 +113,8 @@ export const AuthProvider = ({ children }) => {
       const { data } = await talksUpApi.post('/users/associate', body, {
         headers: { Authorization: `Bearer ${Cookies.get('token')}` },
       })
+      Cookies.remove('hasLikes')
+      Cookies.set('hasLikes', true)
       dispatch({
         type: '[Auth] - Associate user with likes',
         payload: data.data,
