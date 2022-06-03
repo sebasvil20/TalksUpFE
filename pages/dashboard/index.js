@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react'
 
 import { Grid, Text } from '@nextui-org/react'
-
+import Cookie from 'js-cookie'
 import { talksUpApi } from '../../api'
 import { MetaDataLayout } from '../../components/layouts'
 import { PodcastCard, MenuLink } from '../../components/podcast'
@@ -10,21 +10,34 @@ import { Loader } from '../../components/loader'
 
 import { AuthContext } from '../../context'
 
-const Dashboard = ({ allPodcasts, recommended }) => {
+const Dashboard = () => {
   const { user } = useContext(AuthContext)
-  const [hasLikes] = useState(recommended.length > 0)
+  const [hasLikes] = useState(Cookie.get('hasLikes') == 'true')
   const [isLoading, setIsLoading] = useState(true)
   const [fetchForUser, setFetchForUser] = useState(hasLikes)
   const [podcastList, setPodcastList] = useState([])
 
-  useEffect(() => {
-    setPodcastList(allPodcasts.slice(0, 3))
-    if (hasLikes) {
-      setPodcastList(recommended.slice(0, 3))
+  const FetchData = async () => {
+    const token = Cookie.get('token')
+    if (fetchForUser) {
+      const recommended = await talksUpApi.get('/podcasts/recommendation', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      setPodcastList(recommended.data.data.slice(0, 3))
+      setIsLoading(false)
+      return
     }
+    const all = await talksUpApi.get(`/podcasts?lang=${Cookie.get('lang')}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    setPodcastList(all.data.data.slice(0, 3))
     setIsLoading(false)
+  }
+
+  useEffect(() => {
+    FetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [fetchForUser])
 
   return (
     <MetaDataLayout title='TalksUp - Dashboard'>
@@ -60,7 +73,6 @@ const Dashboard = ({ allPodcasts, recommended }) => {
                   text={`For you, ${user?.public_name} 🎧`}
                   isActive={fetchForUser}
                   onClickFunc={() => {
-                    setPodcastList(recommended)
                     setFetchForUser(true)
                   }}
                 />
@@ -69,7 +81,6 @@ const Dashboard = ({ allPodcasts, recommended }) => {
                 text='Last updated 🕙'
                 isActive={!fetchForUser}
                 onClickFunc={() => {
-                  setPodcastList(allPodcasts)
                   setFetchForUser(false)
                 }}
               />
@@ -86,27 +97,6 @@ const Dashboard = ({ allPodcasts, recommended }) => {
       )}
     </MetaDataLayout>
   )
-}
-
-export const getServerSideProps = async ({ req }) => {
-  console.log(req)
-  const { token = '', lang = '', hasLikes = false } = req.cookies
-  let recommended = []
-  const all = await talksUpApi.get(`/podcasts?lang=${lang}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  })
-
-  if (hasLikes) {
-    recommended = await talksUpApi.get('/podcasts/recommendation', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-  }
-  return {
-    props: {
-      allPodcasts: all.data.data,
-      recommended: recommended?.data?.data,
-    },
-  }
 }
 
 export default Dashboard
