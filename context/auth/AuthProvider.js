@@ -89,11 +89,13 @@ export const AuthProvider = ({ children }) => {
       user_id: user.UserID,
       first_name: user.FirstName,
       last_name: user.LastName,
-      birth_date: user.BirthDate,
+      birth_date:
+        user.BirthDate && user.BirthDate != '' ? user.BirthDate : null,
       profile_pic_url:
         user.ProfilePicURL && user.ProfilePicURL != ''
           ? user.ProfilePicURL
           : null,
+      biography: user.Biography && user.Biography != '' ? user.Biography : null,
       phone_number:
         user.PhoneNumber && user.PhoneNumber != '' ? user.PhoneNumber : null,
     })

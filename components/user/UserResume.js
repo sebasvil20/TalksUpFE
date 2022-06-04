@@ -1,15 +1,24 @@
 import { useContext, useEffect, useState } from 'react'
 
-import { Image, Text, Grid, Container, Button } from '@nextui-org/react'
+import {
+  Image,
+  Text,
+  Grid,
+  Container,
+  Button,
+  Avatar
+} from '@nextui-org/react'
 import { AnimatePresence } from 'framer-motion'
 import Chip from '@mui/material/Chip'
-
 import Cookies from 'js-cookie'
+
+import EditIcon from '@mui/icons-material/Edit'
 
 import { AuthContext } from '../../context'
 import { FileUploader } from '../fileUploader/FileUploader'
 import { ErrorCard } from '../errorCard'
 import { Loader } from '../loader'
+import { EditUserModal } from './'
 
 export const UserResume = () => {
   const { user, uploadFile, updateUser } = useContext(AuthContext)
@@ -17,6 +26,7 @@ export const UserResume = () => {
   const [showUploadError, setShowUploadError] = useState(false)
   const [showIconEditImage, setShowIconEditImage] = useState(false)
   const [editImage, setEditImage] = useState(false)
+  const [visibleModal, setVisibleModal] = useState(false)
   const [files, setFiles] = useState([])
 
   const onUploadImg = async () => {
@@ -62,16 +72,17 @@ export const UserResume = () => {
         <>
           <Grid.Container gap={2} alignContent='center'>
             <Grid
-              sm={2}
               xs={12}
               css={{ position: 'relative' }}
               onMouseOver={() => setShowIconEditImage(true)}
               onMouseOut={() => setShowIconEditImage(false)}
+              justify='center'
+              alignItems='center'
             >
               <AnimatePresence>
                 {showUploadError && (
                   <ErrorCard
-                    title='Error subiendo imagen'
+                    title='Error actualizando info'
                     message='Intentelo mas tarde'
                   />
                 )}
@@ -142,7 +153,7 @@ export const UserResume = () => {
                 </div>
               )}
             </Grid>
-            <Grid sm={10} xs={12} direction='column' justify='center'>
+            <Grid xs={12} direction='column' justify='center'>
               <Text
                 color='#4E4B66'
                 css={{
@@ -169,6 +180,21 @@ export const UserResume = () => {
                   {user?.biography} 😁
                 </Text>
               )}
+
+              <Button
+                auto
+                color='primary'
+                shadow
+                css={{ marginTop: '20px', '@sm': {width: '100px!important'}}}
+                onClick={() => setVisibleModal(true)}
+                iconRight={<EditIcon />}
+              >
+                Editar perfil
+              </Button>
+              <EditUserModal
+                visible={visibleModal}
+                closeHandler={() => setVisibleModal(false)}
+              />
               {user?.likes && (
                 <Container
                   css={{
