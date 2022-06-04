@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 
-import { Image, Text, Grid, Container, Button, Avatar } from '@nextui-org/react'
+import { Text, Grid, Container, Button, Avatar } from '@nextui-org/react'
 import { AnimatePresence } from 'framer-motion'
 import Chip from '@mui/material/Chip'
 import Cookies from 'js-cookie'
@@ -110,22 +110,21 @@ export const UserResume = () => {
               ) : (
                 <div className='fpfImg'>
                   {showIconEditImage && (
-                      <Avatar
-                        css={{
-                          zIndex: '90',
-                          position: 'absolute',
-                          top: '12px',
-                          left: '50%',
-                          transform: 'translate(-50%, 0)',
-                          size: '200px',
-                          padding: 0,
-                          margin: 0,
-                          cursor: 'pointer'
-                        }}
-                        text='✏️'
-                        onClick={() => setEditImage(true)}
-                      />
-
+                    <Avatar
+                      css={{
+                        zIndex: '90',
+                        position: 'absolute',
+                        top: '12px',
+                        left: '50%',
+                        transform: 'translate(-50%, 0)',
+                        size: '200px',
+                        padding: 0,
+                        margin: 0,
+                        cursor: 'pointer',
+                      }}
+                      text='✏️'
+                      onClick={() => setEditImage(true)}
+                    />
                   )}
                   <Avatar
                     css={{ size: '200px', zIndex: '1', margin: 0, padding: 0 }}
