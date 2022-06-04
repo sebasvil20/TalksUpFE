@@ -1,13 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 
-import {
-  Image,
-  Text,
-  Grid,
-  Container,
-  Button,
-  Avatar
-} from '@nextui-org/react'
+import { Image, Text, Grid, Container, Button, Avatar } from '@nextui-org/react'
 import { AnimatePresence } from 'framer-motion'
 import Chip from '@mui/material/Chip'
 import Cookies from 'js-cookie'
@@ -70,7 +63,7 @@ export const UserResume = () => {
         <Loader />
       ) : (
         <>
-          <Grid.Container gap={2} alignContent='center'>
+          <Grid.Container gap={2} alignContent='center' justify='center'>
             <Grid
               xs={12}
               css={{ position: 'relative' }}
@@ -117,28 +110,25 @@ export const UserResume = () => {
               ) : (
                 <div className='fpfImg'>
                   {showIconEditImage && (
-                    <div
-                      style={{
-                        zIndex: '10',
-                        position: 'absolute',
-                        top: '10%',
-                        left: '50%',
-                        transform: 'translate(-50%, 0)',
-                        width: '80%',
-                        height: '80%',
-                        borderRadius: '15px',
-                        background: 'rgb(78, 75, 102, 90%)',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                      onClick={() => setEditImage(true)}
-                    >
-                      <Text color='white'>Haga click aca para editar</Text>
-                    </div>
+                      <Avatar
+                        css={{
+                          zIndex: '90',
+                          position: 'absolute',
+                          top: '12px',
+                          left: '50%',
+                          transform: 'translate(-50%, 0)',
+                          size: '200px',
+                          padding: 0,
+                          margin: 0,
+                          cursor: 'pointer'
+                        }}
+                        text='✏️'
+                        onClick={() => setEditImage(true)}
+                      />
+
                   )}
-                  <Image
+                  <Avatar
+                    css={{ size: '200px', zIndex: '1', margin: 0, padding: 0 }}
                     alt='user pfp img'
                     onError={(e) =>
                       (e.target.src =
@@ -157,8 +147,9 @@ export const UserResume = () => {
               <Text
                 color='#4E4B66'
                 css={{
-                  '@smMax': { textAlign: 'center', padding: '0' },
+                  '@smMax': { padding: '0' },
                   paddingLeft: '4px',
+                  textAlign: 'center',
                 }}
                 h6
               >
@@ -166,7 +157,10 @@ export const UserResume = () => {
               </Text>
               <Text
                 color='#14142B'
-                css={{ '@smMax': { textAlign: 'center', padding: '0' } }}
+                css={{
+                  textAlign: 'center',
+                  '@smMax': { textAlign: 'center', padding: '0' },
+                }}
                 h1
               >
                 {user?.first_name} {user?.last_name}
@@ -175,7 +169,10 @@ export const UserResume = () => {
               {user?.biography && (
                 <Text
                   color='#4E4B66'
-                  css={{ '@smMax': { textAlign: 'center', padding: '0' } }}
+                  css={{
+                    textAlign: 'center',
+                    '@smMax': { textAlign: 'center', padding: '0' },
+                  }}
                 >
                   {user?.biography} 😁
                 </Text>
@@ -185,7 +182,10 @@ export const UserResume = () => {
                 auto
                 color='primary'
                 shadow
-                css={{ marginTop: '20px', '@sm': {width: '100px!important'}}}
+                css={{
+                  margin: '20px auto',
+                  '@sm': { width: '100px!important' },
+                }}
                 onClick={() => setVisibleModal(true)}
                 iconRight={<EditIcon />}
               >
@@ -203,7 +203,7 @@ export const UserResume = () => {
                     display: 'flex',
                     flexWrap: 'wrap',
                     justifyContent: 'flex-start',
-                    '@smMax': { justifyContent: 'center' },
+                    justifyContent: 'center',
                   }}
                 >
                   {user.likes.map((like) => (
