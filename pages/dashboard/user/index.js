@@ -7,7 +7,13 @@ const index = () => {
   return (
     <MetaDataLayout title='TalksUp - User Management'>
       <NavBar />
-      <Container css={{ '@sm': {maxWidth: '80%'}, maxWidth: '100%', margin: '70px auto' }}>
+      <Container
+        css={{
+          '@sm': { maxWidth: '80%' },
+          maxWidth: '100%',
+          margin: '70px auto',
+        }}
+      >
         <UserResume />
       </Container>
     </MetaDataLayout>

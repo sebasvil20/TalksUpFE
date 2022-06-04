@@ -71,6 +71,10 @@ export const EditUserModal = ({ visible, closeHandler }) => {
               Modifica los datos que creas necesario 😄
             </Text>
             <Spacer />
+            <Text color='#4E4B66' css={{ fontSize: '12px' }}>
+              Para cambiar tu foto de perfil haz click en ella
+            </Text>
+            <Spacer />
             <Grid xs={12} sm={6}>
               <Input
                 placeholder='Type your first name'

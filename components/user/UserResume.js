@@ -93,7 +93,10 @@ export const UserResume = () => {
                     >
                       <Button
                         css={{ maxWitdh: '100px' }}
-                        onClick={() => setEditImage(false)}
+                        onClick={() => {
+                          setEditImage(false)
+                          setShowIconEditImage(false)
+                        }}
                       >
                         Cancelar
                       </Button>
