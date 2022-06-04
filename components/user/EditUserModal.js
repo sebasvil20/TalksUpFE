@@ -111,7 +111,7 @@ export const EditUserModal = ({ visible, closeHandler }) => {
                 color={!!errors.lastName && 'error'}
               />
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid xs={12}>
               <Input
                 width='100%'
                 label='Numero de telefono (sin ext)'
@@ -121,7 +121,7 @@ export const EditUserModal = ({ visible, closeHandler }) => {
                 helperText='Optional'
               />
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid xs={12}>
               <Textarea
                 width='100%'
                 label='Biografia'
