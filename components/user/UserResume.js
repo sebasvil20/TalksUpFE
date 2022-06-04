@@ -49,6 +49,7 @@ export const UserResume = () => {
 
     setEditImage(false)
     setIsLoading(false)
+    setShowIconEditImage(false)
   }
 
   useEffect(() => {
