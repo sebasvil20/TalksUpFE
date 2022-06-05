@@ -195,7 +195,7 @@ export const UserResume = () => {
                 >
                   {user.likes.map((like) => (
                     <Chip
-                      style={{ marginRight: '10px' }}
+                      style={{ margin: '0 10px' }}
                       key={like.category_id}
                       label={like.name}
                       color='primary'
