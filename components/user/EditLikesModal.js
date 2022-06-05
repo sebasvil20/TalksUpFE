@@ -39,7 +39,7 @@ export const EditLikesModal = ({ visible, closeHandler }) => {
     setLoading(true)
     const isValidUpdate = await associateLikesWithUser({
       UserID: Cookies.get('user_id'),
-      Categories: selectedCategories,
+      Categories: [...new Set(selectedCategories)],
     })
 
     if (!isValidUpdate) {
@@ -47,6 +47,8 @@ export const EditLikesModal = ({ visible, closeHandler }) => {
       setLoading(false)
       return
     }
+    setSelectedCategories([])
+    setShowError(false)
     setLoading(false)
     checkToken()
     closeHandler()
