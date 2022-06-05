@@ -6,7 +6,7 @@ import Chip from '@mui/material/Chip'
 import Cookies from 'js-cookie'
 
 import EditIcon from '@mui/icons-material/Edit'
-import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
+import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown'
 
 import { AuthContext } from '../../context'
 import { FileUploader } from '../fileUploader/FileUploader'
@@ -182,24 +182,6 @@ export const UserResume = () => {
                   {user?.biography} 😁
                 </Text>
               )}
-
-              <Button
-                auto
-                color='primary'
-                shadow
-                css={{
-                  margin: '20px auto',
-                  '@sm': { width: '100px!important' },
-                }}
-                onClick={() => setVisibleModal(true)}
-                iconRight={<EditIcon />}
-              >
-                Editar perfil
-              </Button>
-              <EditUserModal
-                visible={visibleModal}
-                closeHandler={() => setVisibleModal(false)}
-              />
               {user?.likes && (
                 <Container
                   css={{
@@ -222,20 +204,47 @@ export const UserResume = () => {
                   ))}
                 </Container>
               )}
-
-              <Button
-                auto
-                color='secondary'
-                shadow
+              <Container
                 css={{
+                  width: '50%',
+                  '@smMax': { width: '90%' },
                   margin: '20px auto',
-                  '@sm': { width: '100px!important' },
+                  display: 'flex',
+                  justifyContent: 'center',
                 }}
-                onClick={() => setVisibleEditLikesModal(true)}
-                iconRight={<ThumbsUpDownIcon />}
               >
-                Editar gustos
-              </Button>
+                <Button
+                  auto
+                  color='primary'
+                  shadow
+                  css={{
+                    margin: '20px auto',
+                    '@sm': { width: '100px!important' },
+                  }}
+                  onClick={() => setVisibleModal(true)}
+                  iconRight={<EditIcon />}
+                >
+                  Editar perfil
+                </Button>
+                <Button
+                  auto
+                  color='secondary'
+                  shadow
+                  css={{
+                    margin: '20px auto',
+                    '@sm': { width: '100px!important' },
+                  }}
+                  onClick={() => setVisibleEditLikesModal(true)}
+                  iconRight={<ThumbsUpDownIcon />}
+                >
+                  Editar gustos
+                </Button>
+              </Container>
+
+              <EditUserModal
+                visible={visibleModal}
+                closeHandler={() => setVisibleModal(false)}
+              />
               <EditLikesModal
                 visible={visibleEditLikesModal}
                 closeHandler={() => setVisibleEditLikesModal(false)}
