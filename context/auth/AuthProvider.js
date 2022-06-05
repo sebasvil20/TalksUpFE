@@ -152,6 +152,7 @@ export const AuthProvider = ({ children }) => {
         registerUser,
         updateUser,
         uploadFile,
+        checkToken,
         associateLikesWithUser,
       }}
     >

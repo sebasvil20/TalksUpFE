@@ -26,6 +26,10 @@ export const UserCard = () => {
         <Link href='/dashboard/user'>
           <User
             bordered
+            onError={(e) =>
+              (e.target.src =
+                'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/88be4dd4-dc7b-11ec-b799-acde48001122.png')
+            }
             src={
               user?.profile_pic_url
                 ? user.profile_pic_url

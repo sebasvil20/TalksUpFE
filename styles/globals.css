@@ -16,7 +16,6 @@ a {
 }
 
 .fpfImg {
-  
 }
 
 @media (max-width: 600px) {
@@ -24,4 +23,8 @@ a {
     min-height: 300px;
     max-height: 550px;
   }
+}
+
+.MuiAutocomplete-popper {
+  z-index: 999999999999999999999 !important;
 }

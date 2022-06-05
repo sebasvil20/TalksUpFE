@@ -3,8 +3,6 @@ import { useState, useContext } from 'react'
 import {
   Modal,
   Input,
-  Row,
-  Checkbox,
   Button,
   Text,
   Grid,

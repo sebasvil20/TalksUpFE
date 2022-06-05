@@ -6,12 +6,13 @@ import Chip from '@mui/material/Chip'
 import Cookies from 'js-cookie'
 
 import EditIcon from '@mui/icons-material/Edit'
+import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
 
 import { AuthContext } from '../../context'
 import { FileUploader } from '../fileUploader/FileUploader'
 import { ErrorCard } from '../errorCard'
 import { Loader } from '../loader'
-import { EditUserModal } from './'
+import { EditUserModal, EditLikesModal } from './'
 
 export const UserResume = () => {
   const { user, uploadFile, updateUser } = useContext(AuthContext)
@@ -20,6 +21,7 @@ export const UserResume = () => {
   const [showIconEditImage, setShowIconEditImage] = useState(false)
   const [editImage, setEditImage] = useState(false)
   const [visibleModal, setVisibleModal] = useState(false)
+  const [visibleEditLikesModal, setVisibleEditLikesModal] = useState(false)
   const [files, setFiles] = useState([])
 
   const onUploadImg = async () => {
@@ -220,6 +222,24 @@ export const UserResume = () => {
                   ))}
                 </Container>
               )}
+
+              <Button
+                auto
+                color='secondary'
+                shadow
+                css={{
+                  margin: '20px auto',
+                  '@sm': { width: '100px!important' },
+                }}
+                onClick={() => setVisibleEditLikesModal(true)}
+                iconRight={<ThumbsUpDownIcon />}
+              >
+                Editar gustos
+              </Button>
+              <EditLikesModal
+                visible={visibleEditLikesModal}
+                closeHandler={() => setVisibleEditLikesModal(false)}
+              />
             </Grid>
           </Grid.Container>
         </>
