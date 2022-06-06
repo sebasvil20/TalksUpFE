@@ -37,7 +37,7 @@ export const DetailedPodcast = ({ podcast }) => {
         onClick={() => router.push('/dashboard')}
         css={{ margin: 'auto', background: 'transparent', color: '#6E7191' }}
       >
-        ← Go to dashboard
+        ← Volver al dashboard
       </Button>
       <Text css={{ '@smMax': { textAlign: 'center' }, padding: '12px' }}>
         <Text b size={26}>
@@ -118,7 +118,7 @@ export const DetailedPodcast = ({ podcast }) => {
                 target='_blank'
                 rel='nofollow noopener noreferrer'
               >
-                Click to see trailer
+                Click para ir al trailer
               </Link>
             </Text>
           </Grid>
@@ -126,7 +126,7 @@ export const DetailedPodcast = ({ podcast }) => {
         {release_date && (
           <Grid xs={6} sm={3} direction='column'>
             <Text css={{ marginTop: '10px' }} b size={18}>
-              Release date
+              Fecha lanzamiento
             </Text>
             <Text>{release_date}</Text>
           </Grid>
@@ -134,7 +134,7 @@ export const DetailedPodcast = ({ podcast }) => {
         {update_date && (
           <Grid xs={6} sm={3} direction='column'>
             <Text css={{ marginTop: '10px' }} b size={18}>
-              Last updated date
+              Última fecha actualización
             </Text>
             <Text>{update_date}</Text>
           </Grid>
@@ -142,7 +142,7 @@ export const DetailedPodcast = ({ podcast }) => {
         {total_episodes && (
           <Grid xs={6} sm={3} direction='column'>
             <Text css={{ marginTop: '10px' }} b size={18}>
-              Total episodes
+              Cantidad de episodios
             </Text>
             <Text>{total_episodes}</Text>
           </Grid>
@@ -150,7 +150,7 @@ export const DetailedPodcast = ({ podcast }) => {
         {total_length && (
           <Grid xs={6} sm={3} direction='column'>
             <Text css={{ marginTop: '10px' }} b size={18}>
-              Total length
+              Longitud total
             </Text>
             <Text>{total_length}</Text>
           </Grid>

@@ -26,12 +26,17 @@ export const LoginContainer = () => {
         >
           <AuthHeader
             title='Login'
-            subtitle="Don't have an account?"
+            subtitle='¿Aún no tienes una cuenta?'
             link='/register'
-            linkTitle='Sign up for free'
+            linkTitle='Registrate gratis'
           />
           <Container
-            css={{ display: 'flex', maxHeight: '30px!important', width: 'max-content', margin: '0px 0 25px'}}
+            css={{
+              display: 'flex',
+              maxHeight: '30px!important',
+              width: 'max-content',
+              margin: '0px 0 25px',
+            }}
           >
             <ThemeSwitcher customStyle={{ margin: '0px 10px' }} />
             <LangSwitcher />

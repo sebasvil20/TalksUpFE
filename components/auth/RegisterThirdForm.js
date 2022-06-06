@@ -72,8 +72,8 @@ export const RegisterThirdForm = ({ setStepper, categories }) => {
           Cool {userName},
         </Text>
         <Text css={{ color: '$white' }} span>
-          Now let&apos;s define some categories of your interest. <br /> No
-          worries you can still change it in the future
+          Ahora definamos algunas categorías de tu interés. <br /> No te
+          preocupes, podrás cambiarlas después en tu perfil de usuario
         </Text>
       </Card>
       <Spacer y={2} />
@@ -114,7 +114,7 @@ export const RegisterThirdForm = ({ setStepper, categories }) => {
               zIndex: 1,
             }}
           >
-            Omit
+            Omitir
           </Button>
         </Grid>
         <Grid md={6} xs={12} justify='center'>
@@ -131,7 +131,7 @@ export const RegisterThirdForm = ({ setStepper, categories }) => {
             {savingRegister ? (
               <Loading type='points' color='currentColor' size='sm' />
             ) : (
-              'Save'
+              'Guardar gustos'
             )}
           </Button>
         </Grid>

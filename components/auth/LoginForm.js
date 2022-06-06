@@ -58,7 +58,7 @@ export const LoginForm = () => {
           />
         )}
         <Input
-          placeholder='Type your email'
+          placeholder='Escribe tu email'
           label='Email'
           width='70%'
           {...register('email', {
@@ -71,7 +71,7 @@ export const LoginForm = () => {
         />
         <Spacer y={2} />
         <Input.Password
-          placeholder='Type your password'
+          placeholder='Escribe tu contraseña'
           label='Password'
           width='70%'
           {...register('password', {

@@ -45,10 +45,10 @@ export const RegisterContainer = ({ categories }) => {
         }}
       >
         <AuthHeader
-          title='Register'
-          subtitle='Already have an account?'
+          title='Registro'
+          subtitle='¿Ya tienes una cuenta?'
           link='/'
-          linkTitle='Login now'
+          linkTitle='Inicia sesión ahora'
         />
         <Container
           css={{ display: 'flex', width: 'max-content', margin: 'auto' }}

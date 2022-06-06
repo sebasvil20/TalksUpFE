@@ -82,18 +82,18 @@ export const RegisterSecondForm = ({ setStepper }) => {
       )}
       <Card color='success'>
         <Text css={{ fontWeight: '$bold', color: '$white' }} span>
-          Hi {userName}, welcome to TalksUp!
+          Hi {userName}, bienvenido a TalksUp!
         </Text>
         <Text css={{ color: '$white' }} span>
-          To continue, we need basic information about you
+          Para continuar, necesitamos información básica sobre ti
         </Text>
       </Card>
       <Spacer y={2} />
       <Grid.Container gap={2} justify='center'>
         <Grid xs={12} sm={6}>
           <Input
-            placeholder='Type your first name'
-            label='First name'
+            placeholder='Escribe tu nombre'
+            label='Nombre'
             width='100%'
             {...register('firstName', {
               required: 'Este campo es requerido',
@@ -109,9 +109,9 @@ export const RegisterSecondForm = ({ setStepper }) => {
         </Grid>
         <Grid xs={12} sm={6}>
           <Input
-            placeholder='Type your last name'
+            placeholder='Escribe tu apellido'
             width='100%'
-            label='Last name'
+            label='Apellido'
             {...register('lastName', {
               required: 'Este campo es requerido',
               validate: validations.isString,
@@ -127,16 +127,16 @@ export const RegisterSecondForm = ({ setStepper }) => {
         <Grid xs={12} sm={6}>
           <Input
             width='100%'
-            label='Phone number (Without ext code)'
+            label='Núm. Celular (Sin código ext.)'
             type='number'
             {...register('phoneNumber')}
-            helperText='Optional'
+            helperText='Opcional'
           />
         </Grid>
         <Grid xs={12} sm={6}>
           <Input
             width='100%'
-            label='Birth date'
+            label='Fecha nacimiento'
             type='date'
             min='1950-01-01'
             max='2010-01-01'
@@ -162,7 +162,7 @@ export const RegisterSecondForm = ({ setStepper }) => {
         {savingRegister ? (
           <Loading type='points' color='currentColor' size='sm' />
         ) : (
-          'Save'
+          'Guardar'
         )}
       </Button>
     </motion.form>

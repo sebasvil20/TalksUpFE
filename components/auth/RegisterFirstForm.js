@@ -92,7 +92,7 @@ export const RegisterFirstForm = ({ setStepper }) => {
       <Grid.Container gap={2} justify='center'>
         <Grid xs={12} sm={6}>
           <Input
-            placeholder='Type your email'
+            placeholder='Escribe tu email'
             label='Email'
             width='100%'
             type='email'
@@ -106,9 +106,9 @@ export const RegisterFirstForm = ({ setStepper }) => {
         </Grid>
         <Grid xs={12} sm={6}>
           <Input
-            placeholder='Nickname or username'
+            placeholder='Nickname nombre de usuario'
             width='100%'
-            label='Public name'
+            label='Nombre publico'
             {...register('publicName', {
               required: 'Este campo es requerido',
               validate: validations.isString,
@@ -123,7 +123,7 @@ export const RegisterFirstForm = ({ setStepper }) => {
         </Grid>
         <Grid xs={12} sm={6}>
           <Input.Password
-            placeholder='Type your password'
+            placeholder='Escribe tu password'
             label='Password'
             width='100%'
             {...register('password', {
@@ -139,13 +139,13 @@ export const RegisterFirstForm = ({ setStepper }) => {
         </Grid>
         <Grid xs={12} sm={6}>
           <Input.Password
-            placeholder='Type your password'
-            label='Password confirmation'
+            placeholder='Escribe tu password'
+            label='Confirmación de contraseña'
             width='100%'
             {...register('confirmPwd', {
               required: 'Este campo es requerido',
               validate: (value) =>
-                value === password.current || 'The passwords do not match',
+                value === password.current || 'Las contraseñas no coinciden',
             })}
             helperText={errors.confirmPwd?.message}
             color={!!errors.confirmPwd && 'error'}
@@ -180,7 +180,7 @@ export const RegisterFirstForm = ({ setStepper }) => {
           zIndex: 1,
         }}
       >
-        I have read and agreed to the
+        He leido y acepto la
       </Checkbox>
       <TermsModal />
       <Spacer y={1} />
@@ -197,7 +197,7 @@ export const RegisterFirstForm = ({ setStepper }) => {
         {loadingRegister ? (
           <Loading type='points' color='currentColor' size='sm' />
         ) : (
-          'Register'
+          'Registrarse'
         )}
       </Button>
     </motion.form>

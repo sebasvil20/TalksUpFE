@@ -91,7 +91,7 @@ export const PodcastCard = ({ podcast }) => {
                 <Col css={{ paddingLeft: '10px' }}>
                   {total_episodes && (
                     <Text color='#d1d1d1' size={12}>
-                      {total_episodes} espisodes
+                      {total_episodes} episodios
                     </Text>
                   )}
                   <Text color='#d1d1d1' size={12}>
@@ -126,7 +126,7 @@ export const PodcastCard = ({ podcast }) => {
                     weight='bold'
                     transform='uppercase'
                   >
-                    View Details
+                    Ver detalles
                   </Text>
                 </Button>
               </Row>

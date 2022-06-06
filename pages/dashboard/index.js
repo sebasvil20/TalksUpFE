@@ -121,7 +121,7 @@ const Dashboard = () => {
               css={{ paddingLeft: '24px', marginTop: '2px', color: '#14142B' }}
               h1
             >
-              Explore
+              Explorar
             </Text>
             <Text
               css={{
@@ -135,7 +135,7 @@ const Dashboard = () => {
             >
               {hasLikes && (
                 <MenuLink
-                  text={`For you, ${user?.public_name} 🎧`}
+                  text={`Para ti, ${user?.public_name} 🎧`}
                   isActive={fetchForUser}
                   onClickFunc={() => {
                     setFetchForUser(true)
@@ -143,7 +143,7 @@ const Dashboard = () => {
                 />
               )}
               <MenuLink
-                text='Last updated 🕙'
+                text='Los ultimos actualizados 🕙'
                 isActive={!fetchForUser}
                 onClickFunc={() => {
                   setFetchForUser(false)

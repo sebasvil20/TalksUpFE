@@ -4,7 +4,7 @@ import { talksUpApi } from '../api'
 
 const register = ({ categories }) => {
   return (
-    <MetaDataLayout title='TalksUp - Register'>
+    <MetaDataLayout title='TalksUp - Registro'>
       <RegisterContainer categories={categories} />
     </MetaDataLayout>
   )
