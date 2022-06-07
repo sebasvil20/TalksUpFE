@@ -9,7 +9,7 @@ const index = () => {
       <NavBar />
       <Container
         css={{
-          '@sm': { maxWidth: '80%' },
+          '@md': { maxWidth: '40%' },
           maxWidth: '100%',
           margin: '70px auto',
         }}

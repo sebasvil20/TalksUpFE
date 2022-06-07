@@ -206,7 +206,7 @@ export const UserResume = () => {
               )}
               <Container
                 css={{
-                  width: '50%',
+                  width: 'max-content',
                   '@smMax': { width: '90%' },
                   margin: '20px auto',
                   display: 'flex',
@@ -218,7 +218,7 @@ export const UserResume = () => {
                   color='primary'
                   shadow
                   css={{
-                    margin: '20px auto',
+                    margin: '20px 2px',
                     '@sm': { width: '100px!important' },
                   }}
                   onClick={() => setVisibleModal(true)}
@@ -231,7 +231,7 @@ export const UserResume = () => {
                   color='secondary'
                   shadow
                   css={{
-                    margin: '20px auto',
+                    margin: '20px 2px',
                     '@sm': { width: '100px!important' },
                   }}
                   onClick={() => setVisibleEditLikesModal(true)}
