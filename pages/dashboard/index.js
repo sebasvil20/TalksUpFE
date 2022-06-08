@@ -1,23 +1,19 @@
 import { useEffect, useState, useContext } from 'react'
 import { useRouter } from 'next/router'
 
-import { Modal, Button, Grid, Text } from '@nextui-org/react'
+import { Modal, Button, Grid, Text, Spacer } from '@nextui-org/react'
 import Cookie from 'js-cookie'
 
 import { talksUpApi } from '../../api'
 import { MetaDataLayout } from '../../components/layouts'
-import {
-  PodcastCard,
-  MenuLink,
-  PodcastListCard,
-} from '../../components/podcast'
+import { MenuLink, PodcastListCard } from '../../components/podcast'
 import { NavBar } from '../../components/sideBar'
 import { Loader } from '../../components/loader'
-
 import { AuthContext } from '../../context'
+import { CategoryListCard } from '../../components/category'
+import { CompleteProfileModal } from '../../components/user/CompleteProfileModal'
 
 const Dashboard = () => {
-  const router = useRouter()
   const { user } = useContext(AuthContext)
   const [hasLikes] = useState(Cookie.get('hasLikes') == 'true')
   const [isLoading, setIsLoading] = useState(true)
@@ -62,54 +58,10 @@ const Dashboard = () => {
 
   return (
     <MetaDataLayout title='TalksUp - Dashboard'>
-      <Modal
-        closeButton
-        aria-labelledby='modal-title'
-        open={showModal}
-        onClose={() => setShowModal(false)}
-      >
-        <Modal.Header>
-          <Text id='modal-title' size={18}>
-            Bienvenido a
-            <Text b size={18} color='#6334EB'>
-              {' '}
-              TalksUp
-            </Text>
-          </Text>
-        </Modal.Header>
-        <Modal.Body css={{ textAlign: 'center' }}>
-          <Text>
-            Parece que no has completado tu perfil, ¿quieres completarlo ahora?
-          </Text>
-          <Text color='#4E4B66' css={{ fontSize: '12px' }}>
-            Siempre puedes actualizar tu perfil si vas desde el menu de
-            navegación, haciendo click en tu nombre
-          </Text>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            auto
-            flat
-            color='error'
-            onClick={() => {
-              setShowModal(false)
-              localStorage.setItem('updateAsked', 'true')
-            }}
-          >
-            Nope ❌
-          </Button>
-          <Button
-            auto
-            onClick={() => {
-              setShowModal(false)
-              localStorage.setItem('updateAsked', 'true')
-              router.push('/dashboard/user')
-            }}
-          >
-            Vamos 😎
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <CompleteProfileModal
+        showModal={showModal}
+        closeFunc={() => setShowModal(false)}
+      />
       {isLoading ? (
         <Loader />
       ) : (
@@ -154,12 +106,21 @@ const Dashboard = () => {
                 }}
               />
             </Text>
-            <Grid.Container gap={2} justify='flex-start'>
-              <PodcastListCard podcastList={podcastList} />
-            </Grid.Container>
+            <PodcastListCard podcastList={podcastList} />
           </div>
         </>
       )}
+
+      <div style={{ padding: '20px' }}>
+        <Text
+          css={{ paddingLeft: '24px', marginTop: '2px', color: '#14142B' }}
+          h2
+        >
+          Categorías
+        </Text>
+        <Spacer />
+        <CategoryListCard />
+      </div>
     </MetaDataLayout>
   )
 }
