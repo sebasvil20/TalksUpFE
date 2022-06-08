@@ -78,7 +78,7 @@ const Dashboard = () => {
             >
               Explorar
             </Text>
-            <Text
+            <Text 
               css={{
                 paddingLeft: '26px',
                 paddingRight: '26px',
