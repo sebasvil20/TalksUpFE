@@ -6,7 +6,11 @@ import Cookie from 'js-cookie'
 
 import { talksUpApi } from '../../api'
 import { MetaDataLayout } from '../../components/layouts'
-import { PodcastCard, MenuLink } from '../../components/podcast'
+import {
+  PodcastCard,
+  MenuLink,
+  PodcastListCard,
+} from '../../components/podcast'
 import { NavBar } from '../../components/sideBar'
 import { Loader } from '../../components/loader'
 
@@ -48,7 +52,7 @@ const Dashboard = () => {
     if (user) {
       setIsLoading(false)
       if (
-        (!user?.biography || user?.likes?.length <= 0) &&
+        (!user?.biography || !user?.likes) &&
         localStorage.getItem('updateAsked') != 'true'
       ) {
         setShowModal(true)
@@ -151,11 +155,7 @@ const Dashboard = () => {
               />
             </Text>
             <Grid.Container gap={2} justify='flex-start'>
-              {podcastList.map((podcast) => (
-                <Grid key={podcast.podcast_id} sm={4} xs={12}>
-                  <PodcastCard podcast={podcast} />
-                </Grid>
-              ))}
+              <PodcastListCard podcastList={podcastList} />
             </Grid.Container>
           </div>
         </>
