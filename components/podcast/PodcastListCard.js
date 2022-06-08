@@ -1,4 +1,5 @@
 import { Grid } from '@nextui-org/react'
+
 import { PodcastCard } from './'
 
 export const PodcastListCard = ({ podcastList }) => {

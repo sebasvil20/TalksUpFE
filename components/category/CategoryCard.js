@@ -5,7 +5,7 @@ import { Card, Grid, Text, Link } from '@nextui-org/react'
 
 export const CategoryCard = ({ category }) => {
   const router = useRouter()
-  const { category_id, name, icon_url, description } = category
+  const { category_id, name, icon_url, description, total_podcasts } = category
   return (
     <Card
       css={{ p: '$6', m: '5px' }}
@@ -15,9 +15,11 @@ export const CategoryCard = ({ category }) => {
       <Card.Header>
         <Image
           alt='nextui logo'
-          onError={(e) =>3
-            (e.target.src =
-              'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/88be4dd4-dc7b-11ec-b799-acde48001122.png')
+          onError={(e) =>
+            3(
+              (e.target.src =
+                'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/88be4dd4-dc7b-11ec-b799-acde48001122.png')
+            )
           }
           src={
             icon_url
@@ -33,6 +35,9 @@ export const CategoryCard = ({ category }) => {
               {name}
             </Text>
           </Grid>
+          <Grid xs={12}>
+            <Text css={{ color: '$accents8' }}>{total_podcasts} Podcasts</Text>
+          </Grid>
         </Grid.Container>
       </Card.Header>
       <Card.Body css={{ py: '$2' }}>
@@ -42,8 +47,7 @@ export const CategoryCard = ({ category }) => {
         <Link
           icon
           color='primary'
-          target='_blank'
-          href='https://github.com/nextui-org/nextui'
+          href={`/dashboard/categories/${category_id}`}
         >
           Ver podcasts de esta categoria
         </Link>
