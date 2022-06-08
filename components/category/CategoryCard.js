@@ -8,14 +8,14 @@ export const CategoryCard = ({ category }) => {
   const { category_id, name, icon_url, description } = category
   return (
     <Card
-      css={{ p: '$6', mw: '400px', m: '5px' }}
+      css={{ p: '$6', m: '5px' }}
       clickable
       onClick={() => router.push(`/dashboard/categories/${category_id}`)}
     >
       <Card.Header>
         <Image
           alt='nextui logo'
-          onError={(e) =>
+          onError={(e) =>3
             (e.target.src =
               'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/88be4dd4-dc7b-11ec-b799-acde48001122.png')
           }

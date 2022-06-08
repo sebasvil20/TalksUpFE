@@ -1,7 +1,6 @@
 import { useEffect, useState, useContext } from 'react'
-import { useRouter } from 'next/router'
 
-import { Modal, Button, Grid, Text, Spacer } from '@nextui-org/react'
+import { Text, Spacer } from '@nextui-org/react'
 import Cookie from 'js-cookie'
 
 import { talksUpApi } from '../../api'

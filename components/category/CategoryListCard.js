@@ -1,9 +1,9 @@
 import { Grid } from '@nextui-org/react'
-import { CategoryCard } from './CategoryCard'
 
 import Cookie from 'js-cookie'
 
 import { useEffect, useState } from 'react'
+import { CategoryCard } from './CategoryCard'
 import { talksUpApi } from '../../api'
 
 export const CategoryListCard = () => {
@@ -20,7 +20,9 @@ export const CategoryListCard = () => {
   return (
     <Grid.Container gap={2} justify='center'>
       {categories.map((category) => (
-        <CategoryCard key={category.category_id} category={category} />
+        <Grid key={category.category_id} sm={6} md={4} xs={12}>
+          <CategoryCard category={category} />
+        </Grid>
       ))}
     </Grid.Container>
   )
