@@ -31,7 +31,6 @@ export const PodcastCard = ({ podcast }) => {
             zIndex: 1,
             top: 0,
             bgBlur: '#0f1114',
-            borderBottom: '$borderWeights$light solid $gray700',
             zIndex: 1,
           }}
         >
