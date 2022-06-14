@@ -21,7 +21,7 @@ export const CategoryListCard = () => {
     <Grid.Container gap={2} justify='center'>
       {categories.map((category) => (
         <Grid key={category.category_id} sm={6} md={4} xs={12}>
-          <CategoryCard category={category} clickable={true} />
+          <CategoryCard category={category} clickable={true} margin={false} />
         </Grid>
       ))}
     </Grid.Container>

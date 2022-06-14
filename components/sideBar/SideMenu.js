@@ -24,7 +24,7 @@ export const SideMenu = () => {
       <Box
         sx={{
           width: 250,
-          height: '100%',
+          height: '100vh',
           paddingTop: 5,
           display: 'flex',
           flexDirection: 'column',

@@ -39,13 +39,25 @@ export const PodcastCard = ({ podcast }) => {
           w: '450px',
           minWidth: '450px',
           height: '250px',
+          '@smMax': {
+            w: '350px',
+            minWidth: '350px',
+            height: '350px',
+            overflow: 'hidden',
+          },
           borderRadius: '32px',
           p: '10px',
         }}
       >
         <Card.Body>
           <Grid.Container css={{ height: '250px' }}>
-            <Grid xs={4} alignContent='center' alignItems='center'>
+            <Grid
+              md={4}
+              xs={12}
+              alignContent='center'
+              alignItems='center'
+              justify='center'
+            >
               <Link href={`/dashboard/podcast/${podcast_id}`}>
                 <Image
                   src={
@@ -61,19 +73,35 @@ export const PodcastCard = ({ podcast }) => {
               </Link>
             </Grid>
             <Grid
-              xs={8}
+              xs={12}
+              md={8}
               alignContent='center'
               alignItems='center'
               justify='center'
               direction='column'
-              css={{ pl: '25px' }}
+              css={{
+                '@sm': {
+                  pl: '25px',
+                },
+              }}
             >
-              <Col>
+              <Col
+                css={{
+                  '@smMax': {
+                    textAlign: 'center',
+                  },
+                }}
+              >
                 <Text
                   size={12}
                   weight='bold'
                   transform='uppercase'
                   color='#D6D6D6'
+                  css={{
+                    '@smMax': {
+                      textAlign: 'center',
+                    },
+                  }}
                 >
                   By{' '}
                   <Link
@@ -94,13 +122,21 @@ export const PodcastCard = ({ podcast }) => {
                     whiteSpace: 'nowrap',
                     '@smMax': {
                       fontSize: '20px',
+                      maxW: '380px',
+                      textAlign: 'center',
                     },
                   }}
                 >
                   {name}
                 </Link>
               </Col>
-              <Row>
+              <Row
+                css={{
+                  '@smMax': {
+                    justifyContent: 'center',
+                  },
+                }}
+              >
                 <Text
                   color='#989898'
                   size={16}
@@ -108,6 +144,7 @@ export const PodcastCard = ({ podcast }) => {
                     mr: '15px',
                     '@smMax': {
                       fontSize: '14px',
+                      textAlign: 'center',
                     },
                   }}
                 >
@@ -119,6 +156,7 @@ export const PodcastCard = ({ podcast }) => {
                   css={{
                     '@smMax': {
                       fontSize: '14px',
+                      textAlign: 'center',
                     },
                   }}
                 >
@@ -132,6 +170,10 @@ export const PodcastCard = ({ podcast }) => {
                   flexWrap: 'wrap',
                   mw: '280px',
                   alignContent: 'left',
+
+                  '@smMax': {
+                    justifyContent: 'center',
+                  },
                 }}
               >
                 {categories &&
