@@ -4,9 +4,9 @@ import { PodcastCard } from './'
 
 export const PodcastListCard = ({ podcastList }) => {
   return (
-    <Grid.Container gap={2} justify='flex-start'>
+    <Grid.Container gap={2} justify='flex-start' css={{width: '100%', overflow: 'scroll'}} wrap='nowrap' >
       {podcastList.map((podcast) => (
-        <Grid key={podcast.podcast_id} sm={4} xs={12}>
+        <Grid key={podcast.podcast_id}>
           <PodcastCard podcast={podcast} />
         </Grid>
       ))}

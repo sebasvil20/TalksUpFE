@@ -3,13 +3,13 @@ import { useRouter } from 'next/router'
 
 import Cookies from 'js-cookie'
 
-import { PodcastListCard } from '../../../components/podcast'
+import { PodcastListCard, PodcastCard } from '../../../components/podcast'
 import { Loader } from '../../../components/loader'
 import { MetaDataLayout } from '../../../components/layouts'
 import { NavBar } from '../../../components/sideBar'
 import { talksUpApi } from '../../../api'
 import { CategoryCard } from '../../../components/category/CategoryCard'
-import { Button, Spacer } from '@nextui-org/react'
+import { Button, Spacer, Grid } from '@nextui-org/react'
 
 const DetailCategory = () => {
   const [podcastList, setPodcastList] = useState([])
@@ -38,11 +38,11 @@ const DetailCategory = () => {
   return (
     <MetaDataLayout title={isLoading ? 'TalksUp' : `TalksUp -`}>
       <NavBar />
-      <div style={{ display: 'flex', marginTop: '80px', padding: '12px' }}>
+      <div style={{ display: 'flex', marginTop: '80px', width: '100%' }}>
         {isLoading ? (
           <Loader />
         ) : (
-          <div style={{ margin: 'auto' }}>
+          <div style={{ margin: 'auto'}}>
             <Spacer />
             <Button
               onClick={() => router.push('/dashboard')}
@@ -62,7 +62,18 @@ const DetailCategory = () => {
               margin={false}
             />
             <Spacer />
-            <PodcastListCard podcastList={podcastList} />
+            <Grid.Container
+              gap={2}
+              justify='center'
+              css={{ width: '100%', m:'0!important' }}
+              wrap='wrap'
+            >
+              {podcastList.map((podcast) => (
+                <Grid key={podcast.podcast_id}>
+                  <PodcastCard podcast={podcast} />
+                </Grid>
+              ))}
+            </Grid.Container>
           </div>
         )}
       </div>

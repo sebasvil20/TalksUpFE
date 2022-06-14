@@ -33,7 +33,7 @@ const Dashboard = () => {
     const all = await talksUpApi.get(`/podcasts?lang=${Cookie.get('lang')}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
-    setPodcastList(all.data.data.slice(0, 3))
+    setPodcastList(all.data.data.slice(0, 8))
     setIsLoading(false)
   }
 
@@ -66,7 +66,13 @@ const Dashboard = () => {
       ) : (
         <>
           <NavBar />
-          <div style={{ marginTop: '56px', padding: '20px' }}>
+          <div
+            style={{
+              marginTop: '56px',
+              padding: '20px',
+              background: '#FBFCFF',
+            }}
+          >
             <Text
               css={{ paddingLeft: '26px', marginTop: '10px', color: '#6E7191' }}
             >
@@ -78,7 +84,7 @@ const Dashboard = () => {
             >
               Explorar
             </Text>
-            <Text 
+            <Text
               css={{
                 paddingLeft: '26px',
                 paddingRight: '26px',

@@ -7,15 +7,16 @@ export const CategoryCard = ({
   category,
   clickable = true,
   showLink = true,
-  margin= true
+  margin = true,
 }) => {
   const router = useRouter()
   const { category_id, name, icon_url, description, total_podcasts } = category
   return (
     <Card
-      css={{ p: '$6', m: margin ? '5px' : 'auto', maxW: '500px' }}
-      clickable={clickable}
-      onClick={() => router.push(`/dashboard/categories/${category_id}`)}
+      css={{ p: '$6', m: margin ? '5px' : 'auto', maxW: '400px' }}
+      isPressable={clickable}
+      isHoverable
+      onPress={() => router.push(`/dashboard/categories/${category_id}`)}
     >
       <Card.Header>
         <Image
