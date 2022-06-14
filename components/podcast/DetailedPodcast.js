@@ -55,6 +55,7 @@ export const DetailedPodcast = ({ podcast }) => {
                 : 'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/f4435d00-e1e5-11ec-9f43-acde48001122.png'
             }
             alt='Cover podcast image'
+            css={{ borderRadius: '15px' }}
           />
         </Grid>
         <Grid xs={12} sm={10} direction='column' justify='center'>
@@ -96,7 +97,11 @@ export const DetailedPodcast = ({ podcast }) => {
         </Grid>
       </Grid.Container>
 
-      <Grid.Container gap={2} justify='center'  css={{ '@smMax': {textAlign: 'center'} }}>
+      <Grid.Container
+        gap={2}
+        justify='center'
+        css={{ '@smMax': { textAlign: 'center' } }}
+      >
         {rating && (
           <Grid xs={6} sm={3} direction='column'>
             <Text css={{ marginTop: '10px' }} b size={18}>
@@ -141,7 +146,7 @@ export const DetailedPodcast = ({ podcast }) => {
         )}
         {total_episodes && (
           <Grid xs={6} sm={3} md={2} direction='column'>
-            <Text css={{ marginTop: '10px'}} b size={18}>
+            <Text css={{ marginTop: '10px' }} b size={18}>
               Duración
             </Text>
             <Text>

@@ -8,8 +8,7 @@ import { Loader } from '../../../components/loader'
 import { MetaDataLayout } from '../../../components/layouts'
 import { NavBar } from '../../../components/sideBar'
 import { talksUpApi } from '../../../api'
-import { CategoryCard } from '../../../components/category/CategoryCard'
-import { Button, Spacer, Grid } from '@nextui-org/react'
+import { Button, Spacer, Grid, Container, Text, Image } from '@nextui-org/react'
 
 const DetailCategory = () => {
   const [podcastList, setPodcastList] = useState([])
@@ -50,6 +49,8 @@ const DetailCategory = () => {
             justifyContent: 'center',
             alignContent: 'center',
             alignItems: 'center',
+            borderRadius: '30px',
+            backgroundColor: '#ffffff',
           }}
         >
           <Spacer />
@@ -64,13 +65,35 @@ const DetailCategory = () => {
             ← Volver al dashboard
           </Button>
           <Spacer />
-          <CategoryCard
-            category={category}
-            showLink={false}
-            clickable={false}
-            margin={false}
-          />
-          <Spacer />
+          <Container
+            css={{
+              display: 'flex',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+            }}
+          >
+            <Image
+              onError={(e) =>
+                3(
+                  (e.target.src =
+                    'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/88be4dd4-dc7b-11ec-b799-acde48001122.png')
+                )
+              }
+              src={
+                category.icon_url
+                  ? category.icon_url
+                  : 'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/88be4dd4-dc7b-11ec-b799-acde48001122.png'
+              }
+              alt={category.name}
+              css={{ size: '100px' }}
+            />
+            <Text h1 color='#14142B'>
+              {category.name}
+            </Text>
+            <Text color='#6E7191'>{category.description}</Text>
+          </Container>
           <Grid.Container
             gap={2}
             justify='center'

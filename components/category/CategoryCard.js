@@ -6,14 +6,13 @@ import { Card, Grid, Text, Link } from '@nextui-org/react'
 export const CategoryCard = ({
   category,
   clickable = true,
-  showLink = true,
   margin = true,
 }) => {
   const router = useRouter()
   const { category_id, name, icon_url, description, total_podcasts } = category
   return (
     <Card
-      css={{ p: '$6', m: margin ? '5px' : 'auto', maxW: '400px' }}
+      css={{ p: '$6', m: margin ? '5px' : 'auto', w: '100%', h: '100%' }}
       isPressable={clickable}
       isHoverable
       onPress={() => router.push(`/dashboard/categories/${category_id}`)}
@@ -49,17 +48,6 @@ export const CategoryCard = ({
       <Card.Body css={{ py: '$2' }}>
         <Text>{description}</Text>
       </Card.Body>
-      {showLink && (
-        <Card.Footer>
-          <Link
-            icon
-            color='primary'
-            href={`/dashboard/categories/${category_id}`}
-          >
-            Ver podcasts de esta categoria
-          </Link>
-        </Card.Footer>
-      )}
     </Card>
   )
 }

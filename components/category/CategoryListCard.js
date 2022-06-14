@@ -20,7 +20,7 @@ export const CategoryListCard = () => {
   return (
     <Grid.Container gap={2} justify='center'>
       {categories.map((category) => (
-        <Grid key={category.category_id} sm={6} md={4} xs={12}>
+        <Grid key={category.category_id} sm={3} xs={6}>
           <CategoryCard category={category} clickable={true} margin={false} />
         </Grid>
       ))}
