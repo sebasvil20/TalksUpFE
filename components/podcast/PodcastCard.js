@@ -96,20 +96,14 @@ export const PodcastCard = ({ podcast }) => {
                   size={12}
                   weight='bold'
                   transform='uppercase'
-                  color='#D6D6D6'
+                  color='#B7B7B7'
                   css={{
                     '@smMax': {
                       textAlign: 'center',
                     },
                   }}
                 >
-                  By{' '}
-                  <Link
-                    css={{ color: '#B7B7B7' }}
-                    href={`dashboard/artists/${author.author_id}`}
-                  >
-                    {author.name}
-                  </Link>
+                  By {author.name}
                 </Text>
                 <Link
                   href={`/dashboard/podcast/${podcast_id}`}
@@ -122,8 +116,11 @@ export const PodcastCard = ({ podcast }) => {
                     whiteSpace: 'nowrap',
                     '@smMax': {
                       fontSize: '20px',
-                      maxW: '380px',
+                      maxW: '250px',
                       textAlign: 'center',
+                      textOverflow: 'ellipsis',
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
                     },
                   }}
                 >

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import { useRouter } from 'next/router'
 
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
@@ -24,7 +24,15 @@ export const NavLink = ({ children, href, icon }) => {
       }}
     >
       <ListItemIcon>{icon}</ListItemIcon>
-      <ListItemText onClick={() => redirectTo()}> {children} </ListItemText>
+      <ListItemText
+        style={{
+          color: isCurrent() ? '#6334EB' : '',
+        }}
+        onClick={() => redirectTo()}
+      >
+        {' '}
+        {children}{' '}
+      </ListItemText>
     </ListItem>
   )
 }

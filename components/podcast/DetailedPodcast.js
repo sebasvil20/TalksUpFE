@@ -96,7 +96,7 @@ export const DetailedPodcast = ({ podcast }) => {
         </Grid>
       </Grid.Container>
 
-      <Grid.Container gap={2} justify='center'>
+      <Grid.Container gap={2} justify='center'  css={{ '@smMax': {textAlign: 'center'} }}>
         {rating && (
           <Grid xs={6} sm={3} direction='column'>
             <Text css={{ marginTop: '10px' }} b size={18}>
@@ -108,7 +108,7 @@ export const DetailedPodcast = ({ podcast }) => {
           </Grid>
         )}
         {trailer_url && (
-          <Grid xs={6} sm={3} direction='column'>
+          <Grid xs={6} sm={3} md={2} direction='column'>
             <Text css={{ marginTop: '10px' }} b size={18}>
               Trailer
             </Text>
@@ -124,7 +124,7 @@ export const DetailedPodcast = ({ podcast }) => {
           </Grid>
         )}
         {release_date && (
-          <Grid xs={6} sm={3} direction='column'>
+          <Grid xs={6} sm={3} md={2} direction='column'>
             <Text css={{ marginTop: '10px' }} b size={18}>
               Fecha lanzamiento
             </Text>
@@ -132,27 +132,22 @@ export const DetailedPodcast = ({ podcast }) => {
           </Grid>
         )}
         {update_date && (
-          <Grid xs={6} sm={3} direction='column'>
+          <Grid xs={6} sm={3} md={2} direction='column'>
             <Text css={{ marginTop: '10px' }} b size={18}>
-              Última fecha actualización
+              Última actualización
             </Text>
             <Text>{update_date}</Text>
           </Grid>
         )}
         {total_episodes && (
-          <Grid xs={6} sm={3} direction='column'>
-            <Text css={{ marginTop: '10px' }} b size={18}>
-              Cantidad de episodios
+          <Grid xs={6} sm={3} md={2} direction='column'>
+            <Text css={{ marginTop: '10px'}} b size={18}>
+              Duración
             </Text>
-            <Text>{total_episodes}</Text>
-          </Grid>
-        )}
-        {total_length && (
-          <Grid xs={6} sm={3} direction='column'>
-            <Text css={{ marginTop: '10px' }} b size={18}>
-              Longitud total
+            <Text>
+              {total_episodes && `${total_episodes} Epis. - `}{' '}
+              {total_length && total_length}
             </Text>
-            <Text>{total_length}</Text>
           </Grid>
         )}
       </Grid.Container>
