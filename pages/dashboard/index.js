@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react'
 
-import { Text, Spacer } from '@nextui-org/react'
+import { Text, Spacer, Container } from '@nextui-org/react'
 import Cookie from 'js-cookie'
 
 import { talksUpApi } from '../../api'
@@ -84,11 +84,10 @@ const Dashboard = () => {
             >
               Explorar
             </Text>
-            <Text
+            <Container
               css={{
-                paddingLeft: '26px',
-                paddingRight: '26px',
-                marginTop: '0',
+                padding: '0 26px',
+                margin: '0',
                 display: 'flex',
                 justifyContent: 'start',
                 '@smMax': { justifyContent: 'space-between' },
@@ -115,7 +114,7 @@ const Dashboard = () => {
                   setFetchForUser(false)
                 }}
               />
-            </Text>
+            </Container>
             <PodcastListCard podcastList={podcastList} />
           </div>
 

@@ -20,8 +20,6 @@ export const CategoryCard = ({ category, clickable = true, margin = true }) => {
             <Image
               alt='nextui logo'
               objectFit='cover'
-              showSkeleton
-              maxDelay={3000}
               width={100}
               height={100}
               onError={(e) =>
