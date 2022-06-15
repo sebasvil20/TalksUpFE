@@ -42,15 +42,31 @@ export const CategoryCard = ({ category, clickable = true, margin = true }) => {
             justify='center'
             css={{ '@mdMax': { textAlign: 'center' } }}
           >
-            <Text h4 css={{ lineHeight: '$xs' }}>
+            <Text
+              h4
+              css={{ lineHeight: '$xs', '@xsMax': { fontSize: '18px' } }}
+            >
               {name}
             </Text>
-            <Text css={{ color: '$accents8' }}>{total_podcasts} Podcasts</Text>
+            <Text css={{ color: '$accents8', '@xsMax': { fontSize: '14px' } }}>
+              {total_podcasts} Podcasts
+            </Text>
           </Grid>
         </Grid.Container>
       </Card.Header>
       <Card.Body css={{ py: '$2', '@mdMax': { textAlign: 'center' } }}>
-        <Text>{description}</Text>
+        <Text
+          css={{
+            color: '$accents9',
+            '@xsMax': {
+              fontSize: '14px',
+            },
+          }}
+        >
+          {description.length > 50
+            ? `${description.slice(0, 50)}...`
+            : description}
+        </Text>
       </Card.Body>
     </Card>
   )
