@@ -80,7 +80,7 @@ export const RegisterSecondForm = ({ setStepper }) => {
           show={showUpdateError}
         />
       )}
-      <Card color='success'>
+      <Card css={{ backgroundColor: '$success', p: '10px 15px' }}>
         <Text css={{ fontWeight: '$bold', color: '$white' }} span>
           Hi {userName}, bienvenido a TalksUp!
         </Text>

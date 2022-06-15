@@ -67,7 +67,7 @@ export const RegisterThirdForm = ({ setStepper, categories }) => {
           show={showUpdateError}
         />
       )}
-      <Card color='success'>
+      <Card css={{ backgroundColor: '$success', p: '10px 15px' }}>
         <Text css={{ fontWeight: '$bold', color: '$white' }} span>
           Cool {userName},
         </Text>

@@ -23,11 +23,12 @@ export const ErrorCard = ({ title, message }) => {
       exit={{ x: -100, opacity: 0 }}
     >
       <Card
-        color='error'
         css={{
           color: 'white',
           maxWidth: 'fit-content',
           margin: 'auto',
+          backgroundColor: '$error',
+          p: '10px 15px',
         }}
       >
         <Text

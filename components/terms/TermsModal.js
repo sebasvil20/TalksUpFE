@@ -17,7 +17,7 @@ export const TermsModal = () => {
         width='600px'
         aria-labelledby='modal-title'
         aria-describedby='modal-description'
-        css={{ cursor: 'text' }}
+        css={{ cursor: 'text', pt: '25px' }}
         {...bindings}
       >
         <Modal.Header>
@@ -113,10 +113,10 @@ export const TermsModal = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button auto flat color='error' onClick={() => setVisible(false)}>
-            Close
+            Cerrar
           </Button>
           <Button auto onClick={() => setVisible(false)}>
-            Agree
+            Aceptar
           </Button>
         </Modal.Footer>
       </Modal>
