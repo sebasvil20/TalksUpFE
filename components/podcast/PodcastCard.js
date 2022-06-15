@@ -1,12 +1,4 @@
-import {
-  Card,
-  Col,
-  Row,
-  Text,
-  Link,
-  Grid,
-  Image,
-} from '@nextui-org/react'
+import { Card, Col, Row, Text, Link, Grid, Image } from '@nextui-org/react'
 import { CategoryPill } from '../category'
 
 export const PodcastCard = ({ podcast }) => {
@@ -56,6 +48,8 @@ export const PodcastCard = ({ podcast }) => {
             >
               <Link href={`/dashboard/podcast/${podcast_id}`}>
                 <Image
+                  showSkeleton
+                  maxDelay={3000}
                   src={
                     cover_pic_url
                       ? cover_pic_url

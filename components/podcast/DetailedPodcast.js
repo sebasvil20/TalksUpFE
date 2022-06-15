@@ -49,6 +49,8 @@ export const DetailedPodcast = ({ podcast }) => {
       <Grid.Container gap={2}>
         <Grid xs={12} sm={2}>
           <Image
+            showSkeleton
+            maxDelay={3000}
             src={
               cover_pic_url
                 ? cover_pic_url
