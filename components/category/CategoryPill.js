@@ -1,15 +1,6 @@
-import React from 'react'
+import { Link } from '@nextui-org/react'
+
 import LocalOfferIcon from '@mui/icons-material/LocalOffer'
-import {
-  Card,
-  Col,
-  Row,
-  Button,
-  Text,
-  Link,
-  Grid,
-  Image,
-} from '@nextui-org/react'
 
 export const CategoryPill = ({ name, id }) => {
   return (
@@ -24,9 +15,10 @@ export const CategoryPill = ({ name, id }) => {
         textTransform: 'lowercase',
         display: 'flex',
         alignItems: 'center',
+        fontSize: '14px',
       }}
     >
-      <LocalOfferIcon /> {name}
+      <LocalOfferIcon fontSize='16px' /> {name}
     </Link>
   )
 }

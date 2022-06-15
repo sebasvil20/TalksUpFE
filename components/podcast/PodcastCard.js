@@ -1,10 +1,7 @@
-import { useRouter } from 'next/router'
-
 import {
   Card,
   Col,
   Row,
-  Button,
   Text,
   Link,
   Grid,
@@ -13,7 +10,6 @@ import {
 import { CategoryPill } from '../category'
 
 export const PodcastCard = ({ podcast }) => {
-  const router = useRouter()
   const {
     podcast_id,
     author,
@@ -36,10 +32,10 @@ export const PodcastCard = ({ podcast }) => {
       <Card
         isHoverable
         css={{
-          w: '450px',
-          minWidth: '450px',
+          w: '460px',
+          minWidth: '460px',
           height: '250px',
-          '@smMax': {
+          '@mdMax': {
             w: '350px',
             minWidth: '350px',
             height: '350px',
@@ -50,7 +46,7 @@ export const PodcastCard = ({ podcast }) => {
         }}
       >
         <Card.Body>
-          <Grid.Container css={{ height: '250px' }}>
+          <Grid.Container css={{ height: '250px' }} gap={2}>
             <Grid
               md={4}
               xs={12}
@@ -79,15 +75,10 @@ export const PodcastCard = ({ podcast }) => {
               alignItems='center'
               justify='center'
               direction='column'
-              css={{
-                '@sm': {
-                  pl: '25px',
-                },
-              }}
             >
               <Col
                 css={{
-                  '@smMax': {
+                  '@mdMax': {
                     textAlign: 'center',
                   },
                 }}
@@ -97,11 +88,6 @@ export const PodcastCard = ({ podcast }) => {
                   weight='bold'
                   transform='uppercase'
                   color='#B7B7B7'
-                  css={{
-                    '@smMax': {
-                      textAlign: 'center',
-                    },
-                  }}
                 >
                   By {author.name}
                 </Text>
@@ -109,12 +95,12 @@ export const PodcastCard = ({ podcast }) => {
                   href={`/dashboard/podcast/${podcast_id}`}
                   css={{
                     maxW: '250px',
-                    fontSize: '24px',
+                    fontSize: '22px',
                     color: '#14142B',
                     textOverflow: 'ellipsis',
                     overflow: 'hidden',
                     whiteSpace: 'nowrap',
-                    '@smMax': {
+                    '@mdMax': {
                       fontSize: '20px',
                       maxW: '250px',
                       textAlign: 'center',
@@ -129,17 +115,17 @@ export const PodcastCard = ({ podcast }) => {
               </Col>
               <Row
                 css={{
-                  '@smMax': {
+                  '@mdMax': {
                     justifyContent: 'center',
                   },
                 }}
               >
                 <Text
                   color='#989898'
-                  size={16}
+                  size={14}
                   css={{
                     mr: '15px',
-                    '@smMax': {
+                    '@mdMax': {
                       fontSize: '14px',
                       textAlign: 'center',
                     },
@@ -149,10 +135,10 @@ export const PodcastCard = ({ podcast }) => {
                 </Text>
                 <Text
                   color='#989898'
-                  size={16}
+                  size={14}
                   css={{
-                    '@smMax': {
-                      fontSize: '14px',
+                    '@mdMax': {
+                      fontSize: '12px',
                       textAlign: 'center',
                     },
                   }}
@@ -168,7 +154,7 @@ export const PodcastCard = ({ podcast }) => {
                   mw: '280px',
                   alignContent: 'left',
 
-                  '@smMax': {
+                  '@mdMax': {
                     justifyContent: 'center',
                   },
                 }}
