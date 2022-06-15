@@ -23,7 +23,13 @@ export const NavLink = ({ children, href, icon }) => {
         backgroundColor: isCurrent() ? '#efefef' : '',
       }}
     >
-      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemIcon
+        style={{
+          color: isCurrent() ? '#6334EB' : '',
+        }}
+      >
+        {icon}
+      </ListItemIcon>
       <ListItemText
         style={{
           color: isCurrent() ? '#6334EB' : '',

@@ -51,7 +51,7 @@ export const UserCard = () => {
             justifyContent: 'center',
           }}
         >
-          <Button button onClick={() => logoutAndRedirect()}>
+          <Button onClick={() => logoutAndRedirect()}>
             <LogoutIcon />
           </Button>
           <ThemeSwitcher
