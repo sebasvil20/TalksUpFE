@@ -109,7 +109,7 @@ const Dashboard = () => {
                 />
               )}
               <MenuLink
-                text='Los ultimos actualizados 🕙'
+                text='Ùltimos actualizados 🕙'
                 isActive={!fetchForUser}
                 onClickFunc={() => {
                   setFetchForUser(false)

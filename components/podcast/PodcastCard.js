@@ -154,13 +154,15 @@ export const PodcastCard = ({ podcast }) => {
                 }}
               >
                 {categories &&
-                  categories.map((tag) => (
-                    <CategoryPill
-                      key={tag.category_id}
-                      name={tag.name}
-                      id={tag.category_id}
-                    />
-                  ))}
+                  categories
+                    .slice(0, 2)
+                    .map((tag) => (
+                      <CategoryPill
+                        key={tag.category_id}
+                        name={tag.name}
+                        id={tag.category_id}
+                      />
+                    ))}
               </Row>
             </Grid>
           </Grid.Container>

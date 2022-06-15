@@ -207,10 +207,12 @@ export const UserResume = () => {
               <Container
                 css={{
                   width: 'max-content',
-                  '@smMax': { width: '90%' },
+                  flexWrap: 'nowrap',
+                  '@smMax': { width: '100%' },
                   margin: '20px auto',
                   display: 'flex',
                   justifyContent: 'center',
+                  padding: '0',
                 }}
               >
                 <Button
@@ -219,7 +221,9 @@ export const UserResume = () => {
                   shadow
                   css={{
                     margin: '20px 2px',
-                    '@sm': { width: '100px!important' },
+                    '@sm': {
+                      width: '100px!important',
+                    },
                   }}
                   onClick={() => setVisibleModal(true)}
                   iconRight={<EditIcon />}
@@ -240,7 +244,6 @@ export const UserResume = () => {
                   Editar gustos
                 </Button>
               </Container>
-
               <EditUserModal
                 visible={visibleModal}
                 closeHandler={() => setVisibleModal(false)}
