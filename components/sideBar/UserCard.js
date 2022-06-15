@@ -35,7 +35,12 @@ export const UserCard = () => {
                 ? user.profile_pic_url
                 : 'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/88be4dd4-dc7b-11ec-b799-acde48001122.png'
             }
-            name={`${user?.first_name} ${user?.last_name} `}
+            name={`${
+              user?.first_name &&
+              (user?.first_name.length > 10
+                ? `${user?.first_name.slice(0, 10)}...`
+                : user?.first_name)
+            }`}
             color='secondary'
           />
         </Link>

@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 
 import { MetaDataLayout } from '../components/layouts'
 import { LoginContainer } from '../components/auth'
+import { Loader } from '../components/loader'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -21,16 +22,7 @@ export default function Home() {
   return (
     <MetaDataLayout title='TalksUp - Login'>
       {isLoading ? (
-        <Loading
-          size='lg'
-          color='secondary'
-          css={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%,0)',
-          }}
-        />
+        <Loader />
       ) : (
         <LoginContainer />
       )}

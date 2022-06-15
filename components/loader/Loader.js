@@ -2,7 +2,7 @@ import { Loading } from '@nextui-org/react'
 
 export const Loader = () => {
   return (
-    <div style={{ height: '100vh' }}>
+    <div style={{ height: '100vh!important', width: '100%!important' }}>
       <Loading
         color='secondary'
         css={{

@@ -1,5 +1,7 @@
-import { Modal, Button, Text } from '@nextui-org/react'
 import { useRouter } from 'next/router'
+
+import { Modal, Button, Text } from '@nextui-org/react'
+import Cookie from 'js-cookie'
 
 export const CompleteProfileModal = ({ showModal, closeFunc }) => {
   const router = useRouter()
@@ -35,7 +37,7 @@ export const CompleteProfileModal = ({ showModal, closeFunc }) => {
           color='error'
           onClick={() => {
             closeFunc()
-            localStorage.setItem('updateAsked', 'true')
+            localStorage.setItem(`updateAsked-${Cookie.get('token')}`, 'true')
           }}
         >
           Nope ❌
@@ -44,7 +46,7 @@ export const CompleteProfileModal = ({ showModal, closeFunc }) => {
           auto
           onClick={() => {
             closeFunc()
-            localStorage.setItem('updateAsked', 'true')
+            localStorage.setItem(`updateAsked-${Cookie.get('token')}`, 'true')
             router.push('/dashboard/user')
           }}
         >

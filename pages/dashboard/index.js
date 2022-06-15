@@ -48,7 +48,7 @@ const Dashboard = () => {
       setIsLoading(false)
       if (
         (!user?.biography || !user?.likes) &&
-        localStorage.getItem('updateAsked') != 'true'
+        localStorage.getItem(`updateAsked-${Cookie.get('token')}`) != 'true'
       ) {
         setShowModal(true)
       }
@@ -96,7 +96,12 @@ const Dashboard = () => {
             >
               {hasLikes && (
                 <MenuLink
-                  text={`Para ti, ${user?.public_name} 🎧`}
+                  text={`Para ti, ${
+                    user?.public_name &&
+                    (user?.public_name.length > 10
+                      ? `${user?.public_name.slice(0, 10)}...`
+                      : user?.public_name)
+                  } 🎧`}
                   isActive={fetchForUser}
                   onClickFunc={() => {
                     setFetchForUser(true)
@@ -113,19 +118,19 @@ const Dashboard = () => {
             </Text>
             <PodcastListCard podcastList={podcastList} />
           </div>
+
+          <div style={{ padding: '20px' }}>
+            <Text
+              css={{ paddingLeft: '24px', marginTop: '2px', color: '#14142B' }}
+              h2
+            >
+              Categorías
+            </Text>
+            <Spacer />
+            <CategoryListCard />
+          </div>
         </>
       )}
-
-      <div style={{ padding: '20px' }}>
-        <Text
-          css={{ paddingLeft: '24px', marginTop: '2px', color: '#14142B' }}
-          h2
-        >
-          Categorías
-        </Text>
-        <Spacer />
-        <CategoryListCard />
-      </div>
     </MetaDataLayout>
   )
 }
