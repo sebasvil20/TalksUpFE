@@ -3,17 +3,31 @@ import { Spacer, Text, Grid, User } from '@nextui-org/react'
 
 export const ReviewCard = ({ review, user }) => {
   return (
-    <Grid.Container css={{ borderTop: '.5px solid #c5c6d3' }}>
-      <Spacer y={1.2} />
-      <Grid xs={12} justify='space-between'>
+    <Grid.Container
+      css={{ borderTop: '.5px solid #c5c6d3', paddingTop: '10px' }}
+    >
+      <Grid xs={12} sm={6}>
         <Text h4>{review.title}</Text>
+      </Grid>
+
+      <Grid
+        xs={12}
+        sm={6}
+        css={{
+          justifyContent: 'flex-end',
+          '@smMax': { justifyContent: 'flex-start' },
+        }}
+      >
         <Rating value={review.rate} readOnly />
       </Grid>
+
       <Spacer />
+
       <Grid xs={12}>
         <Text>{review.review}</Text>
       </Grid>
-      <Spacer y={1.5} />
+
+      <Spacer y={1.3} />
       <Grid xs={12}>
         <User
           onError={(e) =>

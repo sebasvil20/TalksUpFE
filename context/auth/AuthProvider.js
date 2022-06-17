@@ -43,10 +43,18 @@ export const AuthProvider = ({ children }) => {
         password,
       })
       const { token, user } = data.data
-      Cookies.set('token', token)
-      Cookies.set('user_id', user.user_id)
-      Cookies.set('lang', user.lang)
-      Cookies.set('hasLikes', user.likes?.length > 0)
+      Cookies.set('token', token, {
+        expires: 1,
+      })
+      Cookies.set('user_id', user.user_id, {
+        expires: 1,
+      })
+      Cookies.set('lang', user.lang, {
+        expires: 1,
+      })
+      Cookies.set('hasLikes', user.likes?.length > 0, {
+        expires: 1,
+      })
       dispatch({ type: '[Auth] - Login', payload: user })
       return true
     } catch (error) {

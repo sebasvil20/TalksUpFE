@@ -180,13 +180,26 @@ export const DetailedPodcast = ({ podcast, reviews }) => {
       <Container css={{ '@md': { maxWidth: '50%', margin: '10px auto' } }}>
         <Spacer y={3} />
         <Grid.Container gap={2}>
-          <Grid xs={12} justify='space-between'>
-            <Text h3>Reviews</Text>
+          <Grid
+            xs={12}
+            justify='space-between'
+            css={{ flexWrap: 'wrap', '@xsMax': { justifyContent: 'center' } }}
+          >
+            <Text
+              h3
+              css={{
+                minWidth: '200px',
+                '@xsMax': { textAlign: 'center', marginBottom: '10px' },
+              }}
+            >
+              Reviews
+            </Text>
             <Button
               rounded
               disabled={alreadyReviewed}
               onPress={() => setShowReviewModal(true)}
               onClick={() => setShowReviewModal(true)}
+              css={{ minWidth: '200px' }}
             >
               Agregar Review +
             </Button>
@@ -206,7 +219,7 @@ export const DetailedPodcast = ({ podcast, reviews }) => {
             ))
           ) : (
             <Grid xs={12} justify='center'>
-              <Text color='#6e7191' size={22}>
+              <Text color='#6e7191' size={22} css={{ textAlign: 'center' }}>
                 No hay reviews aun 😢 ¿Quieres sumar la tuya?
               </Text>
             </Grid>
