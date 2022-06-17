@@ -17,7 +17,7 @@ export const isString = (str) => {
   const match = String(str)
   .toLowerCase()
   .match(
-    /^[A-zÀ-ÖØ-öø-ÿ0-9.,-\s]+$/
+    /^[A-zÀ-ÖØ-öø-ÿ0-9.,"'ªº@;!?¿=\-\s]+$/
   )
 
   return (typeof str === 'string' && !!match) ? undefined : 'La cadena de caracteres no parece ser válida'

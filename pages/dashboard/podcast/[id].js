@@ -11,6 +11,7 @@ import { Loader } from '../../../components/loader'
 
 const DetailPodcast = () => {
   const [podcastInfo, setPodcastInfo] = useState()
+  const [reviews, setReviews] = useState()
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
   useEffect(() => {
@@ -20,6 +21,14 @@ const DetailPodcast = () => {
           headers: { Authorization: `Bearer ${Cookies.get('token')}` },
         })
         setPodcastInfo(data.data)
+
+        const reviewResp = await talksUpApi.get(
+          `/podcasts/${router.query.id}/reviews`,
+          {
+            headers: { Authorization: `Bearer ${Cookies.get('token')}` },
+          }
+        )
+        setReviews(reviewResp.data.data)
         setIsLoading(false)
       }
 
@@ -33,7 +42,11 @@ const DetailPodcast = () => {
     >
       <NavBar />
       <div style={{ display: 'flex', marginTop: '80px' }}>
-        {isLoading ? <Loader /> : <DetailedPodcast podcast={podcastInfo} />}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <DetailedPodcast podcast={podcastInfo} reviews={reviews} />
+        )}
       </div>
     </MetaDataLayout>
   )

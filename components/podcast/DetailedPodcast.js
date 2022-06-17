@@ -1,5 +1,6 @@
-import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
+import { useRouter } from 'next/router'
 import {
   Container,
   Spacer,
@@ -11,8 +12,26 @@ import {
   Avatar,
 } from '@nextui-org/react'
 import Rating from '@mui/material/Rating'
+import Cookies from 'js-cookie'
 
-export const DetailedPodcast = ({ podcast }) => {
+import { ReviewCard } from './ReviewCard'
+import { ReviewForm } from './ReviewForm'
+
+export const DetailedPodcast = ({ podcast, reviews }) => {
+  const [showReviewModal, setShowReviewModal] = useState(false)
+  const [alreadyReviewed, setAlreadyReviewed] = useState(false)
+
+  useEffect(() => {
+    if (reviews && reviews.length > 0) {
+      let found = reviews.find(
+        (review) => review.user_id == Cookies.get('user_id')
+      )
+      if (found) {
+        setAlreadyReviewed(true)
+      }
+    }
+  }, [reviews])
+
   const router = useRouter()
   const {
     podcast_id,
@@ -158,6 +177,42 @@ export const DetailedPodcast = ({ podcast }) => {
           </Grid>
         )}
       </Grid.Container>
+      <Container css={{ '@md': { maxWidth: '50%', margin: '10px auto' } }}>
+        <Spacer y={3} />
+        <Grid.Container gap={2}>
+          <Grid xs={12} justify='space-between'>
+            <Text h3>Reviews</Text>
+            <Button
+              rounded
+              disabled={alreadyReviewed}
+              onPress={() => setShowReviewModal(true)}
+              onClick={() => setShowReviewModal(true)}
+            >
+              Agregar Review +
+            </Button>
+            <ReviewForm
+              closeHandler={() => setShowReviewModal(false)}
+              visible={showReviewModal}
+              podcast_id={podcast_id}
+            />
+          </Grid>
+          <Spacer y={1.5} />
+
+          {reviews && reviews.length > 0 ? (
+            reviews.map((review) => (
+              <Grid xs={12} justify='center' key={review.review_id}>
+                <ReviewCard review={review} user={review.user} />
+              </Grid>
+            ))
+          ) : (
+            <Grid xs={12} justify='center'>
+              <Text color='#6e7191' size={22}>
+                No hay reviews aun 😢 ¿Quieres sumar la tuya?
+              </Text>
+            </Grid>
+          )}
+        </Grid.Container>
+      </Container>
     </Container>
   )
 }
