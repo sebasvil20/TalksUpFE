@@ -1,6 +1,6 @@
 import { Grid } from '@nextui-org/react'
 
-import Cookie from 'js-cookie'
+import Cookies from 'js-cookie'
 
 import { useEffect, useState } from 'react'
 import { CategoryCard } from './CategoryCard'
@@ -11,7 +11,7 @@ export const CategoryListCard = () => {
   useEffect(() => {
     const fetchData = async () => {
       const allCategories = await talksUpApi.get(
-        `/categories?lang=${Cookie.get('lang')}`
+        `/categories?lang=${Cookies.get('lang')}`
       )
       setCategories(allCategories.data.data)
     }

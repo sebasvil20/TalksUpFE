@@ -55,7 +55,7 @@ export const PodcastCard = ({ podcast }) => {
                       ? cover_pic_url
                       : 'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/f4435d00-e1e5-11ec-9f43-acde48001122.png'
                   }
-                  css={{ background: 'black', borderRadius: '20px' }}
+                  css={{ borderRadius: '20px' }}
                   height='150px'
                   width='150px'
                   alt={`${name} icon`}

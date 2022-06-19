@@ -89,7 +89,10 @@ export const DetailedPodcast = ({ podcast, reviews }) => {
           </Text>
           <Text>{description}</Text>
           <Text>
-            By <Link href={`/artists/${author.author_id}`}>{author.name}</Link>
+            By{' '}
+            <Link href={`/dashboard/artists/${author.author_id}`}>
+              {author.name}
+            </Link>
           </Text>
           {platforms && (
             <>

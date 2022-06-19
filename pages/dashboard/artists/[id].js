@@ -10,33 +10,31 @@ import { NavBar } from '../../../components/sideBar'
 import { talksUpApi } from '../../../api'
 import { Button, Spacer, Grid, Container, Text, Image } from '@nextui-org/react'
 
-const DetailCategory = () => {
-  const [podcastList, setPodcastList] = useState([])
-  const [category, setCategory] = useState()
+const DetailedArtist = () => {
+  const [artistInfo, setArtistInfo] = useState()
+  const [podcasts, setPodcasts] = useState()
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
-  useEffect(() => {
-    if (router.isReady) {
-      const fetchData = async () => {
-        const podcastList = await talksUpApi.get(
-          `/podcasts?category_id=${router.query.id}`,
-          {
-            headers: { Authorization: `Bearer ${Cookies.get('token')}` },
-          }
-        )
-        const catInfo = await talksUpApi.get(`/categories/${router.query.id}`)
-        setPodcastList(podcastList.data.data)
-        setCategory(catInfo.data.data)
-        setIsLoading(false)
-      }
 
-      fetchData()
+  useEffect(() => {
+    if (!router.isReady) {
+      return
     }
+    const fetchData = async () => {
+      const { data } = await talksUpApi.get(`/authors/${router.query.id}`, {
+        headers: { Authorization: `Bearer ${Cookies.get('token')}` },
+      })
+      setArtistInfo(data.data)
+      setPodcasts(data.data.podcasts)
+      setIsLoading(false)
+    }
+
+    fetchData()
   }, [router.isReady, router.query.id])
 
   return (
     <MetaDataLayout
-      title={isLoading ? 'TalksUp' : `TalksUp - ${category?.name}`}
+      title={isLoading ? 'TalksUp' : `TalksUp - ${artistInfo?.name}`}
     >
       <NavBar />
       {isLoading ? (
@@ -57,14 +55,14 @@ const DetailCategory = () => {
         >
           <Spacer />
           <Button
-            onClick={() => router.push('/dashboard')}
+            onClick={() => router.push('/dashboard/artists')}
             css={{
               margin: 'auto',
               background: 'transparent',
               color: '#6E7191',
             }}
           >
-            ← Volver al dashboard
+            ← Volver al listado
           </Button>
           <Spacer />
           <Container
@@ -82,17 +80,19 @@ const DetailCategory = () => {
                   'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/88be4dd4-dc7b-11ec-b799-acde48001122.png')
               }
               src={
-                category.icon_url
-                  ? category.icon_url
+                artistInfo.profile_pic_url
+                  ? artistInfo.profile_pic_url
                   : 'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/88be4dd4-dc7b-11ec-b799-acde48001122.png'
               }
-              alt={category.name}
+              alt={artistInfo.name}
               css={{ size: '100px' }}
             />
             <Text h1 color='#14142B'>
-              {category.name}
+              {artistInfo.name}
             </Text>
-            <Text color='#6E7191'>{category.description}</Text>
+            {artistInfo.biography && (
+              <Text color='#6E7191'>{artistInfo.biography}</Text>
+            )}
           </Container>
           <Grid.Container
             gap={2}
@@ -100,7 +100,7 @@ const DetailCategory = () => {
             css={{ m: '0!important' }}
             wrap='wrap'
           >
-            {podcastList.map((podcast) => (
+            {podcasts.map((podcast) => (
               <Grid key={podcast.podcast_id}>
                 <PodcastCard podcast={podcast} />
               </Grid>
@@ -112,4 +112,4 @@ const DetailCategory = () => {
   )
 }
 
-export default DetailCategory
+export default DetailedArtist
