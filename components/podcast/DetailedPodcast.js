@@ -10,6 +10,7 @@ import {
   Image,
   Button,
   Avatar,
+  Pagination,
 } from '@nextui-org/react'
 import Rating from '@mui/material/Rating'
 import Cookies from 'js-cookie'
@@ -20,9 +21,12 @@ import { ReviewForm } from './ReviewForm'
 export const DetailedPodcast = ({ podcast, reviews }) => {
   const [showReviewModal, setShowReviewModal] = useState(false)
   const [alreadyReviewed, setAlreadyReviewed] = useState(false)
+  const [totalPages, setTotalPages] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     if (reviews && reviews.length > 0) {
+      setTotalPages(Math.ceil(reviews.length / 2))
       let found = reviews.find(
         (review) => review.user_id == Cookies.get('user_id')
       )
@@ -212,16 +216,33 @@ export const DetailedPodcast = ({ podcast, reviews }) => {
           <Spacer y={1.5} />
 
           {reviews && reviews.length > 0 ? (
-            reviews.map((review) => (
-              <Grid xs={12} justify='center' key={review.review_id}>
-                <ReviewCard review={review} user={review.user} />
-              </Grid>
-            ))
+            reviews
+              .slice((currentPage - 1) * 2, (currentPage - 1) * 2 + 2)
+              .map((review) => (
+                <Grid xs={12} justify='center' key={review.review_id}>
+                  <ReviewCard
+                    review={review}
+                    user={review.user}
+                    canRemove={review.user_id == Cookies.get('user_id')}
+                  />
+                </Grid>
+              ))
           ) : (
             <Grid xs={12} justify='center'>
               <Text color='#6e7191' size={22} css={{ textAlign: 'center' }}>
                 No hay reviews aun 😢 ¿Quieres sumar la tuya?
               </Text>
+            </Grid>
+          )}
+          {reviews && reviews.length > 2 && (
+            <Grid xs={12} justify='center'>
+              <Pagination
+                shadow
+                color='secondary'
+                page={currentPage}
+                onChange={(page) => setCurrentPage(page)}
+                total={totalPages}
+              />
             </Grid>
           )}
         </Grid.Container>

@@ -1,7 +1,26 @@
 import { Rating } from '@mui/material'
-import { Spacer, Text, Grid, User } from '@nextui-org/react'
+import { Spacer, Text, Grid, User, Button } from '@nextui-org/react'
+import Cookies from 'js-cookie'
 
-export const ReviewCard = ({ review, user }) => {
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+
+import { talksUpApi } from '../../api'
+import { useRouter } from 'next/router'
+
+export const ReviewCard = ({ review, user, canRemove }) => {
+  const router = useRouter()
+
+  const deleteReview = async () => {
+    try {
+      const resp = await talksUpApi.delete(`/reviews/${review.review_id}`, {
+        headers: { Authorization: `Bearer ${Cookies.get('token')}` },
+      })
+      console.log(resp)
+    } catch (error) {
+      console.log('Error deleting' + error)
+    }
+  }
+
   return (
     <Grid.Container
       css={{ borderTop: '.5px solid #c5c6d3', paddingTop: '10px' }}
@@ -41,6 +60,18 @@ export const ReviewCard = ({ review, user }) => {
           }
           name={user.public_name}
         />
+        {canRemove && (
+          <Button
+            size=''
+            color='error'
+            icon={<DeleteForeverIcon fill='currentColor' />}
+            css={{ marginLeft: '10px' }}
+            onPress={() => {
+              deleteReview()
+              router.reload()
+            }}
+          />
+        )}
       </Grid>
     </Grid.Container>
   )
