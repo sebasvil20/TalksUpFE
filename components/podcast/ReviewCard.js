@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { Rating } from '@mui/material'
 import { Spacer, Text, Grid, User, Button } from '@nextui-org/react'
 import Cookies from 'js-cookie'
@@ -6,18 +8,20 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 import { talksUpApi } from '../../api'
 import { useRouter } from 'next/router'
+import { ErrorCard } from '../errorCard'
 
 export const ReviewCard = ({ review, user, canRemove }) => {
   const router = useRouter()
+  const [errorDeleting, setErrorDeleting] = useState(false)
 
   const deleteReview = async () => {
     try {
       const resp = await talksUpApi.delete(`/reviews/${review.review_id}`, {
         headers: { Authorization: `Bearer ${Cookies.get('token')}` },
       })
-      console.log(resp)
+      router.reload()
     } catch (error) {
-      console.log('Error deleting' + error)
+      setErrorDeleting(true)
     }
   }
 
@@ -25,6 +29,13 @@ export const ReviewCard = ({ review, user, canRemove }) => {
     <Grid.Container
       css={{ borderTop: '.5px solid #c5c6d3', paddingTop: '10px' }}
     >
+      {errorDeleting && (
+        <ErrorCard
+          message='No se pudo eliminar'
+          title='Intentelo de nuevo'
+          show={errorDeleting}
+        />
+      )}
       <Grid xs={12} sm={6}>
         <Text h4>{review.title}</Text>
       </Grid>
@@ -66,10 +77,7 @@ export const ReviewCard = ({ review, user, canRemove }) => {
             color='error'
             icon={<DeleteForeverIcon fill='currentColor' />}
             css={{ marginLeft: '10px' }}
-            onPress={() => {
-              deleteReview()
-              router.reload()
-            }}
+            onPress={() => deleteReview()}
           />
         )}
       </Grid>
