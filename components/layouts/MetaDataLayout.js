@@ -15,7 +15,7 @@ export const MetaDataLayout = ({ children, title }) => {
           property='og:title'
           content={"Talk's up find your next podcast"}
         />
-        <meta property='og:url' content='https://talks-up-fe.vercel.app/' />
+        <meta property='og:url' content='https://www.talksup.app/' />
         <meta
           property='og:image'
           content='https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/724ecd00-de05-11ec-b35a-e62effe0ba4e.png'
