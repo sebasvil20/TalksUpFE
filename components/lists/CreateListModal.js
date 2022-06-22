@@ -25,6 +25,36 @@ import { AuthContext } from '../../context'
 const steps = ['🥸', 'Icono', 'Cover', '💾']
 
 export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
+  //Stepper
+  const [activeStep, setActiveStep] = useState(0)
+  const [skipped, setSkipped] = useState(new Set())
+  console.log(activeStep)
+
+  const isStepOptional = (step) => {
+    return false
+  }
+
+  const isStepSkipped = (step) => {
+    return skipped.has(step)
+  }
+
+  const handleNext = () => {
+    setIsLoading(true)
+    let newSkipped = skipped
+    if (isStepSkipped(activeStep)) {
+      newSkipped = new Set(newSkipped.values())
+      newSkipped.delete(activeStep)
+    }
+
+    setActiveStep(activeStep + 1)
+    setSkipped(newSkipped)
+    setIsLoading(false)
+  }
+
+  const handleBack = () => {
+    setActiveStep(activeStep - 1)
+  }
+
   //General
   const [isLoading, setIsLoading] = useState(false)
   const [iconURL, setIconURL] = useState()
@@ -70,54 +100,19 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
     handleNext()
   }
 
-  const [activeStep, setActiveStep] = useState(0)
-  const [skipped, setSkipped] = useState(new Set())
-
-  const isStepOptional = (step) => {
-    return step === 1 || step === 2
-  }
-
-  const isStepSkipped = (step) => {
-    return skipped.has(step)
-  }
-
-  const handleNext = () => {
-    let newSkipped = skipped
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values())
-      newSkipped.delete(activeStep)
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
-    setSkipped(newSkipped)
-  }
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1)
-  }
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error('No te puedes saltar este paso')
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values())
-      newSkipped.add(activeStep)
-      return newSkipped
-    })
-  }
-
-  const handleReset = () => {
-    setActiveStep(0)
-  }
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm()
 
   const onSaveList = async ({ name, description }) => {
     setIsLoading(true)
-
+    if (name.length < 3 || description.length < 3) {
+      setIsLoading(false)
+      setActiveStep(0)
+    }
     try {
       var body = JSON.stringify({
         name: name,
@@ -130,23 +125,14 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
         headers: { Authorization: `Bearer ${Cookies.get('token')}` },
       })
       setIsLoading(false)
+      fetchData()
     } catch (error) {
       setTimeout(() => {
         setIsLoading(false)
-      }, 4000)
+        setActiveStep(0)
+      }, 1000)
     }
-
-    setIsLoading(false)
-    fetchData()
-    closeHandler()
   }
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm()
 
   return (
     <Modal
@@ -201,12 +187,12 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
                         message: 'Min. 5 caracteres',
                       },
                     })}
-                    helperText={errors.name?.message}
+                    helperText='Min. 5 caracteres'
                     color={!!errors.name && 'error'}
                   />
                 </Grid>
 
-                <Grid xs={12} justify='center'>
+                <Grid xs={12} justify='center' css={{ marginBottom: '20px' }}>
                   <Textarea
                     minRows={6}
                     label='Descripción de la lista'
@@ -219,13 +205,13 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
                         message: 'Min. 15 caracteres',
                       },
                     })}
-                    helperText={errors.description?.message}
+                    helperText='Min. 15 caracteres'
                     color={!!errors.description && 'error'}
                   />
                 </Grid>
               </Grid.Container>
               <Grid.Container justify='center'>
-                <Button onClick={handleNext} type='button'>
+                <Button onPress={handleNext} type='button'>
                   Siguiente
                 </Button>
               </Grid.Container>
@@ -243,8 +229,7 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
                   <Button
                     type='button'
                     color='inherit'
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
+                    onPress={() => setActiveStep(0)}
                     sx={{ mr: 1 }}
                   >
                     Atras
@@ -252,15 +237,12 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
                 </Grid>
                 <Grid xs={12} justify='center'>
                   <Button
-                    onClick={() => {
-                      onUploadIcon()
-                    }}
+                    disabled={isLoading}
+                    onPress={() => onUploadIcon()}
                     type='button'
                   >
                     {isLoading ? (
                       <Loading type='points' color='currentColor' size='sm' />
-                    ) : activeStep === steps.length - 1 ? (
-                      'Terminar'
                     ) : (
                       'Siguiente/Omitir'
                     )}
@@ -281,8 +263,7 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
                   <Button
                     type='button'
                     color='inherit'
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
+                    onPress={() => setActiveStep(1)}
                     sx={{ mr: 1 }}
                   >
                     Atras
@@ -290,15 +271,14 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
                 </Grid>
                 <Grid xs={12} justify='center'>
                   <Button
-                    onClick={() => {
+                    disabled={isLoading}
+                    onPress={() => {
                       onUploadCover()
                     }}
                     type='button'
                   >
                     {isLoading ? (
                       <Loading type='points' color='currentColor' size='sm' />
-                    ) : activeStep === steps.length - 1 ? (
-                      'Terminar'
                     ) : (
                       'Siguiente/Omitir'
                     )}
@@ -307,42 +287,44 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
               </Grid.Container>
             </>
           ) : (
-            <Grid.Container
-              gap={1}
-              justify='center'
-              alignContent='center'
-              alignItems='center'
-            >
-              <Grid xs={12} justify='center'>
-                <Button
-                  color='inherit'
-                  type='button'
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  sx={{ mr: 1 }}
-                >
-                  Atras
-                </Button>
-              </Grid>
-              <Grid xs={12} justify='center'>
-                <Button
-                  type='submit'
-                  disabled={isLoading}
-                  color='secondary'
-                  shadow
-                  width='70%'
-                  css={{
-                    zIndex: 1,
-                  }}
-                >
-                  {isLoading ? (
-                    <Loading type='points' color='currentColor' size='sm' />
-                  ) : (
-                    'Terminar'
-                  )}
-                </Button>
-              </Grid>
-            </Grid.Container>
+            activeStep === 3 &&
+            !isLoading && (
+              <Grid.Container
+                gap={1}
+                justify='center'
+                alignContent='center'
+                alignItems='center'
+              >
+                <Grid xs={12} justify='center'>
+                  <Button
+                    color='inherit'
+                    type='button'
+                    onPress={handleBack}
+                    sx={{ mr: 1 }}
+                  >
+                    Atras
+                  </Button>
+                </Grid>
+                <Grid xs={12} justify='center'>
+                  <Button
+                    type='submit'
+                    disabled={isLoading}
+                    color='secondary'
+                    shadow
+                    width='70%'
+                    css={{
+                      zIndex: 1,
+                    }}
+                  >
+                    {isLoading ? (
+                      <Loading type='points' color='currentColor' size='sm' />
+                    ) : (
+                      'Terminar'
+                    )}
+                  </Button>
+                </Grid>
+              </Grid.Container>
+            )
           )}
         </form>
       </Modal.Body>

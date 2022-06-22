@@ -98,6 +98,10 @@ export const AddToListModal = ({ visible, closeHandler, podcastID }) => {
                     selectedKeys={selectedList}
                     disallowEmptySelection
                     selectionMode='single'
+                    css={{
+                      maxHeight: '200px',
+                      overflow: 'scroll'
+                    }}
                   >
                     {lists.map((item) => {
                       return (

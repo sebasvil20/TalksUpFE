@@ -110,7 +110,9 @@ export const UserResume = () => {
                       css={{ padding: '5px' }}
                       justify='center'
                     >
-                      <Button onClick={() => onUploadImg()}>Guardar</Button>
+                      <Button auto onClick={() => onUploadImg()}>
+                        Guardar
+                      </Button>
                     </Grid>
                   </Grid.Container>
                 </Container>

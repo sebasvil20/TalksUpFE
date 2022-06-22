@@ -55,7 +55,7 @@ const ListsPage = () => {
               </Text>
               <Button
                 rounded
-                css={{ minWidth: '200px' }}
+                css={{ minWidth: '200px', '@xsMax': { minWidth: '100px' } }}
                 onPress={() => setShowCreateListModal(true)}
                 onClick={() => setShowCreateListModal(true)}
               >
