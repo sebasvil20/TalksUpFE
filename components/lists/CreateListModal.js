@@ -22,7 +22,7 @@ import { validations } from '../../utils'
 import { FileUploader } from '../fileUploader/FileUploader'
 import { AuthContext } from '../../context'
 
-const steps = ['Datos basicos', 'Icono', 'Cover']
+const steps = ['🥸', 'Icono', 'Cover', '💾']
 
 export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
   //General
@@ -32,7 +32,6 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
 
   //Uploader
   const { uploadFile } = useContext(AuthContext)
-  const [showUploadError, setShowUploadError] = useState(false)
   const [iconFiles, setIconFiles] = useState([])
   const [coverFiles, setCoverFiles] = useState([])
 
@@ -40,6 +39,7 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
     setIsLoading(true)
     if (iconFiles.length == 0) {
       setIsLoading(false)
+      handleNext()
       return
     }
     let isValidUpload = await uploadFile(iconFiles[0])
@@ -51,6 +51,23 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
     }
     setIconURL(isValidUpload)
     setIsLoading(false)
+    handleNext()
+  }
+
+  const onUploadCover = async () => {
+    setIsLoading(true)
+    if (coverFiles.length != 0) {
+      let isValidUpload = await uploadFile(coverFiles[0])
+      if (!isValidUpload) {
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 4000)
+        return
+      }
+      setCoverPicURL(isValidUpload)
+    }
+    setIsLoading(false)
+    handleNext()
   }
 
   const [activeStep, setActiveStep] = useState(0)
@@ -100,17 +117,7 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
 
   const onSaveList = async ({ name, description }) => {
     setIsLoading(true)
-    if (coverFiles.length == 0) {
-      return
-    }
-    let isValidUpload = await uploadFile(coverFiles[0])
-    if (!isValidUpload) {
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 4000)
-      return
-    }
-    setCoverPicURL(isValidUpload)
+
     try {
       var body = JSON.stringify({
         name: name,
@@ -137,6 +144,7 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm()
 
@@ -146,7 +154,11 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
       blur
       aria-labelledby='modal-title'
       open={visible}
-      onClose={closeHandler}
+      onClose={() => {
+        closeHandler()
+        setActiveStep(0)
+        reset()
+      }}
     >
       <Modal.Header>
         <Text h3>Crea una nueva lista</Text>
@@ -213,7 +225,9 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
                 </Grid>
               </Grid.Container>
               <Grid.Container justify='center'>
-                <Button onClick={handleNext}>Siguiente</Button>
+                <Button onClick={handleNext} type='button'>
+                  Siguiente
+                </Button>
               </Grid.Container>
             </>
           ) : activeStep === 1 ? (
@@ -227,6 +241,7 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
               >
                 <Grid xs={12} justify='center'>
                   <Button
+                    type='button'
                     color='inherit'
                     disabled={activeStep === 0}
                     onClick={handleBack}
@@ -237,23 +252,23 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
                 </Grid>
                 <Grid xs={12} justify='center'>
                   <Button
-                    onClick={async () => {
-                      await onUploadIcon()
-                      handleNext()
+                    onClick={() => {
+                      onUploadIcon()
                     }}
+                    type='button'
                   >
                     {isLoading ? (
                       <Loading type='points' color='currentColor' size='sm' />
                     ) : activeStep === steps.length - 1 ? (
                       'Terminar'
                     ) : (
-                      'Siguiente'
+                      'Siguiente/Omitir'
                     )}
                   </Button>
                 </Grid>
               </Grid.Container>
             </>
-          ) : (
+          ) : activeStep === 2 ? (
             <>
               <FileUploader files={coverFiles} setFiles={setCoverFiles} />
               <Grid.Container
@@ -264,6 +279,7 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
               >
                 <Grid xs={12} justify='center'>
                   <Button
+                    type='button'
                     color='inherit'
                     disabled={activeStep === 0}
                     onClick={handleBack}
@@ -274,24 +290,59 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
                 </Grid>
                 <Grid xs={12} justify='center'>
                   <Button
-                    type='submit'
-                    disabled={isLoading}
-                    color='secondary'
-                    shadow
-                    width='70%'
-                    css={{
-                      zIndex: 1,
+                    onClick={() => {
+                      onUploadCover()
                     }}
+                    type='button'
                   >
                     {isLoading ? (
                       <Loading type='points' color='currentColor' size='sm' />
-                    ) : (
+                    ) : activeStep === steps.length - 1 ? (
                       'Terminar'
+                    ) : (
+                      'Siguiente/Omitir'
                     )}
                   </Button>
                 </Grid>
               </Grid.Container>
             </>
+          ) : (
+            <Grid.Container
+              gap={1}
+              justify='center'
+              alignContent='center'
+              alignItems='center'
+            >
+              <Grid xs={12} justify='center'>
+                <Button
+                  color='inherit'
+                  type='button'
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  sx={{ mr: 1 }}
+                >
+                  Atras
+                </Button>
+              </Grid>
+              <Grid xs={12} justify='center'>
+                <Button
+                  type='submit'
+                  disabled={isLoading}
+                  color='secondary'
+                  shadow
+                  width='70%'
+                  css={{
+                    zIndex: 1,
+                  }}
+                >
+                  {isLoading ? (
+                    <Loading type='points' color='currentColor' size='sm' />
+                  ) : (
+                    'Terminar'
+                  )}
+                </Button>
+              </Grid>
+            </Grid.Container>
           )}
         </form>
       </Modal.Body>
