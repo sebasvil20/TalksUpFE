@@ -12,7 +12,6 @@ import {
 } from '@nextui-org/react'
 import Cookies from 'js-cookie'
 import { useForm } from 'react-hook-form'
-import Box from '@mui/material/Box'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
@@ -22,8 +21,6 @@ import { talksUpApi } from '../../api'
 import { validations } from '../../utils'
 import { FileUploader } from '../fileUploader/FileUploader'
 import { AuthContext } from '../../context'
-
-import { Button as MuiButton } from '@mui/material/Button'
 
 const steps = ['Datos basicos', 'Icono', 'Cover']
 

@@ -17,9 +17,11 @@ import Cookies from 'js-cookie'
 
 import { ReviewCard } from './ReviewCard'
 import { ReviewForm } from './ReviewForm'
+import { AddToListModal } from '../lists'
 
 export const DetailedPodcast = ({ podcast, reviews }) => {
   const [showReviewModal, setShowReviewModal] = useState(false)
+  const [showListModal, setShowListModal] = useState(false)
   const [alreadyReviewed, setAlreadyReviewed] = useState(false)
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
@@ -62,13 +64,37 @@ export const DetailedPodcast = ({ podcast, reviews }) => {
       >
         ← Volver al dashboard
       </Button>
-      <Text css={{ '@smMax': { textAlign: 'center' }, padding: '12px' }}>
-        <Text b size={26}>
-          {name}
-          {lang_id && (lang_id == 'ESP' ? ' 🇪🇸' : ' 🇺🇸')}
-        </Text>
-      </Text>
-      <Spacer />
+
+      <Grid.Container>
+        <Grid
+          xs={12}
+          justify='space-between'
+          alignContent='center'
+          alignItems='center'
+        >
+          <Text css={{ '@smMax': { textAlign: 'center' }, padding: '12px' }}>
+            <Text b size={26}>
+              {name}
+              {lang_id && (lang_id == 'ESP' ? ' 🇪🇸' : ' 🇺🇸')}
+            </Text>
+          </Text>{' '}
+          <Button
+            flat
+            color='primary'
+            auto
+            onPress={() => setShowListModal(true)}
+            onClick={() => setShowListModal(true)}
+          >
+            Listas
+          </Button>
+          <AddToListModal
+            closeHandler={() => setShowListModal(false)}
+            visible={showListModal}
+            podcastID={podcast_id}
+          />
+        </Grid>
+      </Grid.Container>
+
       <Grid.Container gap={2}>
         <Grid xs={12} sm={2}>
           <Image

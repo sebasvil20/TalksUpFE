@@ -7,7 +7,10 @@ body {
   font-family: 'Poppins', sans-serif !important;
 }
 
-.MuiAutocomplete-popper {
+.MuiAutocomplete-popper,
+.MuiPopover-paper,
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper,
+.MuiFormControl-root {
   z-index: 2147483638 !important;
 }
 
