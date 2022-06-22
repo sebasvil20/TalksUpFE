@@ -7,6 +7,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 
 import { talksUpApi } from '../../api'
+import Link from 'next/link'
 
 export const ListCard = ({ list, fetchData, isLoading }) => {
   const {
@@ -31,13 +32,13 @@ export const ListCard = ({ list, fetchData, isLoading }) => {
               height={100}
               onError={(e) =>
                 (e.target.src =
-                  'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/88be4dd4-dc7b-11ec-b799-acde48001122.png')
+                  'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/b5d288fc-f1e4-11ec-89f4-acde48001122.png')
               }
               style={{ borderRadius: '10px' }}
               src={
                 icon_url
                   ? icon_url
-                  : 'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/f4435d00-e1e5-11ec-9f43-acde48001122.png'
+                  : 'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/b5d288fc-f1e4-11ec-89f4-acde48001122.png'
               }
             />
           </Grid>
@@ -48,12 +49,14 @@ export const ListCard = ({ list, fetchData, isLoading }) => {
             justify='center'
             css={{ '@mdMax': { textAlign: 'center' } }}
           >
-            <Text
-              h4
-              css={{ lineHeight: '$xs', '@xsMax': { fontSize: '18px' } }}
-            >
-              {name}
-            </Text>
+            <Link href={`/dashboard/lists/${list_id}`}>
+              <Text
+                h4
+                css={{ lineHeight: '$xs', '@xsMax': { fontSize: '18px' } }}
+              >
+                {name}
+              </Text>
+            </Link>
             <Text css={{ color: '$accents8', '@xsMax': { fontSize: '14px' } }}>
               {total_podcasts} Podcasts
             </Text>

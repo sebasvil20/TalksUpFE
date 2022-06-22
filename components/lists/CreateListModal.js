@@ -56,20 +56,6 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
     setIsLoading(false)
   }
 
-  const onUploadCover = async () => {
-    if (coverFiles.length == 0) {
-      return
-    }
-    let isValidUpload = await uploadFile(coverFiles[0])
-    if (!isValidUpload) {
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 4000)
-      return
-    }
-    setIconURL(isValidUpload)
-  }
-
   const [activeStep, setActiveStep] = useState(0)
   const [skipped, setSkipped] = useState(new Set())
 
@@ -117,8 +103,18 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
 
   const onSaveList = async ({ name, description }) => {
     setIsLoading(true)
+    if (coverFiles.length == 0) {
+      return
+    }
+    let isValidUpload = await uploadFile(coverFiles[0])
+    if (!isValidUpload) {
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 4000)
+      return
+    }
+    setCoverPicURL(isValidUpload)
     try {
-      onUploadCover()
       var body = JSON.stringify({
         name: name,
         description: description,
