@@ -9,8 +9,16 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import { talksUpApi } from '../../api'
 
 export const ListCard = ({ list, fetchData, isLoading }) => {
-  const { list_id, name, description, likes, likes_ids, total_podcasts, user } =
-    list
+  const {
+    list_id,
+    icon_url,
+    name,
+    description,
+    likes,
+    likes_ids,
+    total_podcasts,
+    user,
+  } = list
   return (
     <Card css={{ p: '$6', m: '5px', w: '100%', h: '100%' }} isHoverable>
       <Card.Header>
@@ -27,7 +35,9 @@ export const ListCard = ({ list, fetchData, isLoading }) => {
               }
               style={{ borderRadius: '10px' }}
               src={
-                'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/88be4dd4-dc7b-11ec-b799-acde48001122.png'
+                icon_url
+                  ? icon_url
+                  : 'https://talksupcdn.sfo3.cdn.digitaloceanspaces.com/f4435d00-e1e5-11ec-9f43-acde48001122.png'
               }
             />
           </Grid>
@@ -55,7 +65,7 @@ export const ListCard = ({ list, fetchData, isLoading }) => {
             justify='center'
             alignContent='center'
             alignItems='center'
-            css={{'@mdMax': {flexDirection: 'row'}}}
+            css={{ '@mdMax': { flexDirection: 'row' } }}
           >
             <Button
               light
@@ -103,7 +113,7 @@ export const ListCard = ({ list, fetchData, isLoading }) => {
           </Card.Body>
         )}
       </Card.Body>
-      <Card.Footer css={{'@mdMax': {justifyContent: 'center'}}}>
+      <Card.Footer css={{ '@mdMax': { justifyContent: 'center' } }}>
         <User
           onError={(e) =>
             (e.target.src =
