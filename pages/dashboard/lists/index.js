@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
+
+import Cookies from 'js-cookie'
 import { Grid, Text } from '@nextui-org/react'
 
 import { talksUpApi } from '../../../api'
 import { MetaDataLayout } from '../../../components/layouts'
 import { NavBar } from '../../../components/sideBar'
 import { Loader } from '../../../components/loader'
-import Cookies from 'js-cookie'
 import { ListCard } from '../../../components/lists'
 
 const ListsPage = () => {
@@ -49,7 +50,7 @@ const ListsPage = () => {
             {lists.map(
               (list) =>
                 list.total_podcasts > 0 && (
-                  <Grid key={list.list_id} sm={3} xs={6}>
+                  <Grid key={list.list_id} md={3} sm={6} xs={12}>
                     <ListCard
                       list={list}
                       fetchData={() => fetchData()}

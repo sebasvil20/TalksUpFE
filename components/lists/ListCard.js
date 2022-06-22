@@ -1,10 +1,11 @@
 import Image from 'next/image'
 
+import Cookies from 'js-cookie'
+import { Card, Grid, Text, Button, User } from '@nextui-org/react'
+
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 
-import Cookies from 'js-cookie'
-import { Card, Grid, Text, Button, User } from '@nextui-org/react'
 import { talksUpApi } from '../../api'
 
 export const ListCard = ({ list, fetchData, isLoading }) => {
@@ -49,14 +50,17 @@ export const ListCard = ({ list, fetchData, isLoading }) => {
           </Grid>
           <Grid
             md={1}
+            xs={12}
             direction='column'
             justify='center'
             alignContent='center'
             alignItems='center'
+            css={{'@mdMax': {flexDirection: 'row'}}}
           >
             <Button
               light
               color='error'
+              size=''
               rounded
               animated={false}
               disabled={isLoading}
@@ -99,7 +103,7 @@ export const ListCard = ({ list, fetchData, isLoading }) => {
           </Card.Body>
         )}
       </Card.Body>
-      <Card.Footer>
+      <Card.Footer css={{'@mdMax': {justifyContent: 'center'}}}>
         <User
           onError={(e) =>
             (e.target.src =
