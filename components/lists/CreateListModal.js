@@ -126,6 +126,7 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
       })
       setIsLoading(false)
       fetchData()
+      closeHandler()
     } catch (error) {
       setTimeout(() => {
         setIsLoading(false)
