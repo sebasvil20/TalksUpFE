@@ -179,6 +179,7 @@ const DetailedList = () => {
                   css={{ textAlign: 'center', paddingTop: '70px' }}
                 >
                   No hay podcast en esta lista. Si es tuya puedes agregar más
+                  podcasts desde el detalle de estos.
                 </Text>
               </Grid>
             )}

@@ -39,13 +39,13 @@ export const SideMenu = () => {
             Dashboard
           </NavLink>
           <NavLink href={'/dashboard/artists'} icon={<RecordVoiceOverIcon />}>
-            Artists
+            Artistas
           </NavLink>
           <NavLink href={'/dashboard/lists'} icon={<EarbudsIcon />}>
-            Lists
+            Listas
           </NavLink>
           <NavLink href={'/contribute'} icon={<AddBoxIcon />}>
-            Contribute
+            Contribuir
           </NavLink>
         </List>
         <UserCard />

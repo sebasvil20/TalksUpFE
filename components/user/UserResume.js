@@ -86,7 +86,7 @@ export const UserResume = () => {
               {editImage ? (
                 <Container justify='center'>
                   <FileUploader files={files} setFiles={setFiles} />
-                  <Grid.Container css={{ marginTop: '30px' }}>
+                  <Grid.Container css={{ marginTop: '30px' }} gap={1}>
                     <Grid
                       sm={12}
                       xs={6}
@@ -94,8 +94,8 @@ export const UserResume = () => {
                       justify='center'
                     >
                       <Button
-                        css={{ maxWitdh: '100px' }}
                         color='error'
+                        auto
                         onClick={() => {
                           setEditImage(false)
                           setShowIconEditImage(false)
@@ -164,7 +164,7 @@ export const UserResume = () => {
                 }}
                 h6
               >
-                Hi! 🤩 {user?.public_name}
+                ¡Hola! 🤩 {user?.public_name}
               </Text>
               <Text
                 color='#14142B'
