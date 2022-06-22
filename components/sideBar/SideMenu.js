@@ -41,7 +41,7 @@ export const SideMenu = () => {
           <NavLink href={'/dashboard/artists'} icon={<RecordVoiceOverIcon />}>
             Artists
           </NavLink>
-          <NavLink href={'/lists'} icon={<EarbudsIcon />}>
+          <NavLink href={'/dashboard/lists'} icon={<EarbudsIcon />}>
             Lists
           </NavLink>
           <NavLink href={'/contribute'} icon={<AddBoxIcon />}>

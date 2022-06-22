@@ -1,10 +1,11 @@
 import { Loading } from '@nextui-org/react'
 
-export const Loader = () => {
+export const Loader = ({type='default'}) => {
   return (
     <div style={{ height: '100vh!important', width: '100%!important' }}>
       <Loading
         color='secondary'
+        type={type}
         css={{
           width: '200px',
           position: 'absolute',

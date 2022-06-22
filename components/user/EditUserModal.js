@@ -60,7 +60,7 @@ export const EditUserModal = ({ visible, closeHandler }) => {
       onClose={closeHandler}
     >
       <Modal.Header>
-        <Text>Actualiza tu usario</Text>
+        <Text>Actualiza tu usuario</Text>
       </Modal.Header>
       <form noValidate onSubmit={handleSubmit(onUpdateUser)}>
         <Modal.Body>
@@ -75,7 +75,7 @@ export const EditUserModal = ({ visible, closeHandler }) => {
             <Spacer />
             <Grid xs={12} sm={6}>
               <Input
-                placeholder='Type your first name'
+                placeholder='Escribe tu nombre'
                 label='Nombre'
                 width='100%'
                 {...register('firstName', {
@@ -93,7 +93,7 @@ export const EditUserModal = ({ visible, closeHandler }) => {
             </Grid>
             <Grid xs={12} sm={6}>
               <Input
-                placeholder='Type your last name'
+                placeholder='Escribe tu apellido'
                 width='100%'
                 label='Apellido'
                 {...register('lastName', {
@@ -112,7 +112,7 @@ export const EditUserModal = ({ visible, closeHandler }) => {
             <Grid xs={12}>
               <Input
                 width='100%'
-                label='Numero de telefono (sin ext)'
+                label='Número de teléfono (sin ext)'
                 type='number'
                 {...register('phoneNumber')}
                 initialValue={user.phone_number}
@@ -122,8 +122,8 @@ export const EditUserModal = ({ visible, closeHandler }) => {
             <Grid xs={12}>
               <Textarea
                 width='100%'
-                label='Biografia'
-                placeholder='Explica quien eres, que te gusta o algun dato interesante sobre ti 🤯'
+                label='Biografía'
+                placeholder='Explica quien eres, que te gusta o algún dato interesante sobre ti 🤯'
                 {...register('biography', {
                   validate: validations.isString,
                   minLength: {

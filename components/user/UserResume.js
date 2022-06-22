@@ -62,11 +62,11 @@ export const UserResume = () => {
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <Grid.Container gap={2} alignContent='center' justify='center'>
+      <Grid.Container gap={2} alignContent='center' justify='center'>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
             <Grid
               xs={12}
               css={{ position: 'relative' }}
@@ -95,6 +95,7 @@ export const UserResume = () => {
                     >
                       <Button
                         css={{ maxWitdh: '100px' }}
+                        color='error'
                         onClick={() => {
                           setEditImage(false)
                           setShowIconEditImage(false)
@@ -133,7 +134,12 @@ export const UserResume = () => {
                     />
                   )}
                   <Avatar
-                    css={{ size: '200px', zIndex: '1', margin: 0, padding: 0 }}
+                    css={{
+                      size: '200px',
+                      zIndex: '1',
+                      margin: 0,
+                      padding: 0,
+                    }}
                     alt='user pfp img'
                     onError={(e) =>
                       (e.target.src =
@@ -253,9 +259,9 @@ export const UserResume = () => {
                 closeHandler={() => setVisibleEditLikesModal(false)}
               />
             </Grid>
-          </Grid.Container>
-        </>
-      )}
+          </>
+        )}
+      </Grid.Container>
     </>
   )
 }

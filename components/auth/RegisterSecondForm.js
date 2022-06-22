@@ -82,7 +82,7 @@ export const RegisterSecondForm = ({ setStepper }) => {
       )}
       <Card css={{ backgroundColor: '$success', p: '10px 15px' }}>
         <Text css={{ fontWeight: '$bold', color: '$white' }} span>
-          Hi {userName}, bienvenido a TalksUp!
+          Hola {userName}, bienvenido a TalksUp!
         </Text>
         <Text css={{ color: '$white' }} span>
           Para continuar, necesitamos información básica sobre ti
