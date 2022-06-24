@@ -11,6 +11,7 @@ import { Loader } from '../../components/loader'
 import { AuthContext } from '../../context'
 import { CategoryListCard } from '../../components/category'
 import { CompleteProfileModal } from '../../components/user/CompleteProfileModal'
+import { Router } from 'next/router'
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext)
