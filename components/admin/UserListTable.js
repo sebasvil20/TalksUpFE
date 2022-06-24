@@ -11,7 +11,7 @@ import {
   Pagination,
 } from '@nextui-org/react'
 
-import { DeleteConfirmationModal, UpgradeToAdminConfirmationModal } from './'
+import { DeleteUserConfirmationModal, UpgradeToAdminConfirmationModal } from './'
 
 export const UserListTable = ({ users, fetchData }) => {
   const columns = [
@@ -111,7 +111,7 @@ export const UserListTable = ({ users, fetchData }) => {
                   </Col>
                   {user.role != 1 && (
                     <Col css={{ d: 'flex' }}>
-                      <DeleteConfirmationModal
+                      <DeleteUserConfirmationModal
                         user_id={user.user_id}
                         public_name={user.public_name}
                         fetchData={fetchData}

@@ -10,7 +10,8 @@ import {
   Spacer,
 } from '@nextui-org/react'
 
-import { DeleteConfirmationModal } from './'
+import { DeleteUserConfirmationModal } from './'
+import { DeleteAuthorConfirmationModal } from './DeleteAuthorConfirmationModal'
 
 export const ArtistListTable = ({ artists, fetchData }) => {
   const columns = [
@@ -102,10 +103,10 @@ export const ArtistListTable = ({ artists, fetchData }) => {
                 <Table.Cell>
                   <Row justify='center' align='center'>
                     <Col css={{ d: 'flex' }}>
-                      <DeleteConfirmationModal
-                        user_id={artist.artist_id}
-                        public_name={artist.name}
+                      <DeleteAuthorConfirmationModal
+                        author_id={artist.author_id}
                         fetchData={fetchData}
+                        name={artist.name}
                       />
                     </Col>
                   </Row>

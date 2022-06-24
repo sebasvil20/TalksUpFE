@@ -1,26 +1,37 @@
 import { useState } from 'react'
 import Cookies from 'js-cookie'
 
-import { Modal, Button, Text, Input, Row, Checkbox } from '@nextui-org/react'
+import {
+  Modal,
+  Button,
+  Text,
+  Input,
+  Row,
+  Checkbox,
+  Spacer,
+} from '@nextui-org/react'
 
 import { SuccessCard, ErrorCard } from '../errorCard'
 import { talksUpApi } from '../../api'
 import { IconButton, DeleteIcon } from './'
 
-export const DeleteConfirmationModal = ({
-  user_id,
-  public_name,
+export const DeleteAuthorConfirmationModal = ({
+  author_id,
+  name,
   fetchData,
 }) => {
   const [visible, setVisible] = useState(false)
   const [visibleSuccess, setVisibleSuccess] = useState(false)
   const [visibleError, setVisibleError] = useState(false)
 
-  const deleteUser = async () => {
+  const deleteAuthor = async () => {
     try {
-      const { data } = await talksUpApi.delete(`/users/${user_id}`, {
-        headers: { Authorization: `Bearer ${Cookies.get('token')}` },
-      })
+      const { data } = await talksUpApi.delete(
+        `/authors?author_id=${author_id}`,
+        {
+          headers: { Authorization: `Bearer ${Cookies.get('token')}` },
+        }
+      )
       setVisibleSuccess(true)
       setTimeout(() => {
         setVisibleSuccess(false)
@@ -42,15 +53,15 @@ export const DeleteConfirmationModal = ({
     <>
       {visibleSuccess && (
         <SuccessCard
-          message='Usuario eliminado'
           title='Acción ejecutada'
+          message='Author eliminado'
           show={visibleSuccess}
         />
       )}
       {visibleError && (
         <ErrorCard
-          message='No se pudo eliminar'
           title='Error'
+          message='No se pudo eliminar'
           show={visibleError}
         />
       )}
@@ -65,22 +76,28 @@ export const DeleteConfirmationModal = ({
       >
         <Modal.Header>
           <Text id='modal-title' size={18}>
-            ¿Esta seguro de eliminar a {public_name}?
+            ¿Esta seguro de eliminar a {name}?
           </Text>
         </Modal.Header>
         <Modal.Body>
-        <Text color='#4E4B66' css={{ fontSize: '12px', textAlign: 'center' }}>
-          Eliminará tambien todas las listas, likes y reviews que tenga a su nombre
-        </Text>
+          <Text color='#4E4B66' css={{ fontSize: '12px', textAlign: 'center' }}>
+            Eliminará tambien todas los podcasts de &quot;{name}&quot;,
+            junto con sus reviews
+          </Text>
+          <Spacer />
+          <Text color='$error' css={{ fontSize: '12px', textAlign: 'center' }}>
+            Esta acción es irreversible
+          </Text>
         </Modal.Body>
         <Modal.Footer>
-          <Button auto flat color='error' onClick={() => setVisible(false)}>
+          <Button auto flat onClick={() => setVisible(false)}>
             Cancelar
           </Button>
           <Button
             auto
+            color='error'
             onClick={() => {
-              deleteUser()
+              deleteAuthor()
             }}
           >
             Confirmar
