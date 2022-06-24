@@ -6,11 +6,12 @@ import { MetaDataLayout } from '../../../components/layouts'
 import { Loader } from '../../../components/loader'
 import { NavBar } from '../../../components/sideBar'
 import { talksUpApi } from '../../../api'
-import { UserListTable } from '../../../components/admin'
+import { UserListTable, ArtistListTable } from '../../../components/admin'
 
 const AdminPage = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [userList, setUserList] = useState([])
+  const [artistList, setArtistList] = useState([])
   const router = useRouter()
 
   const fetchData = async () => {
@@ -18,7 +19,13 @@ const AdminPage = () => {
       headers: { Authorization: `Bearer ${Cookies.get('token')}` },
     })
     setUserList(allUsers.data.data)
-    setIsLoading(false)
+  }
+
+  const fetchArtists = async () => {
+    const allArtists = await talksUpApi.get(`/authors`, {
+      headers: { Authorization: `Bearer ${Cookies.get('token')}` },
+    })
+    setArtistList(allArtists.data.data)
   }
 
   useEffect(() => {
@@ -31,6 +38,8 @@ const AdminPage = () => {
     }
 
     fetchData()
+    fetchArtists()
+    setIsLoading(false)
   }, [router, router.isReady])
 
   return (
@@ -62,20 +71,25 @@ const AdminPage = () => {
             Revisa metricas importantes y modifica usuarios
           </Text>
           <Spacer />
-
-          <Text
-            css={{
-              paddingLeft: '24px',
-              marginTop: '2px',
-              color: '#14142B',
-            }}
-            h2
-          >
-            Lista de usuarios
-          </Text>
-          <Grid.Container>
-            <Grid xs={6} css={{display:'unset!important', zIndex: '0!important'}}>
-              <UserListTable users={userList} fetchData={fetchData}/>
+          <Grid.Container gap={1}>
+            <Grid
+              xs={6}
+              css={{
+                display: 'unset!important',
+                zIndex: '0!important',
+                paddingLeft: '24px',
+                marginTop: '2px',
+              }}
+            >
+              <Text
+                css={{
+                  color: '#14142B',
+                }}
+                h2
+              >
+                Lista de usuarios
+              </Text>
+              <UserListTable users={userList} fetchData={fetchData} />
             </Grid>
           </Grid.Container>
         </div>

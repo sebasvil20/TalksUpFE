@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import Cookies from 'js-cookie'
 
+import Cookies from 'js-cookie'
 import { Modal, Button, Text } from '@nextui-org/react'
 
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 import { SuccessCard, ErrorCard } from '../errorCard'
 import { talksUpApi } from '../../api'
-import { IconButton, DeleteIcon } from './'
+import { IconButton } from './'
 
 export const UpgradeToAdminConfirmationModal = ({
   user_id,

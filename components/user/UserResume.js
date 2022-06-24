@@ -88,7 +88,6 @@ export const UserResume = () => {
                   <FileUploader files={files} setFiles={setFiles} />
                   <Grid.Container css={{ marginTop: '30px' }} gap={1}>
                     <Grid
-                      sm={12}
                       xs={6}
                       css={{ padding: '5px' }}
                       justify='center'
@@ -105,7 +104,6 @@ export const UserResume = () => {
                       </Button>
                     </Grid>
                     <Grid
-                      sm={12}
                       xs={6}
                       css={{ padding: '5px' }}
                       justify='center'
