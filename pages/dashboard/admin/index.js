@@ -91,6 +91,25 @@ const AdminPage = () => {
               </Text>
               <UserListTable users={userList} fetchData={fetchData} />
             </Grid>
+            <Grid
+              xs={6}
+              css={{
+                display: 'unset!important',
+                zIndex: '0!important',
+                paddingLeft: '24px',
+                marginTop: '2px',
+              }}
+            >
+              <Text
+                css={{
+                  color: '#14142B',
+                }}
+                h2
+              >
+                Lista de artistas
+              </Text>
+              <ArtistListTable artists={artistList} fetchData={fetchArtists} />
+            </Grid>
           </Grid.Container>
         </div>
       )}
