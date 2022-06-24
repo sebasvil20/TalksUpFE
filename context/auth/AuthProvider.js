@@ -55,6 +55,9 @@ export const AuthProvider = ({ children }) => {
       Cookies.set('hasLikes', user.likes?.length > 0, {
         expires: 1,
       })
+      Cookies.set('role', user.role, {
+        expires: 1,
+      })
       dispatch({ type: '[Auth] - Login', payload: user })
       return true
     } catch (error) {
@@ -67,6 +70,7 @@ export const AuthProvider = ({ children }) => {
     Cookies.remove('user_id')
     Cookies.remove('lang')
     Cookies.remove('hasLikes')
+    Cookies.remove('role')
     dispatch({ type: '[Auth] - Logout' })
     return true
   }

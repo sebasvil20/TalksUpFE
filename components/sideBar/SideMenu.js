@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import { Drawer, Box, List } from '@mui/material'
-import { Link } from '@nextui-org/react'
+import { Link, Spacer } from '@nextui-org/react'
 
 import ExploreIcon from '@mui/icons-material/Explore'
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver'
@@ -11,6 +11,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox'
 import { UIContext } from '../../context'
 import { LogoHeader } from '../header'
 import { UserCard, NavLink } from './'
+import Cookies from 'js-cookie'
 
 export const SideMenu = () => {
   const { isMenuOpen, toggleSideMenu } = useContext(UIContext)
@@ -44,9 +45,15 @@ export const SideMenu = () => {
           <NavLink href={'/dashboard/lists'} icon={<EarbudsIcon />}>
             Listas
           </NavLink>
-          <NavLink href={'/contribute'} icon={<AddBoxIcon />}>
-            Contribuir
-          </NavLink>
+          {Cookies.get('role') == '1' && (
+            <>
+              <Spacer />
+              <hr />
+              <NavLink href={'/dashboard/admin'} icon={<AddBoxIcon />}>
+                Admin
+              </NavLink>
+            </>
+          )}
         </List>
         <UserCard />
       </Box>

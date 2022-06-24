@@ -100,7 +100,7 @@ export const AddToListModal = ({ visible, closeHandler, podcastID }) => {
                     selectionMode='single'
                     css={{
                       maxHeight: '200px',
-                      overflow: 'scroll'
+                      overflow: 'scroll',
                     }}
                   >
                     {lists.map((item) => {
