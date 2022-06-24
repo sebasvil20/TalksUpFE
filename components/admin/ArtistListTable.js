@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+
 import {
   Table,
   Row,
@@ -10,8 +11,8 @@ import {
   Spacer,
 } from '@nextui-org/react'
 
-import { DeleteUserConfirmationModal } from './'
 import { DeleteAuthorConfirmationModal } from './DeleteAuthorConfirmationModal'
+import { NewPodcastButton } from './NewPodcastButton'
 
 export const ArtistListTable = ({ artists, fetchData }) => {
   const columns = [
@@ -102,6 +103,9 @@ export const ArtistListTable = ({ artists, fetchData }) => {
                 </Table.Cell>
                 <Table.Cell>
                   <Row justify='center' align='center'>
+                    <Col css={{ d: 'flex' }}>
+                      <NewPodcastButton artist_id={artist.author_id} />
+                    </Col>
                     <Col css={{ d: 'flex' }}>
                       <DeleteAuthorConfirmationModal
                         author_id={artist.author_id}

@@ -1,7 +1,9 @@
-import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
-import { Grid, Text, Button, Spacer } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
+
+import { Grid, Text, Button, Spacer } from '@nextui-org/react'
+import Cookies from 'js-cookie'
+
 import { MetaDataLayout } from '../../../components/layouts'
 import { Loader } from '../../../components/loader'
 import { NavBar } from '../../../components/sideBar'
@@ -36,7 +38,7 @@ const AdminPage = () => {
       router.replace('/dashboard')
       return
     }
- 
+
     fetchData()
     fetchArtists()
     setIsLoading(false)
@@ -102,14 +104,30 @@ const AdminPage = () => {
                 marginTop: '2px',
               }}
             >
-              <Text
-                css={{
-                  color: '#14142B',
-                }}
-                h2
-              >
-                Lista de artistas
-              </Text>
+              <Grid.Container>
+                <Grid
+                  xs={12}
+                  justify='space-between'
+                  alignContent='center'
+                  alignItems='center'
+                >
+                  <Text
+                    css={{
+                      color: '#14142B',
+                    }}
+                    h2
+                  >
+                    Lista de artistas
+                  </Text>
+                  <Button
+                    rounded
+                    css={{ minWidth: '200px', '@xsMax': { minWidth: '100px' } }}
+                    onPress={() => router.push('/dashboard/admin/newartist')}
+                  >
+                    Crear artista
+                  </Button>
+                </Grid>
+              </Grid.Container>
               <ArtistListTable artists={artistList} fetchData={fetchArtists} />
             </Grid>
           </Grid.Container>
