@@ -3,7 +3,8 @@ import { useState } from 'react'
 import Cookies from 'js-cookie'
 import { Modal, Button, Text } from '@nextui-org/react'
 
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
+import AdminPanelSettingsTwoToneIcon from '@mui/icons-material/AdminPanelSettingsTwoTone'
 
 import { SuccessCard, ErrorCard } from '../errorCard'
 import { talksUpApi } from '../../api'
@@ -13,6 +14,7 @@ export const UpgradeToAdminConfirmationModal = ({
   user_id,
   public_name,
   fetchData,
+  role,
 }) => {
   const [visible, setVisible] = useState(false)
   const [visibleSuccess, setVisibleSuccess] = useState(false)
@@ -20,7 +22,7 @@ export const UpgradeToAdminConfirmationModal = ({
 
   const upgradeUser = async () => {
     try {
-        console.log(Cookies.get('token'))
+      console.log(Cookies.get('token'))
       const { data } = await talksUpApi.put(`/users/admins/${user_id}`, null, {
         headers: { Authorization: `Bearer ${Cookies.get('token')}` },
       })
@@ -32,7 +34,7 @@ export const UpgradeToAdminConfirmationModal = ({
       fetchData()
       return
     } catch (error) {
-        console.log(error)
+      console.log(error)
       setVisibleError(true)
       setTimeout(() => {
         setVisibleError(false)
@@ -59,7 +61,15 @@ export const UpgradeToAdminConfirmationModal = ({
         />
       )}
       <IconButton onClick={() => setVisible(true)}>
-        <AdminPanelSettingsIcon size={20} fill='#FF0080' />
+        {role == 1 ? (
+          <AdminPanelSettingsTwoToneIcon
+            size={20}
+            fill='#FC8B8B'
+            style={{ color: '#FC8B8B' }}
+          />
+        ) : (
+          <AdminPanelSettingsIcon style={{ color: '#4E74FF' }} />
+        )}
       </IconButton>
       <Modal
         closeButton
@@ -69,13 +79,17 @@ export const UpgradeToAdminConfirmationModal = ({
       >
         <Modal.Header>
           <Text id='modal-title' size={18}>
-            ¿Esta seguro de hacer Admin a {public_name}?
+            {role == 1
+              ? `¿Esta seguro de quitar el Admin a ${public_name}?`
+              : `¿Esta seguro de hacer Admin a ${public_name}?`}
           </Text>
         </Modal.Header>
         <Modal.Body>
-        <Text color='#4E4B66' css={{ fontSize: '12px', textAlign: 'center' }}>
-          Este usuario podra hacer a los otros usuarios administradores o modificar recursos importantes
-        </Text>
+          <Text color='#4E4B66' css={{ fontSize: '12px', textAlign: 'center' }}>
+            {role == 1
+              ? `${public_name} ya no tendrá acceso a esta pantalla ni podra modificar información importante`
+              : `${public_name} podra hacer a los otros usuarios administradores o modificar recursos importantes`}
+          </Text>
         </Modal.Body>
         <Modal.Footer>
           <Button auto flat color='error' onClick={() => setVisible(false)}>
@@ -84,7 +98,7 @@ export const UpgradeToAdminConfirmationModal = ({
           <Button
             auto
             onClick={() => {
-                upgradeUser()
+              upgradeUser()
             }}
           >
             Confirmar

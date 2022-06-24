@@ -68,6 +68,11 @@ export const DeleteConfirmationModal = ({
             ¿Esta seguro de eliminar a {public_name}?
           </Text>
         </Modal.Header>
+        <Modal.Body>
+        <Text color='#4E4B66' css={{ fontSize: '12px', textAlign: 'center' }}>
+          Eliminará tambien todas las listas, likes y reviews que tenga a su nombre
+        </Text>
+        </Modal.Body>
         <Modal.Footer>
           <Button auto flat color='error' onClick={() => setVisible(false)}>
             Cancelar

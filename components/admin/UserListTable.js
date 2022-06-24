@@ -86,16 +86,19 @@ export const UserListTable = ({ users, fetchData }) => {
                   <UpgradeToAdminConfirmationModal
                     user_id={user.user_id}
                     public_name={user.public_name}
+                    role={user.role}
                     fetchData={fetchData}
                   />
                 </Col>
-                <Col css={{ d: 'flex' }}>
-                  <DeleteConfirmationModal
-                    user_id={user.user_id}
-                    public_name={user.public_name}
-                    fetchData={fetchData}
-                  />
-                </Col>
+                {user.role != 1 && (
+                  <Col css={{ d: 'flex' }}>
+                    <DeleteConfirmationModal
+                      user_id={user.user_id}
+                      public_name={user.public_name}
+                      fetchData={fetchData}
+                    />
+                  </Col>
+                )}
               </Row>
             </Table.Cell>
           </Table.Row>

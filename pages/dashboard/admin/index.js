@@ -36,7 +36,7 @@ const AdminPage = () => {
       router.replace('/dashboard')
       return
     }
-
+ 
     fetchData()
     fetchArtists()
     setIsLoading(false)
@@ -73,7 +73,8 @@ const AdminPage = () => {
           <Spacer />
           <Grid.Container gap={1}>
             <Grid
-              xs={6}
+              xs={12}
+              md={6}
               css={{
                 display: 'unset!important',
                 zIndex: '0!important',
@@ -92,7 +93,8 @@ const AdminPage = () => {
               <UserListTable users={userList} fetchData={fetchData} />
             </Grid>
             <Grid
-              xs={6}
+              xs={12}
+              md={6}
               css={{
                 display: 'unset!important',
                 zIndex: '0!important',
