@@ -56,13 +56,6 @@ export const UserCard = () => {
           <Button onClick={() => logoutAndRedirect()}>
             <LogoutIcon />
           </Button>
-          <ThemeSwitcher
-            customStyle={{
-              margin: '0px 10px',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          />
         </div>
       </Grid>
     </Container>

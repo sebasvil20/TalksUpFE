@@ -23,7 +23,7 @@ export const NavBar = () => {
           <Button onClick={() => toggleSideMenu()}>
             <MenuIcon style={{ color: '#6334EB' }} />
           </Button>
-          <Input
+          {/* <Input
             type='text'
             placeholder='Buscar...'
             style={{ margin: 'auto' }}
@@ -34,7 +34,7 @@ export const NavBar = () => {
                 </IconButton>
               </InputAdornment>
             }
-          />
+          /> */}
         </Toolbar>
       </AppBar>
       <SideMenu />

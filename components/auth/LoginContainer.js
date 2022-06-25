@@ -30,17 +30,6 @@ export const LoginContainer = () => {
             link='/register'
             linkTitle='Registrate gratis'
           />
-          <Container
-            css={{
-              display: 'flex',
-              maxHeight: '30px!important',
-              width: 'max-content',
-              margin: '0px 0 25px',
-            }}
-          >
-            <ThemeSwitcher customStyle={{ margin: '0px 10px' }} />
-            <LangSwitcher />
-          </Container>
           <LoginForm />
         </Grid>
         <Grid

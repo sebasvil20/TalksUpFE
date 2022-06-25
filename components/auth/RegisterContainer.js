@@ -50,12 +50,6 @@ export const RegisterContainer = ({ categories }) => {
           link='/'
           linkTitle='Inicia sesión ahora'
         />
-        <Container
-          css={{ display: 'flex', width: 'max-content', margin: 'auto' }}
-        >
-          <ThemeSwitcher customStyle={{ margin: '0px 10px' }} />
-          <LangSwitcher />
-        </Container>
         <Spacer />
         <RegisterForm categories={categories} />
       </Container>
