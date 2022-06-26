@@ -64,7 +64,9 @@ export const UserResume = () => {
     <>
       <Grid.Container gap={2} alignContent='center' justify='center'>
         {isLoading ? (
-          <Loader />
+          <div style={{ width: '100%', height: '100vh' }}>
+            <Loader />
+          </div>
         ) : (
           <>
             <Grid
@@ -87,11 +89,7 @@ export const UserResume = () => {
                 <Container justify='center'>
                   <FileUploader files={files} setFiles={setFiles} />
                   <Grid.Container css={{ marginTop: '30px' }} gap={1}>
-                    <Grid
-                      xs={6}
-                      css={{ padding: '5px' }}
-                      justify='center'
-                    >
+                    <Grid xs={6} css={{ padding: '5px' }} justify='center'>
                       <Button
                         color='error'
                         auto
@@ -103,11 +101,7 @@ export const UserResume = () => {
                         Cancelar
                       </Button>
                     </Grid>
-                    <Grid
-                      xs={6}
-                      css={{ padding: '5px' }}
-                      justify='center'
-                    >
+                    <Grid xs={6} css={{ padding: '5px' }} justify='center'>
                       <Button auto onClick={() => onUploadImg()}>
                         Guardar
                       </Button>
