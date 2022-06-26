@@ -22,6 +22,7 @@ export const NavLink = ({ children, href, icon }) => {
       style={{
         backgroundColor: isCurrent() ? '#efefef' : '',
       }}
+      onClick={() => redirectTo()}
     >
       <ListItemIcon
         style={{
@@ -34,7 +35,6 @@ export const NavLink = ({ children, href, icon }) => {
         style={{
           color: isCurrent() ? '#6334EB' : '',
         }}
-        onClick={() => redirectTo()}
       >
         {' '}
         {children}{' '}
