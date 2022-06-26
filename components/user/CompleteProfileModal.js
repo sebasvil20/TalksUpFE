@@ -8,6 +8,7 @@ export const CompleteProfileModal = ({ showModal, closeFunc }) => {
   return (
     <Modal
       closeButton
+      blur
       aria-labelledby='modal-title'
       open={showModal}
       onClose={() => closeFunc()}

@@ -170,6 +170,9 @@ export const UserResume = () => {
                 color='#14142B'
                 css={{
                   textAlign: 'center',
+                  overflow: 'hidden',
+                  whiteSpace: 'nowrap',
+                  textOverflow: 'ellipsis',
                   '@smMax': { textAlign: 'center', padding: '0' },
                 }}
                 h1

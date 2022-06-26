@@ -104,7 +104,7 @@ const DetailedList = () => {
               textAlign: 'center',
             }}
           >
-            <div style={{ width: '100%', height: '100px' }}>
+            <div style={{ width: '80%', height: '100px' }}>
               <img
                 onError={(e) =>
                   (e.target.src =
@@ -118,8 +118,8 @@ const DetailedList = () => {
                 alt={listInfo.name}
                 style={{
                   borderRadius: '10px',
-                  width: '100%',
-                  height: '100px',
+                  width: '80%',
+                  height: '150px',
                   position: 'relative',
                   zIndex: '1',
                 }}
@@ -141,7 +141,7 @@ const DetailedList = () => {
               style={{
                 width: '100px',
                 height: '100px',
-                marginTop: '-50px',
+                marginTop: '0px',
                 borderRadius: '10px',
                 position: 'relative',
                 zIndex: '99',
@@ -153,7 +153,9 @@ const DetailedList = () => {
               color='#14142B'
               css={{ maxWidth: '100%', wordBreak: 'break-word' }}
             >
-              {listInfo.name}
+              {listInfo.name.length > 50
+                ? `${listInfo.name.slice(0, 50)}...`
+                : listInfo.name}
             </Text>
             {listInfo.description && (
               <Text color='#6E7191'>{listInfo.description}</Text>

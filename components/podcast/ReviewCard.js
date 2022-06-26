@@ -36,7 +36,13 @@ export const ReviewCard = ({ review, user, canRemove }) => {
           show={errorDeleting}
         />
       )}
-      <Grid xs={12} sm={6}>
+      <Grid
+        xs={12}
+        sm={6}
+        css={{
+          wordBreak: 'break-all',
+        }}
+      >
         <Text h4>{review.title}</Text>
       </Grid>
 
@@ -53,7 +59,12 @@ export const ReviewCard = ({ review, user, canRemove }) => {
 
       <Spacer />
 
-      <Grid xs={12}>
+      <Grid
+        xs={12}
+        css={{
+          wordBreak: 'break-all',
+        }}
+      >
         <Text>{review.review}</Text>
       </Grid>
 

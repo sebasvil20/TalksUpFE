@@ -108,13 +108,17 @@ export const RegisterFirstForm = ({ setStepper }) => {
           <Input
             placeholder='Nickname nombre de usuario'
             width='100%'
-            label='Nombre publico'
+            label='Nickname o apodo'
             {...register('publicName', {
               required: 'Este campo es requerido',
               validate: validations.isString,
               minLength: {
                 value: 5,
                 message: 'Min. 5 caracteres',
+              },
+              maxLength: {
+                value: 20,
+                message: 'Max. 20 caracteres',
               },
             })}
             helperText={errors.publicName?.message}
@@ -152,12 +156,32 @@ export const RegisterFirstForm = ({ setStepper }) => {
           />
         </Grid>
         <Grid xs={6}>
-          <select {...register('country')}>
+          <select
+            {...register('country')}
+            style={{
+              width: '100%',
+              border: 'none',
+              backgroundColor: '#f1f3f5',
+              height: '40px',
+              borderRadius: '10px',
+              padding: '5px 15px 5px 10px',
+            }}
+          >
             <option value='CO'>Colombia</option>
           </select>
         </Grid>
         <Grid xs={6}>
-          <select {...register('lang')}>
+          <select
+            {...register('lang')}
+            style={{
+              width: '100%',
+              border: 'none',
+              backgroundColor: '#f1f3f5',
+              height: '40px',
+              borderRadius: '10px',
+              padding: '5px 15px 5px 10px',
+            }}
+          >
             <option value='ESP' defaultValue>
               Español
             </option>

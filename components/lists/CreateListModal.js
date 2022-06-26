@@ -186,7 +186,7 @@ export const CreateListModal = ({ visible, closeHandler, fetchData }) => {
                       minLength: {
                         value: 5,
                         message: 'Min. 5 caracteres',
-                      },
+                      }
                     })}
                     helperText='Min. 5 caracteres'
                     color={!!errors.name && 'error'}

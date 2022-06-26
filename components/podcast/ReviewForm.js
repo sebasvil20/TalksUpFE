@@ -80,6 +80,10 @@ export const ReviewForm = ({ visible, closeHandler, podcast_id }) => {
                     value: 5,
                     message: 'Min. 5 caracteres',
                   },
+                  maxLength: {
+                    value: 40,
+                    message: 'Max. 40 caracteres'
+                  }
                 })}
                 helperText={errors.title?.message}
                 color={!!errors.title && 'error'}

@@ -8,8 +8,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 
 import { talksUpApi } from '../../api'
 import Link from 'next/link'
+import { useState } from 'react'
 
 export const ListCard = ({ list, fetchData, isLoading }) => {
+  const [loadingLike, setLoadingLike] = useState(false)
+
   const {
     list_id,
     icon_url,
@@ -52,7 +55,14 @@ export const ListCard = ({ list, fetchData, isLoading }) => {
             <Link href={`/dashboard/lists/${list_id}`}>
               <Text
                 h4
-                css={{ lineHeight: '$xs', '@xsMax': { fontSize: '18px' } }}
+                css={{
+                  lineHeight: '$xs',
+                  '@xsMax': { fontSize: '18px' },
+                  overflow: 'hidden',
+                  whiteSpace: 'nowrap',
+                  textOverflow: 'ellipsis',
+                  cursor: 'pointer',
+                }}
               >
                 {name}
               </Text>
@@ -76,8 +86,9 @@ export const ListCard = ({ list, fetchData, isLoading }) => {
               size=''
               rounded
               animated={false}
-              disabled={isLoading}
+              disabled={isLoading || loadingLike}
               onClick={async () => {
+                setLoadingLike(true)
                 let body = JSON.stringify({
                   list_id: list_id,
                   user_id: Cookies.get('user_id'),
@@ -86,12 +97,17 @@ export const ListCard = ({ list, fetchData, isLoading }) => {
                   headers: { Authorization: `Bearer ${Cookies.get('token')}` },
                 })
                 fetchData()
+                setLoadingLike(false)
               }}
             >
               {likes_ids?.includes(Cookies.get('user_id')) ? (
-                <FavoriteIcon style={{ color: '#FF3F3F' }} />
+                <FavoriteIcon
+                  style={{ color: `${loadingLike ? '#9c9c9c' : '#FF3F3F'}` }}
+                />
               ) : (
-                <FavoriteBorderIcon />
+                <FavoriteBorderIcon
+                  style={{ color: `${loadingLike ? '#9c9c9c' : '#FF3F3F'}` }}
+                />
               )}
             </Button>
             {likes}
@@ -107,6 +123,9 @@ export const ListCard = ({ list, fetchData, isLoading }) => {
                 '@xsMax': {
                   fontSize: '14px',
                 },
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis',
               }}
             >
               {description.length > 50
