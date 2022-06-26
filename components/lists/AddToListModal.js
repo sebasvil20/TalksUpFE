@@ -105,7 +105,14 @@ export const AddToListModal = ({ visible, closeHandler, podcastID }) => {
                   >
                     {lists.map((item) => {
                       return (
-                        <Dropdown.Item key={item.key}>
+                        <Dropdown.Item
+                          key={item.key}
+                          css={{
+                            overflow: 'hidden',
+                            whiteSpace: 'nowrap',
+                            textOverflow: 'ellipsis',
+                          }}
+                        >
                           {item.name}
                         </Dropdown.Item>
                       )
